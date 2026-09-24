@@ -5,3 +5,5 @@
 - [x] Configurar mensagens contextuais e estado provisório do WhatsApp
 - [x] Adicionar SEO local, mapa, acessibilidade e favicon
 - [x] Validar desktop, celular, navegação e conteúdo
+- [ ] Refinar hero, categorias, prensagem, ajuda, avaliações e equipe
+- [ ] Validar contatos, mapa, animações e responsividade após o refinamento
