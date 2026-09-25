@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Aperture,
   ArrowDown,
   ArrowRight,
   Camera,
@@ -10,11 +9,9 @@ import {
   MapPin,
   Menu,
   MessageCircle,
-  Quote,
   Send,
   ShieldCheck,
   Sparkles,
-  Star,
   Users,
   Wrench,
   X,
@@ -30,7 +27,7 @@ import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 const BUSINESS = {
   name: "Casa do Produtor",
   address: "Avenida Dorvalino dos Santos, 1760 — Centro, Sidrolândia/MS",
-  whatsappNumber: "",
+  whatsappNumber: "5567992991091",
   hours: "Horário de funcionamento será informado em breve.",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Avenida+Dorvalino+dos+Santos+1760+Centro+Sidrolandia+MS",
@@ -45,18 +42,12 @@ const messages = {
 };
 
 const categories = [
-  ["01", "Linha agrícola", "Produtos para diferentes necessidades do campo e da propriedade.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar produtos da linha agrícola."],
-  ["02", "Ferragens", "Itens essenciais para manutenção, montagem e reparos.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar produtos de ferragens."],
-  ["03", "Parafusos", "Opções para diferentes tipos de trabalho e aplicação.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar parafusos."],
-  ["04", "Ferramentas", "Soluções para oficina, manutenção e trabalho diário.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar ferramentas."],
-  ["05", "Roçadeiras", "Equipamentos para o cuidado de áreas urbanas e rurais.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar roçadeiras."],
-  ["06", "Tintas", "Produtos para proteção, acabamento e renovação.", "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar tintas."],
-] as const;
-
-const helpActions = [
-  [Camera, "01", "Tire uma foto", "Abra o WhatsApp e anexe ou tire a foto por lá.", "Olá! Vim pelo site da Casa do Produtor e quero enviar uma foto de um produto ou peça que estou procurando."],
-  [Send, "02", "Envie pelo WhatsApp", "Descreva por texto o produto ou a peça que procura.", "Olá! Vim pelo site da Casa do Produtor e gostaria de enviar uma descrição do produto ou peça que estou procurando."],
-  [Users, "03", "Consulte com nossa equipe", "Fale diretamente com alguém da Casa do Produtor.", "Olá! Vim pelo site da Casa do Produtor e gostaria de falar com alguém da equipe sobre um produto."],
+  ["01", "Linha agrícola", "Produtos para diferentes necessidades do campo e da propriedade."],
+  ["02", "Ferragens", "Itens essenciais para manutenção, montagem e reparos."],
+  ["03", "Parafusos", "Opções para diferentes tipos de trabalho e aplicação."],
+  ["04", "Ferramentas", "Soluções para oficina, manutenção e trabalho diário."],
+  ["05", "Roçadeiras", "Equipamentos para o cuidado de áreas urbanas e rurais."],
+  ["06", "Tintas", "Produtos para proteção, acabamento e renovação."],
 ] as const;
 
 const timeline = [
@@ -121,29 +112,6 @@ function WhatsAppLink({ message, className = "", compact = false }: { message: s
   );
 }
 
-function WhatsAppArea({ message, className = "", children, label }: { message: string; className?: string; children: ReactNode; label: string }) {
-  const href = BUSINESS.whatsappNumber
-    ? `https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(message)}`
-    : undefined;
-
-  if (href) return <a className={className} href={href} target="_blank" rel="noreferrer" aria-label={label}>{children}</a>;
-
-  return <button className={className} type="button" aria-label={label} onClick={() => window.alert("O número de WhatsApp será informado em breve.")}>{children}</button>;
-}
-
-function HydraulicConnector() {
-  return (
-    <div className="connector-track" aria-hidden="true">
-      <div className="hydraulic-connector">
-        <span className="connector-thread" />
-        <span className="connector-nut" />
-        <span className="connector-neck" />
-        <span className="connector-collar" />
-      </div>
-    </div>
-  );
-}
-
 function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`reveal ${className}`}>{children}</div>;
 }
@@ -186,22 +154,8 @@ function Index() {
       { threshold: 0.12 },
     );
     elements.forEach((element) => observer.observe(element));
-    const root = document.documentElement;
-    const updateScroll = () => {
-      const start = 80;
-      const service = document.querySelector("#servicos");
-      if (!(service instanceof HTMLElement)) return;
-      const end = service.offsetTop + service.offsetHeight * 0.42;
-      const progress = Math.min(1, Math.max(0, (window.scrollY - start) / Math.max(1, end - start)));
-      root.style.setProperty("--connector-progress", String(progress));
-    };
-    updateScroll();
-    window.addEventListener("scroll", updateScroll, { passive: true });
-    window.addEventListener("resize", updateScroll);
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", updateScroll);
-      window.removeEventListener("resize", updateScroll);
     };
   }, []);
 
@@ -209,7 +163,6 @@ function Index() {
     <div id="inicio" className="site-shell">
       <Header />
       <main>
-        <div className="connector-journey">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-photo-wrap"><img className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" /><span>Loja física · Sidrolândia/MS</span></div>
           <div className="hero-shade" />
@@ -224,7 +177,7 @@ function Index() {
             </div>
           </div>
           <div className="hero-tag" aria-hidden="true"><span>Desde</span><strong>2020</strong></div>
-          <HydraulicConnector />
+          <div className="technical-placeholder" aria-hidden="true"><span /><span /><span /></div>
         </section>
 
         <section className="section categories-section" id="produtos" aria-labelledby="categories-title">
@@ -233,14 +186,13 @@ function Index() {
             <p>Uma seleção pensada para resolver necessidades da casa, oficina, empresa e propriedade rural.</p>
           </Reveal>
           <div className="category-editorial">
-            {categories.map(([number, title, description, message], index) => (
-              <WhatsAppArea key={title} message={message} label={`Consultar ${title} pelo WhatsApp`} className={`category-row category-row-${index + 1}`}>
+            {categories.map(([number, title, description], index) => (
+              <Reveal key={title} className={`category-row category-row-${index + 1}`}>
                 <span className="category-number">{number}</span>
-                <span className="category-icon"><Aperture aria-hidden="true" /></span>
                 <h3>{title}</h3>
                 <p>{description}</p>
                 <ArrowRight aria-hidden="true" />
-              </WhatsAppArea>
+              </Reveal>
             ))}
           </div>
         </section>
@@ -255,12 +207,11 @@ function Index() {
             </Reveal>
             <Reveal className="service-visual">
               <img src={counterTeamAsset.url} alt="Equipe da Casa do Produtor no balcão da loja" loading="lazy" />
-              <div className="connector-destination" aria-hidden="true"><span /><span /><span /></div>
+              <div className="technical-ring" aria-hidden="true"><span /><span /><span /></div>
               <p>Atendimento direto<br />com nossa equipe</p>
             </Reveal>
           </div>
         </section>
-        </div>
 
         <section className="section showcase-section" aria-labelledby="showcase-title">
           <Reveal className="showcase-intro">
@@ -287,15 +238,15 @@ function Index() {
           <Reveal className="photo-help-copy">
             <p className="eyebrow">A gente ajuda</p>
             <h2 id="photo-help-title">Não encontrou<br />o que procura?</h2>
-            <p className="photo-lead">Você encontra aqui. E, se não encontrar, fale com a gente.</p>
-            <p>Escolha a forma mais fácil de explicar o que precisa. A conversa continua diretamente no WhatsApp.</p>
+            <p>Não sabe o nome do produto? Envie uma foto da peça, conexão, ferramenta ou item pelo WhatsApp. Nossa equipe pode ajudar a identificar ou verificar a disponibilidade.</p>
+            <WhatsAppLink message={messages.photo} />
           </Reveal>
           <Reveal className="photo-steps">
-            {helpActions.map(([Icon, number, title, copy, message]) => (
-              <WhatsAppArea key={title} className="help-action" message={message} label={`${title} pelo WhatsApp`}>
-                <Icon aria-hidden="true" /><span>{number}</span><span><strong>{title}</strong><small>{copy}</small></span><ArrowRight aria-hidden="true" />
-              </WhatsAppArea>
-            ))}
+            <div><Camera /><span>01</span><strong>Tire uma foto</strong></div>
+            <ArrowDown aria-hidden="true" />
+            <div><Send /><span>02</span><strong>Envie pelo WhatsApp</strong></div>
+            <ArrowDown aria-hidden="true" />
+            <div><Wrench /><span>03</span><strong>Consulte com nossa equipe</strong></div>
           </Reveal>
         </section>
 
@@ -326,17 +277,6 @@ function Index() {
             <summary>Conhecer mais da nossa história <ArrowDown size={18} /></summary>
             <p>O caminho foi marcado por desafios, aprendizado e pelo apoio de quem acredita no nosso trabalho. A história continua sendo construída todos os dias, junto com clientes, colaboradores, fornecedores e parceiros.</p>
           </details>
-        </section>
-
-        <section className="reviews-section" aria-labelledby="reviews-title">
-          <Reveal className="reviews-heading">
-            <div><p className="eyebrow">Avaliações no Google</p><h2 id="reviews-title">O que nossos clientes dizem</h2></div>
-            <p>Experiências de quem já compra e é atendido pela Casa do Produtor.</p>
-          </Reveal>
-          <Reveal className="reviews-empty">
-            <div className="review-mark"><Quote aria-hidden="true" /></div>
-            <div className="review-copy"><div className="google-stars" aria-label="Avaliações do Google"><span>Google</span>{Array.from({ length: 5 }).map((_, index) => <Star key={index} aria-hidden="true" />)}</div><p>As avaliações reais desta loja serão exibidas aqui assim que o perfil oficial for conectado.</p><small>Nenhum depoimento fictício foi publicado.</small></div>
-          </Reveal>
         </section>
 
         <section className="team-section" aria-labelledby="team-title">
