@@ -7,3 +7,4 @@
 - [x] Validar desktop, celular, navegação e conteúdo
 - [ ] Refinar hero, categorias, prensagem, ajuda, avaliações e equipe
 - [ ] Validar contatos, mapa, animações e responsividade após o refinamento
+- [ ] Ativar todos os contatos com o WhatsApp oficial 5567992991091
