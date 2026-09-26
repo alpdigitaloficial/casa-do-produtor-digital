@@ -177,12 +177,11 @@ function Index() {
             </div>
           </div>
           <div className="hero-tag" aria-hidden="true"><span>Desde</span><strong>2020</strong></div>
-          <div className="technical-placeholder" aria-hidden="true"><span /><span /><span /></div>
         </section>
 
         <section className="section categories-section" id="produtos" aria-labelledby="categories-title">
           <Reveal className="section-heading split-heading">
-            <div><p className="eyebrow">Cidade + campo</p><h2 id="categories-title">Variedade que acompanha<br />o seu trabalho.</h2></div>
+            <div><p className="eyebrow">Cidade + campo</p><h2 id="categories-title">Encontre o que<br />você precisa</h2></div>
             <p>Uma seleção pensada para resolver necessidades da casa, oficina, empresa e propriedade rural.</p>
           </Reveal>
           <div className="category-editorial">
@@ -309,7 +308,7 @@ function Index() {
 
       <footer>
         <div className="footer-brand"><img src={logoAsset.url} alt="Casa do Produtor" /><p>Soluções para a cidade e para o campo.</p></div>
-        <nav aria-label="Links do rodapé"><a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#servicos">Serviços</a><a href="#historia">Nossa história</a><a href="#localizacao">Localização</a><a href="#inicio">WhatsApp</a></nav>
+        <nav aria-label="Links do rodapé"><a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#servicos">Serviços</a><a href="#historia">Nossa história</a><a href="#localizacao">Localização</a><a href={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} target="_blank" rel="noreferrer">WhatsApp</a></nav>
         <div className="footer-address"><p>{BUSINESS.address}</p><small>© {new Date().getFullYear()} Casa do Produtor</small></div>
       </footer>
       <WhatsAppLink message={messages.hero} className="floating-whatsapp" />
