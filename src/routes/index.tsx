@@ -23,6 +23,7 @@ import counterTeamAsset from "@/assets/equipe-balcao.jpg.asset.json";
 import facadeTeamAsset from "@/assets/equipe-fachada.jpg.asset.json";
 import storeTeamAsset from "@/assets/equipe-loja.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
+import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
 
 const BUSINESS = {
   name: "Casa do Produtor",
@@ -187,10 +188,12 @@ function Index() {
           <div className="category-editorial">
             {categories.map(([number, title, description], index) => (
               <Reveal key={title} className={`category-row category-row-${index + 1}`}>
+                <a className="category-link" href={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(`${messages.product} Tenho interesse em ${title.toLowerCase()}.`)}`} target="_blank" rel="noreferrer" aria-label={`Consultar ${title} pelo WhatsApp`}>
                 <span className="category-number">{number}</span>
                 <h3>{title}</h3>
                 <p>{description}</p>
                 <ArrowRight aria-hidden="true" />
+                </a>
               </Reveal>
             ))}
           </div>
@@ -205,9 +208,8 @@ function Index() {
               <WhatsAppLink message={messages.service} />
             </Reveal>
             <Reveal className="service-visual">
-              <img src={counterTeamAsset.url} alt="Equipe da Casa do Produtor no balcão da loja" loading="lazy" />
-              <div className="technical-ring" aria-hidden="true"><span /><span /><span /></div>
-              <p>Atendimento direto<br />com nossa equipe</p>
+              <img src={pressAsset.url} alt="Prensa hidráulica real utilizada pela Casa do Produtor na prensagem de mangueiras" loading="lazy" />
+              <p>Equipamento real<br />da Casa do Produtor</p>
             </Reveal>
           </div>
         </section>
