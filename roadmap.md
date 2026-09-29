@@ -9,4 +9,5 @@
 - [x] Concluir Fase 1: integrar visualmente hero, categorias, prensagem, produtos, ajuda, história e equipe
 - [x] Validar contatos, mapa e responsividade após a integração
 - [x] Ativar todos os contatos com o WhatsApp oficial 5567992991091
+- [x] Concluir Fase 1.1: equilibrar topo, conectar categorias e destacar a foto real da prensa
 - [ ] Reservado para fase futura: animação principal, avaliações e novas funções de WhatsApp
