@@ -21,9 +21,11 @@ import { useEffect, useState, type ReactNode } from "react";
 import logoAsset from "@/assets/casa-do-produtor-logo.png.asset.json";
 import counterTeamAsset from "@/assets/equipe-balcao.jpg.asset.json";
 import facadeTeamAsset from "@/assets/equipe-fachada.jpg.asset.json";
-import storeTeamAsset from "@/assets/equipe-loja.jpg.asset.json";
+import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
+import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
 import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
+import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 
 const BUSINESS = {
   name: "Casa do Produtor",
@@ -221,8 +223,16 @@ function Index() {
             <p>Ferramentas, ferragens, equipamentos, produtos agrícolas, limpeza e muito mais.</p>
           </Reveal>
           <div className="showcase-layout">
-            <Reveal className="showcase-main">
-              <img src={storeTeamAsset.url} alt="Equipe entre ferramentas, equipamentos e produtos na Casa do Produtor" loading="lazy" />
+            <Reveal className="showcase-composition">
+              <figure className="showcase-photo showcase-photo-main">
+                <img src={toolsAsset.url} alt="Parede de ferramentas e ferragens da Casa do Produtor" loading="lazy" />
+              </figure>
+              <figure className="showcase-photo showcase-photo-equipment">
+                <img src={equipmentAsset.url} alt="Equipamentos para cuidado de áreas urbanas e rurais disponíveis na loja" loading="lazy" />
+              </figure>
+              <figure className="showcase-photo showcase-photo-paint">
+                <img src={paintAsset.url} alt="Tintas organizadas nas prateleiras da Casa do Produtor" loading="lazy" />
+              </figure>
               <span>Produtos reais. Atendimento próximo.</span>
             </Reveal>
             <Reveal className="showcase-side">
