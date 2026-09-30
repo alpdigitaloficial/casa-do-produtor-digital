@@ -142,10 +142,17 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 
 .showcase-intro { max-width: 52rem; margin-bottom: 2.5rem; }
 .showcase-layout { display: grid; gap: 1rem; }
-.showcase-main { position: relative; height: min(120vw, 44rem); overflow: hidden; }
-.showcase-main img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform .8s ease; }
-.showcase-main:hover img { transform: scale(1.025); }
-.showcase-main span { position: absolute; left: 0; bottom: 0; padding: .9rem 1rem; background: var(--primary); color: var(--primary-foreground); font-weight: 800; }
+.showcase-composition { position: relative; min-height: min(125vw, 42rem); padding-bottom: 4.5rem; }
+.showcase-photo { position: absolute; margin: 0; overflow: hidden; background: var(--muted); }
+.showcase-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+.showcase-photo-main { inset: 0 0 23% 0; clip-path: polygon(0 0, 100% 0, 100% 93%, 94% 100%, 0 100%); }
+.showcase-photo-main img { object-position: center; }
+.showcase-photo-equipment { z-index: 2; right: 4%; bottom: 0; width: 54%; height: 34%; border: .45rem solid var(--background); }
+.showcase-photo-equipment img { object-position: 46% center; }
+.showcase-photo-paint { z-index: 2; left: 0; bottom: 1.25rem; width: 43%; height: 27%; border-top: .45rem solid var(--background); border-right: .45rem solid var(--background); }
+.showcase-photo-paint img { object-position: center; }
+.showcase-composition:hover .showcase-photo-main img { transform: scale(1.02); }
+.showcase-composition > span { position: absolute; z-index: 3; left: 0; bottom: 0; padding: .9rem 1rem; background: var(--primary); color: var(--primary-foreground); font-weight: 800; }
 .showcase-side { padding: 2rem 1.25rem; background: var(--industrial-soft); }
 .stock-list { display: grid; margin-bottom: 2rem; }
 .stock-list span { display: flex; align-items: center; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid color-mix(in oklab, var(--foreground) 16%, transparent); font-weight: 750; }
@@ -242,7 +249,11 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .service-visual img { object-position: center 16%; }
   .service-visual > p { left: 3rem; bottom: 2.5rem; }
   .showcase-layout { grid-template-columns: minmax(0,1.5fr) minmax(18rem,.55fr); align-items: stretch; margin-top: -1rem; }
-  .showcase-main { height: 44rem; }
+  .showcase-composition { min-height: 44rem; padding-bottom: 0; margin-right: 1.25rem; }
+  .showcase-photo-main { inset: 0 8% 15% 0; clip-path: polygon(0 0,100% 0,100% 91%,95% 100%,0 100%); }
+  .showcase-photo-equipment { right: 0; bottom: 0; width: 48%; height: 40%; }
+  .showcase-photo-paint { left: 4%; bottom: -1rem; width: 37%; height: 28%; border-left: .45rem solid var(--background); }
+  .showcase-composition > span { left: 8%; bottom: 0; }
   .showcase-side { display: flex; flex-direction: column; justify-content: center; padding: 3rem; }
   .photo-help-section { grid-template-columns: 1fr 1fr; align-items: center; }
   .benefits-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
