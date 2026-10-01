@@ -11,4 +11,5 @@
 - [x] Ativar todos os contatos com o WhatsApp oficial 5567992991091
 - [x] Concluir Fase 1.1: equilibrar topo, conectar categorias e destacar a foto real da prensa
 - [x] Corrigir a seção de variedade com fotografias reais de produtos, sem alterar as demais seções
+- [x] Concluir Fase 2: elevar fotografias reais e continuidade editorial sem reconstruir o site
 - [ ] Reservado para fase futura: animação principal, avaliações e novas funções de WhatsApp
