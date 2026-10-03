@@ -85,13 +85,13 @@ img { display: block; max-width: 100%; }
 
 .hero-section { position: relative; min-height: min(38rem, calc(100svh - 4rem)); display: flex; align-items: flex-end; color: var(--secondary-foreground); background: var(--surface-dark); isolation: isolate; }
 .hero-photo-wrap { position: absolute; inset: 0; overflow: hidden; }
-.hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: 54% top; transform: scale(1.012) translate3d(0, calc(var(--hero-progress, 0) * 7px), 0); animation: hero-photo-in .7s cubic-bezier(.2,.7,.2,1) both; will-change: transform; }
+.hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: 54% top; transform: scale(1.012) translate3d(0, var(--hero-photo-shift, 0), 0); animation: hero-photo-in .7s cubic-bezier(.2,.7,.2,1) both; will-change: transform; }
 .hero-photo-wrap > span { position: absolute; right: 1rem; bottom: 1rem; z-index: 2; padding: .55rem .7rem; border-left: 2px solid var(--primary); background: color-mix(in oklab, var(--surface-dark) 78%, transparent); color: var(--secondary-foreground); font-size: .65rem; font-weight: 800; text-transform: uppercase; }
 @media (max-width: 47.99rem) { .hero-photo-wrap > span { display: none; } }
 .hero-shade, .hero-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero-shade { background: linear-gradient(180deg, color-mix(in oklab, var(--surface-dark) 38%, transparent) 0%, color-mix(in oklab, var(--surface-dark) 12%, transparent) 28%, color-mix(in oklab, var(--surface-dark) 94%, transparent) 100%); }
 .hero-lines { opacity: .35; background-image: linear-gradient(90deg, transparent 49.85%, color-mix(in oklab, var(--background) 35%, transparent) 50%, transparent 50.15%); background-size: 25% 100%; }
-.hero-content { position: relative; z-index: 2; width: min(100% - 2rem, 82rem); margin: 0 auto; padding: 7.5rem 0 3rem; opacity: calc(1 - var(--hero-progress, 0) * .18); transform: translate3d(0, calc(var(--hero-progress, 0) * -8px), 0); will-change: transform, opacity; }
+.hero-content { position: relative; z-index: 2; width: min(100% - 2rem, 82rem); margin: 0 auto; padding: 7.5rem 0 3rem; opacity: var(--hero-content-opacity, 1); transform: translate3d(0, var(--hero-content-shift, 0), 0); will-change: transform, opacity; }
 .motion-ready .hero-content .eyebrow { animation: hero-content-in .5s .12s ease both; }
 .motion-ready .hero-content h1 { animation: hero-content-in .55s .19s cubic-bezier(.2,.7,.2,1) both; }
 .motion-ready .hero-content .hero-copy { animation: hero-content-in .5s .27s ease both; }

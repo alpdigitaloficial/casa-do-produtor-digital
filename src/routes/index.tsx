@@ -166,7 +166,9 @@ function Index() {
     const updateMotion = () => {
       const viewportHeight = window.innerHeight;
       const heroProgress = Math.min(Math.max(window.scrollY / Math.max(viewportHeight * 0.72, 1), 0), 1);
-      heroElement?.style.setProperty("--hero-progress", heroProgress.toFixed(3));
+      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 7).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.18).toFixed(3));
 
       motionElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
