@@ -115,8 +115,8 @@ function WhatsAppLink({ message, className = "", compact = false }: { message: s
   );
 }
 
-function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`reveal ${className}`}>{children}</div>;
+function Reveal({ children, className = "", ...props }: { children: ReactNode; className?: string; "data-depth"?: string }) {
+  return <div className={`reveal ${className}`} {...props}>{children}</div>;
 }
 
 function Header() {
