@@ -173,7 +173,7 @@ function Index() {
       motionElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
         const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
-        const depth = Number(element.dataset.depth ?? "0");
+        const depth = Number(element.dataset["depth"] ?? "0");
         const shift = Math.min(Math.max(centerOffset * depth, -depth), depth);
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
