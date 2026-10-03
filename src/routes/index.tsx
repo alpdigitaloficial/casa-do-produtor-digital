@@ -115,8 +115,8 @@ function WhatsAppLink({ message, className = "", compact = false }: { message: s
   );
 }
 
-function Reveal({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`reveal ${className}`}>{children}</div>;
+function Reveal({ children, className = "", ...props }: { children: ReactNode; className?: string; "data-depth"?: string }) {
+  return <div className={`reveal ${className}`} {...props}>{children}</div>;
 }
 
 function Header() {
@@ -152,13 +152,58 @@ function Header() {
 function Index() {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal");
+    const timelineElement = document.querySelector<HTMLElement>(".timeline");
+    const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
+    const heroElement = document.querySelector<HTMLElement>(".hero-section");
+    let animationFrame = 0;
+
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
       { threshold: 0.12 },
     );
     elements.forEach((element) => observer.observe(element));
+
+    const updateMotion = () => {
+      const viewportHeight = window.innerHeight;
+      const heroProgress = Math.min(Math.max(window.scrollY / Math.max(viewportHeight * 0.72, 1), 0), 1);
+      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 7).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.18).toFixed(3));
+
+      motionElements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
+        const depth = Number(element.dataset["depth"] ?? "0");
+        const shift = Math.min(Math.max(centerOffset * depth, -depth), depth);
+        element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
+      });
+
+      if (timelineElement) {
+        const rect = timelineElement.getBoundingClientRect();
+        const progress = Math.min(Math.max((viewportHeight * 0.82 - rect.top) / Math.max(rect.height * 0.9, 1), 0), 1);
+        timelineElement.style.setProperty("--timeline-progress", progress.toFixed(3));
+      }
+    };
+
+    const requestMotionUpdate = () => {
+      if (animationFrame) return;
+      animationFrame = window.requestAnimationFrame(() => {
+        animationFrame = 0;
+        updateMotion();
+      });
+    };
+
+    document.documentElement.classList.add("motion-ready");
+    updateMotion();
+    window.addEventListener("scroll", requestMotionUpdate, { passive: true });
+    window.addEventListener("resize", requestMotionUpdate);
+
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", requestMotionUpdate);
+      window.removeEventListener("resize", requestMotionUpdate);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      document.documentElement.classList.remove("motion-ready");
     };
   }, []);
 
@@ -209,7 +254,7 @@ function Index() {
               <p>Mais praticidade para quem precisa de uma solução rápida e adequada para mangueiras de alta pressão.</p>
               <WhatsAppLink message={messages.service} />
             </Reveal>
-            <Reveal className="service-visual">
+            <Reveal className="service-visual" data-depth="7">
               <img src={pressAsset.url} alt="Prensa hidráulica real utilizada pela Casa do Produtor na prensagem de mangueiras" loading="lazy" />
               <p>Equipamento real<br />da Casa do Produtor</p>
             </Reveal>
@@ -223,7 +268,7 @@ function Index() {
             <p>Ferramentas, ferragens, equipamentos, produtos agrícolas, limpeza e muito mais.</p>
           </Reveal>
           <div className="showcase-layout">
-            <Reveal className="showcase-composition">
+            <Reveal className="showcase-composition" data-depth="6">
               <figure className="showcase-photo showcase-photo-main">
                 <img src={toolsAsset.url} alt="Parede de ferramentas e ferragens da Casa do Produtor" loading="lazy" />
               </figure>
@@ -292,14 +337,14 @@ function Index() {
 
         <section className="team-section" aria-labelledby="team-title">
           <div className="team-composition">
-            <Reveal className="team-image-large"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor" loading="lazy" /></Reveal>
-            <Reveal className="team-image-small"><img src={counterTeamAsset.url} alt="Equipe de atendimento da Casa do Produtor" loading="lazy" /></Reveal>
+            <Reveal className="team-image-large" data-depth="5"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor" loading="lazy" /></Reveal>
+            <Reveal className="team-image-small" data-depth="8"><img src={counterTeamAsset.url} alt="Equipe de atendimento da Casa do Produtor" loading="lazy" /></Reveal>
             <Reveal className="team-copy"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
 
         <section className="location-section" id="localizacao" aria-labelledby="location-title">
-          <div className="location-photo"><img src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>
+          <div className="location-photo" data-depth="5"><img src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>
           <div className="location-info">
             <Reveal><p className="eyebrow">Visite a loja</p><h2 id="location-title">Venha conhecer<br />a Casa do Produtor</h2></Reveal>
             <div className="address-line"><MapPin /><p>{BUSINESS.address}</p></div>
