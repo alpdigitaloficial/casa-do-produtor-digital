@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep page motion coordinated by one passive scroll listener and one animation frame; this preserves smooth mobile scrolling and reduced-motion support.
