@@ -31,7 +31,6 @@ const BUSINESS = {
   name: "Casa do Produtor",
   address: "Avenida Dorvalino dos Santos, 1760 — Centro, Sidrolândia/MS",
   whatsappNumber: "5567992991091",
-  hours: "Horário de funcionamento será informado em breve.",
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Avenida+Dorvalino+dos+Santos+1760+Centro+Sidrolandia+MS",
 } as const;
@@ -151,8 +150,9 @@ function Header() {
 
 function Index() {
   useEffect(() => {
-    const elements = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll(".reveal, .motion-section");
     const timelineElement = document.querySelector<HTMLElement>(".timeline");
+    const timelineItems = document.querySelectorAll<HTMLElement>(".timeline-item");
     const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
     const heroElement = document.querySelector<HTMLElement>(".hero-section");
     let animationFrame = 0;
@@ -166,15 +166,17 @@ function Index() {
     const updateMotion = () => {
       const viewportHeight = window.innerHeight;
       const heroProgress = Math.min(Math.max(window.scrollY / Math.max(viewportHeight * 0.72, 1), 0), 1);
-      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 7).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.18).toFixed(3));
+      const mobileFactor = window.innerWidth < 768 ? 0.55 : 1;
+      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 6 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -10 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.08).toFixed(3));
+      document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
 
       motionElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
         const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
         const depth = Number(element.dataset["depth"] ?? "0");
-        const shift = Math.min(Math.max(centerOffset * depth, -depth), depth);
+        const shift = Math.min(Math.max(centerOffset * depth * mobileFactor, -depth * mobileFactor), depth * mobileFactor);
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
 
@@ -182,6 +184,11 @@ function Index() {
         const rect = timelineElement.getBoundingClientRect();
         const progress = Math.min(Math.max((viewportHeight * 0.82 - rect.top) / Math.max(rect.height * 0.9, 1), 0), 1);
         timelineElement.style.setProperty("--timeline-progress", progress.toFixed(3));
+        timelineItems.forEach((item, index) => {
+          const start = index / timelineItems.length;
+          const itemProgress = Math.min(Math.max((progress - start) * timelineItems.length, 0), 1);
+          item.style.setProperty("--timeline-item-progress", itemProgress.toFixed(3));
+        });
       }
     };
 
@@ -204,6 +211,7 @@ function Index() {
       window.removeEventListener("resize", requestMotionUpdate);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       document.documentElement.classList.remove("motion-ready");
+      document.documentElement.classList.remove("has-scrolled");
     };
   }, []);
 
@@ -227,7 +235,7 @@ function Index() {
           <div className="hero-tag" aria-hidden="true"><span>Desde</span><strong>2020</strong></div>
         </section>
 
-        <section className="section categories-section" id="produtos" aria-labelledby="categories-title">
+        <section className="section categories-section motion-section" id="produtos" aria-labelledby="categories-title">
           <Reveal className="section-heading split-heading">
             <div><p className="eyebrow">Cidade + campo</p><h2 id="categories-title">Encontre o que<br />você precisa</h2></div>
             <p>Uma seleção pensada para resolver necessidades da casa, oficina, empresa e propriedade rural.</p>
@@ -246,9 +254,9 @@ function Index() {
           </div>
         </section>
 
-        <section className="service-section" id="servicos" aria-labelledby="service-title">
+        <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">
-            <Reveal className="service-copy">
+            <Reveal className="service-copy" data-depth="-3">
               <p className="eyebrow light">Serviço especializado</p>
               <h2 id="service-title">Prensagem de<br />mangueiras hidráulicas</h2>
               <p>Mais praticidade para quem precisa de uma solução rápida e adequada para mangueiras de alta pressão.</p>
@@ -261,21 +269,21 @@ function Index() {
           </div>
         </section>
 
-        <section className="section showcase-section" aria-labelledby="showcase-title">
+        <section className="section showcase-section motion-section" aria-labelledby="showcase-title">
           <Reveal className="showcase-intro">
             <p className="eyebrow">Nossa vitrine</p>
             <h2 id="showcase-title">Variedade que acompanha<br />o seu trabalho.</h2>
             <p>Ferramentas, ferragens, equipamentos, produtos agrícolas, limpeza e muito mais.</p>
           </Reveal>
           <div className="showcase-layout">
-            <Reveal className="showcase-composition" data-depth="6">
-              <figure className="showcase-photo showcase-photo-main">
+            <Reveal className="showcase-composition">
+              <figure className="showcase-photo showcase-photo-main" data-depth="3">
                 <img src={toolsAsset.url} alt="Parede de ferramentas e ferragens da Casa do Produtor" loading="lazy" />
               </figure>
-              <figure className="showcase-photo showcase-photo-equipment">
+              <figure className="showcase-photo showcase-photo-equipment" data-depth="7">
                 <img src={equipmentAsset.url} alt="Equipamentos para cuidado de áreas urbanas e rurais disponíveis na loja" loading="lazy" />
               </figure>
-              <figure className="showcase-photo showcase-photo-paint">
+              <figure className="showcase-photo showcase-photo-paint" data-depth="-5">
                 <img src={paintAsset.url} alt="Tintas organizadas nas prateleiras da Casa do Produtor" loading="lazy" />
               </figure>
               <span>Produtos reais. Atendimento próximo.</span>
@@ -290,7 +298,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="photo-help-section" aria-labelledby="photo-help-title">
+        <section className="photo-help-section motion-section" aria-labelledby="photo-help-title">
           <Reveal className="photo-help-copy">
             <p className="eyebrow">A gente ajuda</p>
             <h2 id="photo-help-title">Não encontrou<br />o que procura?</h2>
@@ -335,11 +343,11 @@ function Index() {
           </details>
         </section>
 
-        <section className="team-section" aria-labelledby="team-title">
+        <section className="team-section motion-section" aria-labelledby="team-title">
           <div className="team-composition">
             <Reveal className="team-image-large" data-depth="5"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor" loading="lazy" /></Reveal>
             <Reveal className="team-image-small" data-depth="8"><img src={counterTeamAsset.url} alt="Equipe de atendimento da Casa do Produtor" loading="lazy" /></Reveal>
-            <Reveal className="team-copy"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
+            <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
 
@@ -348,7 +356,14 @@ function Index() {
           <div className="location-info">
             <Reveal><p className="eyebrow">Visite a loja</p><h2 id="location-title">Venha conhecer<br />a Casa do Produtor</h2></Reveal>
             <div className="address-line"><MapPin /><p>{BUSINESS.address}</p></div>
-            <div className="address-line"><Clock3 /><p>{BUSINESS.hours}</p></div>
+            <div className="hours-block" aria-label="Horário de atendimento">
+              <div className="hours-heading"><Clock3 /><strong>Horário de atendimento</strong></div>
+              <dl>
+                <div><dt>Seg — Sex</dt><dd>06:50 — 17:30</dd></div>
+                <div><dt>Sáb</dt><dd>07:00 — 11:30</dd></div>
+                <div><dt>Dom</dt><dd>Fechado</dd></div>
+              </dl>
+            </div>
             <div className="location-actions">
               <a className="button-dark" href={BUSINESS.mapsUrl} target="_blank" rel="noreferrer">Como chegar <ExternalLink size={17} /></a>
               <WhatsAppLink message={messages.location} />
