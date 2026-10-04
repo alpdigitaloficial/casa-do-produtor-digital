@@ -176,7 +176,8 @@ function Index() {
         const rect = element.getBoundingClientRect();
         const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
         const depth = Number(element.dataset["depth"] ?? "0");
-        const shift = Math.min(Math.max(centerOffset * depth * mobileFactor, -depth * mobileFactor), depth * mobileFactor);
+        const limit = Math.abs(depth) * mobileFactor;
+        const shift = Math.min(Math.max(centerOffset * depth * mobileFactor, -limit), limit);
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
 
@@ -188,6 +189,10 @@ function Index() {
           const start = index / timelineItems.length;
           const itemProgress = Math.min(Math.max((progress - start) * timelineItems.length, 0), 1);
           item.style.setProperty("--timeline-item-progress", itemProgress.toFixed(3));
+          item.style.setProperty("--timeline-item-opacity", (0.38 + itemProgress * 0.62).toFixed(3));
+          item.style.setProperty("--timeline-copy-opacity", (0.42 + itemProgress * 0.58).toFixed(3));
+          item.style.setProperty("--timeline-item-shift", `${((1 - itemProgress) * 6).toFixed(2)}px`);
+          item.style.setProperty("--timeline-marker-scale", (0.68 + itemProgress * 0.32).toFixed(3));
         });
       }
     };

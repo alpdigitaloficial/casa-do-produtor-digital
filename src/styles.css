@@ -214,9 +214,9 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .timeline { position: relative; margin: 3rem 0; }
 .timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3.3rem; width: 1px; background: linear-gradient(var(--primary), color-mix(in oklab, var(--primary) 25%, transparent)); transform: scaleY(var(--timeline-progress, 0)); transform-origin: top; transition: transform .12s linear; }
 .timeline-item { position: relative; display: grid; grid-template-columns: 2.8rem 1rem minmax(0,1fr); gap: .65rem; align-items: start; min-height: 7rem; }
-.timeline-item span { color: var(--primary); font: 800 .78rem var(--font-sans); opacity: calc(.38 + var(--timeline-item-progress, 0) * .62); transform: translateY(calc((1 - var(--timeline-item-progress, 0)) * .3rem)); }
-.timeline-item div { position: relative; z-index: 2; width: .8rem; height: .8rem; border: 3px solid var(--surface-dark); border-radius: 50%; background: var(--primary); transform: scale(calc(.68 + var(--timeline-item-progress, 0) * .32)); }
-.timeline-item p { color: color-mix(in oklab, var(--secondary-foreground) 80%, transparent); line-height: 1.5; opacity: calc(.42 + var(--timeline-item-progress, 0) * .58); transform: translateY(calc((1 - var(--timeline-item-progress, 0)) * .4rem)); }
+.timeline-item span { color: var(--primary); font: 800 .78rem var(--font-sans); opacity: var(--timeline-item-opacity, .38); transform: translateY(var(--timeline-item-shift, 6px)); }
+.timeline-item div { position: relative; z-index: 2; width: .8rem; height: .8rem; border: 3px solid var(--surface-dark); border-radius: 50%; background: var(--primary); transform: scale(var(--timeline-marker-scale, .68)); }
+.timeline-item p { color: color-mix(in oklab, var(--secondary-foreground) 80%, transparent); line-height: 1.5; opacity: var(--timeline-copy-opacity, .42); transform: translateY(var(--timeline-item-shift, 6px)); }
 .timeline-item span, .timeline-item div, .timeline-item p { transition: opacity .14s linear, transform .14s linear; }
 .history-more { max-width: 45rem; border-top: 1px solid color-mix(in oklab, var(--background) 18%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--background) 18%, transparent); }
 .history-more summary { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; color: var(--primary); cursor: pointer; font-weight: 800; list-style: none; }
