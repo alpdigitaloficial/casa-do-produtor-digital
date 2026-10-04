@@ -14,4 +14,5 @@
 - [x] Concluir Fase 2: elevar fotografias reais e continuidade editorial sem reconstruir o site
 - [x] Restaurar crop da fachada, destaques amarelos das categorias e fundo branco da equipe
 - [x] Concluir Fase 3: microinterações e experiência de navegação
+- [ ] Concluir Fase 3.1: reforçar movimento contínuo e adicionar horários de atendimento
 - [ ] Reservado para fase futura: animação principal, avaliações e novas funções de WhatsApp
