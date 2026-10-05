@@ -241,7 +241,7 @@ function Index() {
           const serviceTop = serviceRect.top + window.scrollY;
           const destinationScroll = Math.max(serviceTop - viewportHeight * (isMobile ? 0.28 : 0.24), 1);
           const progress = Math.min(Math.max(window.scrollY / destinationScroll, 0), 1);
-          const points = isMobile
+          const points: Array<[number, number, number, number]> = isMobile
             ? [
                 [window.innerWidth * 0.84, viewportHeight * 0.7, -14, 0.58],
                 [window.innerWidth * 0.82, viewportHeight * 0.61, -3, 0.62],
@@ -256,15 +256,13 @@ function Index() {
                 [window.innerWidth * 0.72, viewportHeight * 0.4, -8, 0.76],
                 [targetX, targetY, -4, 0.72],
               ];
-          const stops = [0, 0.24, 0.53, 0.78, 1];
-          const segmentIndex = Math.min(stops.findIndex((stop) => progress <= stop) - 1, 3);
-          const safeIndex = Math.max(segmentIndex, 0);
-          const segmentStart = stops[safeIndex];
-          const segmentEnd = stops[safeIndex + 1];
+          const safeIndex = progress <= 0.24 ? 0 : progress <= 0.53 ? 1 : progress <= 0.78 ? 2 : 3;
+          const segmentStart = [0, 0.24, 0.53, 0.78][safeIndex] ?? 0;
+          const segmentEnd = [0.24, 0.53, 0.78, 1][safeIndex] ?? 1;
           const localProgress = (progress - segmentStart) / Math.max(segmentEnd - segmentStart, 0.001);
           const easedProgress = localProgress * localProgress * (3 - 2 * localProgress);
-          const from = points[safeIndex];
-          const to = points[safeIndex + 1];
+          const from = points[safeIndex] ?? [0, 0, 0, 1];
+          const to = points[safeIndex + 1] ?? from;
           const mix = (start: number, end: number) => start + (end - start) * easedProgress;
           const x = mix(from[0], to[0]);
           const y = mix(from[1], to[1]);
