@@ -118,6 +118,53 @@ function Reveal({ children, className = "", ...props }: { children: ReactNode; c
   return <div className={`reveal ${className}`} {...props}>{children}</div>;
 }
 
+function HydraulicConnector() {
+  return (
+    <div className="hydraulic-connector" aria-hidden="true">
+      <svg viewBox="0 0 240 90" role="presentation">
+        <defs>
+          <linearGradient id="hose-body" x1="0" y1="0" x2="0" y2="1">
+            <stop className="hose-highlight" offset="0" />
+            <stop className="hose-mid" offset="0.34" />
+            <stop className="hose-dark" offset="0.72" />
+            <stop className="hose-edge" offset="1" />
+          </linearGradient>
+          <linearGradient id="metal-body" x1="0" y1="0" x2="0" y2="1">
+            <stop className="metal-shadow" offset="0" />
+            <stop className="metal-bright" offset="0.22" />
+            <stop className="metal-mid" offset="0.48" />
+            <stop className="metal-light" offset="0.7" />
+            <stop className="metal-shadow" offset="1" />
+          </linearGradient>
+          <linearGradient id="metal-end" x1="0" y1="0" x2="1" y2="0">
+            <stop className="metal-shadow" offset="0" />
+            <stop className="metal-light" offset="0.45" />
+            <stop className="metal-mid" offset="0.72" />
+            <stop className="metal-dark" offset="1" />
+          </linearGradient>
+          <pattern id="hose-weave" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+            <path className="hose-weave-line" d="M0 0V8" />
+          </pattern>
+        </defs>
+        <path className="connector-hose" d="M-10 31H91C101 31 108 37 108 45S101 59 91 59H-10Z" />
+        <path className="connector-weave" d="M0 34H92C99 34 104 39 104 45S99 56 92 56H0Z" />
+        <path className="connector-hose-glint" d="M4 36H89C96 36 99 38 102 42" />
+        <g className="connector-crimp">
+          <path d="M82 26H144V64H82C75 64 70 58 70 51V39C70 32 75 26 82 26Z" />
+          <path className="connector-crimp-highlight" d="M79 31H139" />
+          <path className="connector-crimp-edge" d="M84 27V63M94 27V63M104 27V63M114 27V63M124 27V63M134 27V63" />
+        </g>
+        <path className="connector-hex" d="M143 28H179L194 45L179 62H143L132 45Z" />
+        <path className="connector-hex-highlight" d="M145 32H177L187 43" />
+        <path className="connector-neck" d="M184 35H211V55H184Z" />
+        <path className="connector-thread" d="M207 37H238V53H207Z" />
+        <path className="connector-thread-lines" d="M212 38V52M218 38V52M224 38V52M230 38V52" />
+        <ellipse className="connector-opening" cx="238" cy="45" rx="3.2" ry="8" />
+      </svg>
+    </div>
+  );
+}
+
 function Header() {
   const [open, setOpen] = useState(false);
   const links = [
@@ -155,6 +202,9 @@ function Index() {
     const timelineItems = document.querySelectorAll<HTMLElement>(".timeline-item");
     const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
     const heroElement = document.querySelector<HTMLElement>(".hero-section");
+    const hydraulicElement = document.querySelector<HTMLElement>(".hydraulic-connector");
+    const serviceVisual = document.querySelector<HTMLElement>(".service-visual");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
 
     const observer = new IntersectionObserver(
@@ -172,6 +222,62 @@ function Index() {
       heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8 * mobileFactor).toFixed(2)}px`);
       heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.025).toFixed(3));
       document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
+
+      if (hydraulicElement && serviceVisual) {
+        const serviceRect = serviceVisual.getBoundingClientRect();
+        const isMobile = window.innerWidth < 768;
+        const targetX = serviceRect.left + serviceRect.width * (isMobile ? 0.48 : 0.3);
+        const targetY = serviceRect.top + serviceRect.height * (isMobile ? 0.25 : 0.31);
+
+        if (reducedMotion.matches) {
+          const targetVisible = serviceRect.top < viewportHeight && serviceRect.bottom > 0;
+          hydraulicElement.style.setProperty("--hydraulic-x", `${targetX.toFixed(2)}px`);
+          hydraulicElement.style.setProperty("--hydraulic-y", `${targetY.toFixed(2)}px`);
+          hydraulicElement.style.setProperty("--hydraulic-rotation", "-4deg");
+          hydraulicElement.style.setProperty("--hydraulic-scale", isMobile ? "0.56" : "0.72");
+          hydraulicElement.style.setProperty("--hydraulic-opacity", targetVisible ? "0.88" : "0");
+          hydraulicElement.dataset["progress"] = targetVisible ? "static" : "hidden";
+        } else {
+          const serviceTop = serviceRect.top + window.scrollY;
+          const destinationScroll = Math.max(serviceTop - viewportHeight * (isMobile ? 0.28 : 0.24), 1);
+          const progress = Math.min(Math.max(window.scrollY / destinationScroll, 0), 1);
+          const points: Array<[number, number, number, number]> = isMobile
+            ? [
+                [window.innerWidth * 0.84, viewportHeight * 0.7, -14, 0.58],
+                [window.innerWidth * 0.82, viewportHeight * 0.61, -3, 0.62],
+                [window.innerWidth * 0.88, viewportHeight * 0.5, 10, 0.58],
+                [window.innerWidth * 0.96, viewportHeight * 0.42, -7, 0.54],
+                [targetX, targetY, -4, 0.56],
+              ]
+            : [
+                [window.innerWidth * 0.88, viewportHeight * 0.79, -17, 0.88],
+                [window.innerWidth * 0.83, viewportHeight * 0.68, -5, 0.94],
+                [window.innerWidth * 0.91, viewportHeight * 0.53, 11, 0.86],
+                [window.innerWidth * 0.72, viewportHeight * 0.4, -8, 0.76],
+                [targetX, targetY, -4, 0.72],
+              ];
+          const safeIndex = progress <= 0.24 ? 0 : progress <= 0.53 ? 1 : progress <= 0.78 ? 2 : 3;
+          const segmentStart = [0, 0.24, 0.53, 0.78][safeIndex] ?? 0;
+          const segmentEnd = [0.24, 0.53, 0.78, 1][safeIndex] ?? 1;
+          const localProgress = (progress - segmentStart) / Math.max(segmentEnd - segmentStart, 0.001);
+          const easedProgress = localProgress * localProgress * (3 - 2 * localProgress);
+          const from = points[safeIndex] ?? [0, 0, 0, 1];
+          const to = points[safeIndex + 1] ?? from;
+          const mix = (start: number, end: number) => start + (end - start) * easedProgress;
+          const x = mix(from[0], to[0]);
+          const y = mix(from[1], to[1]);
+          const rotation = mix(from[2], to[2]);
+          const scale = mix(from[3], to[3]);
+          const servicePassed = serviceRect.bottom < 0;
+
+          hydraulicElement.style.setProperty("--hydraulic-x", `${x.toFixed(2)}px`);
+          hydraulicElement.style.setProperty("--hydraulic-y", `${y.toFixed(2)}px`);
+          hydraulicElement.style.setProperty("--hydraulic-rotation", `${rotation.toFixed(2)}deg`);
+          hydraulicElement.style.setProperty("--hydraulic-scale", scale.toFixed(3));
+          hydraulicElement.style.setProperty("--hydraulic-opacity", servicePassed ? "0" : "0.96");
+          hydraulicElement.dataset["progress"] = progress.toFixed(3);
+        }
+      }
 
       motionElements.forEach((element) => {
         const rect = element.getBoundingClientRect();
@@ -215,11 +321,13 @@ function Index() {
     updateMotion();
     window.addEventListener("scroll", requestMotionUpdate, { passive: true });
     window.addEventListener("resize", requestMotionUpdate);
+    reducedMotion.addEventListener("change", requestMotionUpdate);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", requestMotionUpdate);
       window.removeEventListener("resize", requestMotionUpdate);
+      reducedMotion.removeEventListener("change", requestMotionUpdate);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       document.documentElement.classList.remove("motion-ready");
       document.documentElement.classList.remove("has-scrolled");
@@ -229,6 +337,7 @@ function Index() {
   return (
     <div id="inicio" className="site-shell">
       <Header />
+      <HydraulicConnector />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-photo-wrap"><img className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" /><span>Loja física · Sidrolândia/MS</span></div>
