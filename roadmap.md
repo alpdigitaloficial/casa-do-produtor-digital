@@ -15,4 +15,5 @@
 - [x] Restaurar crop da fachada, destaques amarelos das categorias e fundo branco da equipe
 - [x] Concluir Fase 3: microinterações e experiência de navegação
 - [x] Concluir Fase 3.1: reforçar movimento contínuo e adicionar horários de atendimento
-- [ ] Reservado para fase futura: animação principal, avaliações e novas funções de WhatsApp
+- [x] Concluir Fase 3.2: refinar profundidade do Hero e progressão da timeline vinculada ao scroll
+- [ ] Reservado para fase futura: Fase 4 — animação principal, avaliações e novas funções de WhatsApp

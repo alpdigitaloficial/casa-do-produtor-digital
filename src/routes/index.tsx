@@ -151,6 +151,7 @@ function Header() {
 function Index() {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal, .motion-section");
+    const historyElement = document.querySelector<HTMLElement>(".history-section");
     const timelineElement = document.querySelector<HTMLElement>(".timeline");
     const timelineItems = document.querySelectorAll<HTMLElement>(".timeline-item");
     const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
@@ -167,9 +168,9 @@ function Index() {
       const viewportHeight = window.innerHeight;
       const heroProgress = Math.min(Math.max(window.scrollY / Math.max(viewportHeight * 0.72, 1), 0), 1);
       const mobileFactor = window.innerWidth < 768 ? 0.55 : 1;
-      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 6 * mobileFactor).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -10 * mobileFactor).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.08).toFixed(3));
+      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 8 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -12 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.04).toFixed(3));
       document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
 
       motionElements.forEach((element) => {
@@ -181,13 +182,20 @@ function Index() {
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
 
-      if (timelineElement) {
-        const rect = timelineElement.getBoundingClientRect();
-        const progress = Math.min(Math.max((viewportHeight * 0.82 - rect.top) / Math.max(rect.height * 0.9, 1), 0), 1);
+      if (historyElement && timelineElement) {
+        const historyRect = historyElement.getBoundingClientRect();
+        const timelineRect = timelineElement.getBoundingClientRect();
+        const mobileTimeline = window.innerWidth < 768;
+        const startLine = mobileTimeline ? viewportHeight * 0.76 : viewportHeight * 0.7;
+        const travel = mobileTimeline
+          ? Math.max(timelineRect.height * 0.88, 1)
+          : Math.max(historyRect.height * 0.58, 1);
+        const progress = Math.min(Math.max((startLine - timelineRect.top) / travel, 0), 1);
         timelineElement.style.setProperty("--timeline-progress", progress.toFixed(3));
         timelineItems.forEach((item, index) => {
-          const start = index / timelineItems.length;
-          const itemProgress = Math.min(Math.max((progress - start) * timelineItems.length, 0), 1);
+          const markerPosition = timelineItems.length > 1 ? index / (timelineItems.length - 1) : 0;
+          const responseWindow = mobileTimeline ? 0.22 : 0.18;
+          const itemProgress = Math.min(Math.max((progress - markerPosition) / responseWindow, 0), 1);
           item.style.setProperty("--timeline-item-progress", itemProgress.toFixed(3));
           item.style.setProperty("--timeline-item-opacity", (0.38 + itemProgress * 0.62).toFixed(3));
           item.style.setProperty("--timeline-copy-opacity", (0.42 + itemProgress * 0.58).toFixed(3));
