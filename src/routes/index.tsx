@@ -193,8 +193,8 @@ function Index() {
         const progress = Math.min(Math.max((startLine - timelineRect.top) / travel, 0), 1);
         timelineElement.style.setProperty("--timeline-progress", progress.toFixed(3));
         timelineItems.forEach((item, index) => {
-          const markerPosition = timelineItems.length > 1 ? index / (timelineItems.length - 1) : 0;
-          const responseWindow = mobileTimeline ? 0.22 : 0.18;
+          const markerPosition = (index + 0.25) / timelineItems.length;
+          const responseWindow = mobileTimeline ? 0.2 : 0.16;
           const itemProgress = Math.min(Math.max((progress - markerPosition) / responseWindow, 0), 1);
           item.style.setProperty("--timeline-item-progress", itemProgress.toFixed(3));
           item.style.setProperty("--timeline-item-opacity", (0.38 + itemProgress * 0.62).toFixed(3));
