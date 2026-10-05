@@ -213,11 +213,11 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .history-intro p { color: color-mix(in oklab, var(--secondary-foreground) 67%, transparent); }
 .timeline { position: relative; margin: 3rem 0; }
 .timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3.3rem; width: 1px; background: linear-gradient(var(--primary), color-mix(in oklab, var(--primary) 25%, transparent)); transform: scaleY(var(--timeline-progress, 0)); transform-origin: top; transition: transform .12s linear; }
-.timeline-item { position: relative; display: grid; grid-template-columns: 2.8rem 1rem minmax(0,1fr); gap: .65rem; align-items: start; min-height: 7rem; }
+.timeline-item { position: relative; display: grid; grid-template-columns: 2.8rem 1rem minmax(0,1fr); gap: .65rem; align-items: start; min-height: 7rem; opacity: 1; transform: none; transition: none; }
 .timeline-item span { color: var(--primary); font: 800 .78rem var(--font-sans); opacity: var(--timeline-item-opacity, .38); transform: translateY(var(--timeline-item-shift, 6px)); }
 .timeline-item div { position: relative; z-index: 2; width: .8rem; height: .8rem; border: 3px solid var(--surface-dark); border-radius: 50%; background: var(--primary); transform: scale(var(--timeline-marker-scale, .68)); }
 .timeline-item p { color: color-mix(in oklab, var(--secondary-foreground) 80%, transparent); line-height: 1.5; opacity: var(--timeline-copy-opacity, .42); transform: translateY(var(--timeline-item-shift, 6px)); }
-.timeline-item span, .timeline-item div, .timeline-item p { transition: opacity .14s linear, transform .14s linear; }
+.timeline-item span, .timeline-item div, .timeline-item p { transition: opacity .1s linear, transform .1s linear; }
 .history-more { max-width: 45rem; border-top: 1px solid color-mix(in oklab, var(--background) 18%, transparent); border-bottom: 1px solid color-mix(in oklab, var(--background) 18%, transparent); }
 .history-more summary { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; color: var(--primary); cursor: pointer; font-weight: 800; list-style: none; }
 .history-more p { color: color-mix(in oklab, var(--secondary-foreground) 68%, transparent); line-height: 1.7; }
@@ -273,9 +273,9 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
 
 .reveal { opacity: 0; transform: translateY(1.3rem); transition: opacity .62s ease, transform .62s cubic-bezier(.2,.7,.2,1); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
-.benefits-grid .benefit-item:nth-child(2), .timeline .timeline-item:nth-child(2) { transition-delay: .06s; }
-.benefits-grid .benefit-item:nth-child(3), .timeline .timeline-item:nth-child(3) { transition-delay: .12s; }
-.benefits-grid .benefit-item:nth-child(4), .timeline .timeline-item:nth-child(4) { transition-delay: .18s; }
+.benefits-grid .benefit-item:nth-child(2) { transition-delay: .06s; }
+.benefits-grid .benefit-item:nth-child(3) { transition-delay: .12s; }
+.benefits-grid .benefit-item:nth-child(4) { transition-delay: .18s; }
 
 @keyframes hero-photo-in { from { opacity: .65; transform: scale(1.025) translate3d(0, 8px, 0); } to { opacity: 1; } }
 @keyframes hero-content-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
