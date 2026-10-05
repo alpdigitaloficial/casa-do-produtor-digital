@@ -226,7 +226,7 @@ function Index() {
       if (hydraulicElement && serviceVisual) {
         const serviceRect = serviceVisual.getBoundingClientRect();
         const isMobile = window.innerWidth < 768;
-        const targetX = serviceRect.left + serviceRect.width * (isMobile ? 0.72 : 0.3);
+        const targetX = serviceRect.left + serviceRect.width * (isMobile ? 0.48 : 0.3);
         const targetY = serviceRect.top + serviceRect.height * (isMobile ? 0.25 : 0.31);
 
         if (reducedMotion.matches) {
