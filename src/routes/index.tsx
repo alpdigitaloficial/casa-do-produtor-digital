@@ -246,7 +246,7 @@ function Index() {
                 [window.innerWidth * 0.84, viewportHeight * 0.7, -14, 0.58],
                 [window.innerWidth * 0.82, viewportHeight * 0.61, -3, 0.62],
                 [window.innerWidth * 0.88, viewportHeight * 0.5, 10, 0.58],
-                [window.innerWidth * 0.76, viewportHeight * 0.42, -7, 0.54],
+                [window.innerWidth * 0.96, viewportHeight * 0.42, -7, 0.54],
                 [targetX, targetY, -4, 0.56],
               ]
             : [
