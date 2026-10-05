@@ -151,7 +151,6 @@ function Header() {
 function Index() {
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal, .motion-section");
-    const historyElement = document.querySelector<HTMLElement>(".history-section");
     const timelineElement = document.querySelector<HTMLElement>(".timeline");
     const timelineItems = document.querySelectorAll<HTMLElement>(".timeline-item");
     const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
@@ -166,11 +165,12 @@ function Index() {
 
     const updateMotion = () => {
       const viewportHeight = window.innerHeight;
-      const heroProgress = Math.min(Math.max(window.scrollY / Math.max(viewportHeight * 0.72, 1), 0), 1);
-      const mobileFactor = window.innerWidth < 768 ? 0.55 : 1;
-      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 8 * mobileFactor).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -12 * mobileFactor).toFixed(2)}px`);
-      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.04).toFixed(3));
+      const heroHeight = heroElement?.getBoundingClientRect().height ?? viewportHeight;
+      const heroProgress = Math.min(Math.max(window.scrollY / Math.max(heroHeight, 1), 0), 1);
+      const mobileFactor = window.innerWidth < 768 ? 0.5 : 1;
+      heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 14 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8 * mobileFactor).toFixed(2)}px`);
+      heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.025).toFixed(3));
       document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
 
       motionElements.forEach((element) => {
@@ -182,18 +182,16 @@ function Index() {
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
 
-      if (historyElement && timelineElement) {
-        const historyRect = historyElement.getBoundingClientRect();
+      if (timelineElement) {
         const timelineRect = timelineElement.getBoundingClientRect();
         const mobileTimeline = window.innerWidth < 768;
-        const startLine = mobileTimeline ? viewportHeight * 0.76 : viewportHeight * 0.7;
-        const travel = mobileTimeline
-          ? Math.max(timelineRect.height * 0.88, 1)
-          : Math.max(historyRect.height * 0.58, 1);
+        const startLine = viewportHeight * (mobileTimeline ? 0.82 : 0.76);
+        const endLine = viewportHeight * (mobileTimeline ? 0.24 : 0.28);
+        const travel = Math.max(timelineRect.height + startLine - endLine, 1);
         const progress = Math.min(Math.max((startLine - timelineRect.top) / travel, 0), 1);
         timelineElement.style.setProperty("--timeline-progress", progress.toFixed(3));
         timelineItems.forEach((item, index) => {
-          const markerPosition = (index + 0.25) / timelineItems.length;
+          const markerPosition = (index + 0.15) / timelineItems.length;
           const responseWindow = mobileTimeline ? 0.2 : 0.16;
           const itemProgress = Math.min(Math.max((progress - markerPosition) / responseWindow, 0), 1);
           item.style.setProperty("--timeline-item-progress", itemProgress.toFixed(3));
@@ -348,7 +346,7 @@ function Index() {
             <Reveal><p>A Casa do Produtor nasceu em 2020 com o sonho de construir algo nosso e oferecer à cidade e ao campo um lugar com variedade, qualidade e confiança.</p></Reveal>
           </div>
           <div className="timeline">
-            {timeline.map(([year, copy]) => <Reveal className="timeline-item" key={year}><span>{year}</span><div /><p>{copy}</p></Reveal>)}
+            {timeline.map(([year, copy]) => <div className="timeline-item" key={year}><span>{year}</span><div /><p>{copy}</p></div>)}
           </div>
           <details className="history-more">
             <summary>Conhecer mais da nossa história <ArrowDown size={18} /></summary>

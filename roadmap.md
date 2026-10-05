@@ -16,4 +16,5 @@
 - [x] Concluir Fase 3: microinterações e experiência de navegação
 - [x] Concluir Fase 3.1: reforçar movimento contínuo e adicionar horários de atendimento
 - [x] Concluir Fase 3.2: refinar profundidade do Hero e progressão da timeline vinculada ao scroll
+- [x] Concluir Fase 3.3: auditar e tornar Hero e timeline objetivamente vinculados ao scroll
 - [ ] Reservado para fase futura: Fase 4 — animação principal, avaliações e novas funções de WhatsApp
