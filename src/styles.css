@@ -62,6 +62,14 @@
   --surface-dark: oklch(0.16 0.014 72);
   --surface-raised: oklch(0.24 0.014 72);
   --whatsapp: oklch(0.67 0.17 147);
+  --metal-shadow: oklch(0.28 0.008 80);
+  --metal-dark: oklch(0.38 0.01 82);
+  --metal-mid: oklch(0.58 0.012 85);
+  --metal-light: oklch(0.79 0.01 88);
+  --metal-bright: oklch(0.91 0.008 90);
+  --hose-dark: oklch(0.13 0.006 80);
+  --hose-mid: oklch(0.22 0.008 80);
+  --hose-light: oklch(0.36 0.008 80);
 }
 
 * { box-sizing: border-box; border-color: var(--border); }
@@ -75,6 +83,21 @@ img { display: block; max-width: 100%; }
 :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 
 .site-shell { overflow: clip; }
+.hydraulic-connector { position: fixed; z-index: 24; top: 0; left: 0; width: clamp(8.25rem, 13vw, 12.5rem); opacity: var(--hydraulic-opacity, 0); pointer-events: none; transform: translate3d(var(--hydraulic-x, 88vw), var(--hydraulic-y, 78vh), 0) translate(-50%, -50%) rotate(var(--hydraulic-rotation, -17deg)) scale(var(--hydraulic-scale, .88)); transform-origin: center; filter: drop-shadow(0 .8rem .65rem color-mix(in oklab, var(--surface-dark) 34%, transparent)); will-change: transform, opacity; }
+.hydraulic-connector svg { display: block; width: 100%; overflow: visible; }
+.hose-highlight { stop-color: var(--hose-light); }.hose-mid { stop-color: var(--hose-mid); }.hose-dark { stop-color: var(--hose-dark); }.hose-edge { stop-color: var(--surface-dark); }
+.metal-shadow { stop-color: var(--metal-shadow); }.metal-dark { stop-color: var(--metal-dark); }.metal-mid { stop-color: var(--metal-mid); }.metal-light { stop-color: var(--metal-light); }.metal-bright { stop-color: var(--metal-bright); }
+.connector-hose { fill: url(#hose-body); }
+.connector-weave { fill: url(#hose-weave); opacity: .42; }
+.hose-weave-line { stroke: var(--metal-mid); stroke-width: 1.2; opacity: .46; }
+.connector-hose-glint { fill: none; stroke: color-mix(in oklab, var(--metal-light) 50%, transparent); stroke-width: 1.5; stroke-linecap: round; }
+.connector-crimp, .connector-neck { fill: url(#metal-body); }
+.connector-crimp-highlight, .connector-hex-highlight { fill: none; stroke: color-mix(in oklab, var(--metal-bright) 72%, transparent); stroke-width: 2; stroke-linecap: round; }
+.connector-crimp-edge { fill: none; stroke: color-mix(in oklab, var(--metal-shadow) 72%, transparent); stroke-width: 2; }
+.connector-hex { fill: url(#metal-body); stroke: var(--metal-shadow); stroke-width: 1; }
+.connector-thread { fill: url(#metal-end); }
+.connector-thread-lines { fill: none; stroke: color-mix(in oklab, var(--metal-shadow) 78%, transparent); stroke-width: 1.4; }
+.connector-opening { fill: var(--surface-dark); stroke: var(--metal-light); stroke-width: 1.2; }
 .site-header { position: absolute; z-index: 30; top: 0; left: 0; right: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 1rem; width: min(100% - 2rem, 88rem); margin: 0 auto; padding: 1rem 0; border-bottom: 1px solid color-mix(in oklab, var(--background) 28%, transparent); color: var(--secondary-foreground); }
 .brand-link { min-width: 0; }
 .brand-link img { width: 12.5rem; height: 3.8rem; object-fit: contain; object-position: left center; }
@@ -355,4 +378,5 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .timeline-item span, .timeline-item div, .timeline-item p { opacity: 1; transform: none; }
   .categories-section::before, .categories-section::after, .service-section::after, .showcase-section::before { transform: scale(1); }
   .floating-whatsapp { opacity: 1; transform: none; pointer-events: auto; }
+  .hydraulic-connector { transition: none !important; }
 }

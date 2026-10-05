@@ -11,3 +11,4 @@
 
 - Keep page motion coordinated by one passive scroll listener and one animation frame; this preserves smooth mobile scrolling and reduced-motion support.
 - Drive timeline progress from its own viewport geometry and keep timeline items outside one-shot reveal effects; this preserves bidirectional scroll feedback.
+- Render the Hero-to-press hydraulic journey as one fixed, pointer-free element whose route is computed inside the shared scroll frame; this preserves visual continuity and interaction safety.
