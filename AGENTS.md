@@ -10,4 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep page motion coordinated by one passive scroll listener and one animation frame; this preserves smooth mobile scrolling and reduced-motion support.
-- Drive timeline progression from its section scroll geometry rather than intersection timing; this keeps the narrative continuous across viewport sizes.
+- Drive timeline progress from its own viewport geometry and keep timeline items outside one-shot reveal effects; this preserves bidirectional scroll feedback.
