@@ -87,7 +87,7 @@ img { display: block; max-width: 100%; }
 .hydraulic-connector svg { display: block; width: 100%; overflow: visible; }
 .hose-highlight { stop-color: var(--hose-light); }.hose-mid { stop-color: var(--hose-mid); }.hose-dark { stop-color: var(--hose-dark); }.hose-edge { stop-color: var(--surface-dark); }
 .metal-shadow { stop-color: var(--metal-shadow); }.metal-dark { stop-color: var(--metal-dark); }.metal-mid { stop-color: var(--metal-mid); }.metal-light { stop-color: var(--metal-light); }.metal-bright { stop-color: var(--metal-bright); }
-.connector-hose-edge { fill: none; stroke: var(--surface-dark); stroke-width: 31; stroke-linecap: round; stroke-linejoin: round; }
+.connector-hose-edge { fill: none; stroke: color-mix(in oklab, var(--hose-light) 76%, var(--surface-dark)); stroke-width: 31; stroke-linecap: round; stroke-linejoin: round; }
 .connector-hose { fill: none; stroke: url(#hose-body); stroke-width: 27; stroke-linecap: round; stroke-linejoin: round; }
 .connector-weave { fill: url(#hose-weave); opacity: .42; }
 .hose-weave-line { stroke: var(--metal-mid); stroke-width: 1.25; opacity: .32; }
