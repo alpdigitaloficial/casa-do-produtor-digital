@@ -19,3 +19,4 @@
 - [x] Concluir Fase 3.3: auditar e tornar Hero e timeline objetivamente vinculados ao scroll
 - [x] Concluir Fase 4: peça hidráulica única e contínua do Hero até a prensa, vinculada ao scroll
 - [x] Corrigir visualmente a Fase 4: mangueira preta de alta pressão com terminal metálico prensado
+- [ ] Concluir correção final da Fase 4 com asset real e chegada acima do título de prensagem
