@@ -83,18 +83,22 @@ img { display: block; max-width: 100%; }
 :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 
 .site-shell { overflow: clip; }
-.hydraulic-connector { position: fixed; z-index: 24; top: 0; left: 0; width: clamp(8.25rem, 13vw, 12.5rem); opacity: var(--hydraulic-opacity, 0); pointer-events: none; transform: translate3d(var(--hydraulic-x, 88vw), var(--hydraulic-y, 78vh), 0) translate(-50%, -50%) rotate(var(--hydraulic-rotation, -17deg)) scale(var(--hydraulic-scale, .88)); transform-origin: center; filter: drop-shadow(0 .8rem .65rem color-mix(in oklab, var(--surface-dark) 34%, transparent)); will-change: transform, opacity; }
+.hydraulic-connector { position: fixed; z-index: 24; top: 0; left: 0; width: clamp(10.5rem, 17vw, 15.5rem); opacity: var(--hydraulic-opacity, 0); pointer-events: none; transform: translate3d(var(--hydraulic-x, 88vw), var(--hydraulic-y, 78vh), 0) translate(-50%, -50%) rotate(var(--hydraulic-rotation, -17deg)) scale(var(--hydraulic-scale, .88)); transform-origin: center; filter: drop-shadow(0 .85rem .65rem color-mix(in oklab, var(--surface-dark) 38%, transparent)) drop-shadow(0 .12rem .12rem color-mix(in oklab, var(--surface-dark) 42%, transparent)); will-change: transform, opacity; }
 .hydraulic-connector svg { display: block; width: 100%; overflow: visible; }
 .hose-highlight { stop-color: var(--hose-light); }.hose-mid { stop-color: var(--hose-mid); }.hose-dark { stop-color: var(--hose-dark); }.hose-edge { stop-color: var(--surface-dark); }
 .metal-shadow { stop-color: var(--metal-shadow); }.metal-dark { stop-color: var(--metal-dark); }.metal-mid { stop-color: var(--metal-mid); }.metal-light { stop-color: var(--metal-light); }.metal-bright { stop-color: var(--metal-bright); }
-.connector-hose { fill: url(#hose-body); }
+.connector-hose-edge { fill: none; stroke: color-mix(in oklab, var(--hose-light) 76%, var(--surface-dark)); stroke-width: 31; stroke-linecap: round; stroke-linejoin: round; }
+.connector-hose { fill: none; stroke: url(#hose-body); stroke-width: 27; stroke-linecap: round; stroke-linejoin: round; }
 .connector-weave { fill: url(#hose-weave); opacity: .42; }
-.hose-weave-line { stroke: var(--metal-mid); stroke-width: 1.2; opacity: .46; }
-.connector-hose-glint { fill: none; stroke: color-mix(in oklab, var(--metal-light) 50%, transparent); stroke-width: 1.5; stroke-linecap: round; }
+.hose-weave-line { stroke: var(--metal-mid); stroke-width: 1.25; opacity: .32; }
+.connector-hose-glint { fill: none; stroke: color-mix(in oklab, var(--metal-light) 42%, transparent); stroke-width: 2; stroke-linecap: round; }
+.connector-hose-mark { fill: none; stroke: color-mix(in oklab, var(--primary) 42%, var(--hose-mid)); stroke-width: 1.7; stroke-linecap: round; opacity: .68; }
 .connector-crimp, .connector-neck { fill: url(#metal-body); }
 .connector-crimp-highlight, .connector-hex-highlight { fill: none; stroke: color-mix(in oklab, var(--metal-bright) 72%, transparent); stroke-width: 2; stroke-linecap: round; }
 .connector-crimp-edge { fill: none; stroke: color-mix(in oklab, var(--metal-shadow) 72%, transparent); stroke-width: 2; }
+.connector-crimp-band { fill: none; stroke: color-mix(in oklab, var(--metal-shadow) 84%, transparent); stroke-width: 3; }
 .connector-hex { fill: url(#metal-body); stroke: var(--metal-shadow); stroke-width: 1; }
+.connector-hex-face { fill: color-mix(in oklab, var(--metal-bright) 23%, transparent); }
 .connector-thread { fill: url(#metal-end); }
 .connector-thread-lines { fill: none; stroke: color-mix(in oklab, var(--metal-shadow) 78%, transparent); stroke-width: 1.4; }
 .connector-opening { fill: var(--surface-dark); stroke: var(--metal-light); stroke-width: 1.2; }
