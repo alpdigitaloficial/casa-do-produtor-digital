@@ -3,7 +3,6 @@ import {
   ArrowDown,
   ArrowRight,
   Camera,
-  Check,
   Clock3,
   ExternalLink,
   MapPin,
@@ -19,14 +18,14 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 
 import logoAsset from "@/assets/casa-do-produtor-logo.png.asset.json";
-import counterTeamAsset from "@/assets/equipe-balcao.jpg.asset.json";
 import facadeTeamAsset from "@/assets/equipe-fachada.jpg.asset.json";
 import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
 import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
-import hoseAsset from "@/assets/mangueira-hidraulica-terminal-real.png.asset.json";
+import { CategoryPanel } from "@/components/category-panel";
+import { HydraulicComposition, TeamFilm } from "@/components/editorial-media";
 
 const BUSINESS = {
   name: "Casa do Produtor",
@@ -119,14 +118,6 @@ function Reveal({ children, className = "", ...props }: { children: ReactNode; c
   return <div className={`reveal ${className}`} {...props}>{children}</div>;
 }
 
-function HydraulicConnector() {
-  return (
-    <div className="hydraulic-connector" aria-hidden="true">
-      <img src={hoseAsset.url} alt="" width={1261} height={335} decoding="async" />
-    </div>
-  );
-}
-
 function Header() {
   const [open, setOpen] = useState(false);
   const links = [
@@ -164,9 +155,7 @@ function Index() {
     const timelineItems = document.querySelectorAll<HTMLElement>(".timeline-item");
     const motionElements = document.querySelectorAll<HTMLElement>("[data-depth]");
     const heroElement = document.querySelector<HTMLElement>(".hero-section");
-    const hydraulicElement = document.querySelector<HTMLElement>(".hydraulic-connector");
-    const serviceVisual = document.querySelector<HTMLElement>(".service-visual");
-    const serviceEyebrow = document.querySelector<HTMLElement>(".service-copy .eyebrow");
+    const serviceElement = document.querySelector<HTMLElement>(".service-section");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
 
@@ -186,62 +175,16 @@ function Index() {
       heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.025).toFixed(3));
       document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
 
-      if (hydraulicElement && serviceVisual) {
-        const serviceRect = serviceVisual.getBoundingClientRect();
-        const isMobile = window.innerWidth < 768;
-        const anchorRect = (serviceEyebrow ?? serviceVisual).getBoundingClientRect();
-        const targetX = anchorRect.left + (isMobile ? 150 : 190);
-        const targetY = anchorRect.top - (isMobile ? 40 : 72);
-        const heroRect = heroElement?.getBoundingClientRect() ?? new DOMRect(0, 0, window.innerWidth, viewportHeight);
-
-        if (reducedMotion.matches) {
-          const targetVisible = anchorRect.top < viewportHeight && anchorRect.bottom > 0;
-          hydraulicElement.style.setProperty("--hydraulic-x", `${targetX.toFixed(2)}px`);
-          hydraulicElement.style.setProperty("--hydraulic-y", `${targetY.toFixed(2)}px`);
-          hydraulicElement.style.setProperty("--hydraulic-rotation", "-3deg");
-          hydraulicElement.style.setProperty("--hydraulic-scale", isMobile ? "0.82" : "0.86");
-          hydraulicElement.style.setProperty("--hydraulic-opacity", targetVisible ? "1" : "0");
-          hydraulicElement.dataset["progress"] = targetVisible ? "static" : "hidden";
-        } else {
-          const anchorTop = anchorRect.top + window.scrollY;
-          const destinationScroll = Math.max(anchorTop - viewportHeight * (isMobile ? 0.32 : 0.3), 1);
-          const progress = Math.min(Math.max(window.scrollY / destinationScroll, 0), 1);
-          const points: Array<[number, number, number, number]> = isMobile
-            ? [
-                [window.innerWidth * 0.7, heroRect.bottom - 12, -6, 0.92],
-                [window.innerWidth * 0.72, viewportHeight * 0.55, 4, 0.9],
-                [window.innerWidth * 0.78, viewportHeight * 0.42, -4, 0.86],
-                [window.innerWidth * 0.68, viewportHeight * 0.3, 3, 0.84],
-                [targetX, targetY, -3, 0.82],
-              ]
-            : [
-                [heroRect.left + heroRect.width * 0.6, heroRect.top + heroRect.height * 0.86, -8, 1],
-                [window.innerWidth * 0.64, viewportHeight * 0.58, 3, 0.98],
-                [window.innerWidth * 0.74, viewportHeight * 0.46, -5, 0.94],
-                [window.innerWidth * 0.5, viewportHeight * 0.36, 2, 0.9],
-                [targetX, targetY, -3, 0.86],
-              ];
-          const safeIndex = progress <= 0.24 ? 0 : progress <= 0.53 ? 1 : progress <= 0.78 ? 2 : 3;
-          const segmentStart = [0, 0.24, 0.53, 0.78][safeIndex] ?? 0;
-          const segmentEnd = [0.24, 0.53, 0.78, 1][safeIndex] ?? 1;
-          const localProgress = (progress - segmentStart) / Math.max(segmentEnd - segmentStart, 0.001);
-          const easedProgress = localProgress * localProgress * (3 - 2 * localProgress);
-          const from = points[safeIndex] ?? [0, 0, 0, 1];
-          const to = points[safeIndex + 1] ?? from;
-          const mix = (start: number, end: number) => start + (end - start) * easedProgress;
-          const x = mix(from[0], to[0]);
-          const y = mix(from[1], to[1]);
-          const rotation = mix(from[2], to[2]);
-          const scale = mix(from[3], to[3]);
-          const servicePassed = serviceRect.bottom < 0;
-
-          hydraulicElement.style.setProperty("--hydraulic-x", `${x.toFixed(2)}px`);
-          hydraulicElement.style.setProperty("--hydraulic-y", `${y.toFixed(2)}px`);
-          hydraulicElement.style.setProperty("--hydraulic-rotation", `${rotation.toFixed(2)}deg`);
-          hydraulicElement.style.setProperty("--hydraulic-scale", scale.toFixed(3));
-          hydraulicElement.style.setProperty("--hydraulic-opacity", servicePassed ? "0" : "0.96");
-          hydraulicElement.dataset["progress"] = progress.toFixed(3);
-        }
+      // Prepared only: local crops of the forthcoming real asset, no cross-page route.
+      const hydraulicHeroProgress = reducedMotion.matches ? 0 : heroProgress;
+      heroElement?.style.setProperty("--composition-scale", (1 + hydraulicHeroProgress * 0.035).toFixed(3));
+      heroElement?.style.setProperty("--composition-rotation", `${(hydraulicHeroProgress * -2).toFixed(2)}deg`);
+      heroElement?.style.setProperty("--composition-crop", `${(hydraulicHeroProgress * 8).toFixed(2)}%`);
+      if (serviceElement) {
+        const rect = serviceElement.getBoundingClientRect();
+        const progress = reducedMotion.matches ? 1 : Math.min(Math.max((viewportHeight - rect.top) / viewportHeight, 0), 1);
+        serviceElement.style.setProperty("--composition-scale", (0.97 + progress * 0.03).toFixed(3));
+        serviceElement.style.setProperty("--composition-crop", `${((1 - progress) * 8).toFixed(2)}%`);
       }
 
       motionElements.forEach((element) => {
@@ -302,12 +245,12 @@ function Index() {
   return (
     <div id="inicio" className="site-shell">
       <Header />
-      <HydraulicConnector />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-photo-wrap"><img className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" /><span>Loja física · Sidrolândia/MS</span></div>
           <div className="hero-shade" />
           <div className="hero-lines" aria-hidden="true" />
+          <HydraulicComposition stage="hero" />
           <div className="hero-content">
             <p className="eyebrow light">Casa do Produtor · Sidrolândia/MS</p>
             <h1 id="hero-title">Soluções para a cidade<br />e para o campo.</h1>
@@ -342,6 +285,7 @@ function Index() {
         <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">
             <Reveal className="service-copy" data-depth="-3">
+              <HydraulicComposition stage="service" />
               <p className="eyebrow light">Serviço especializado</p>
               <h2 id="service-title">Prensagem de<br />mangueiras hidráulicas</h2>
               <p>Mais praticidade para quem precisa de uma solução rápida e adequada para mangueiras de alta pressão.</p>
@@ -375,7 +319,7 @@ function Index() {
             </Reveal>
             <Reveal className="showcase-side">
               <div className="stock-list">
-                {categories.map(([, title]) => <span key={title}><Check size={15} />{title}</span>)}
+                {categories.map(([number, title, description]) => <CategoryPanel key={title} number={number} title={title} description={description} whatsappNumber={BUSINESS.whatsappNumber} />)}
               </div>
               <p>Consulte nossa equipe para verificar opções e disponibilidade.</p>
               <WhatsAppLink message={messages.product} />
@@ -430,8 +374,8 @@ function Index() {
 
         <section className="team-section motion-section" aria-labelledby="team-title">
           <div className="team-composition">
-            <Reveal className="team-image-large" data-depth="5"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor" loading="lazy" /></Reveal>
-            <Reveal className="team-image-small" data-depth="8"><img src={counterTeamAsset.url} alt="Equipe de atendimento da Casa do Produtor" loading="lazy" /></Reveal>
+            <Reveal className="team-image-large" data-depth="5"><TeamFilm fallbackPoster={facadeTeamAsset.url} /></Reveal>
+            <Reveal className="team-image-small team-image-complete" data-depth="8"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor em frente à loja" loading="lazy" /></Reveal>
             <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
