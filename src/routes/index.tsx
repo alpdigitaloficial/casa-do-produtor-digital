@@ -26,6 +26,7 @@ import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
 import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
+import hoseAsset from "@/assets/mangueira-hidraulica-terminal-real.png.asset.json";
 
 const BUSINESS = {
   name: "Casa do Produtor",
@@ -121,53 +122,7 @@ function Reveal({ children, className = "", ...props }: { children: ReactNode; c
 function HydraulicConnector() {
   return (
     <div className="hydraulic-connector" aria-hidden="true">
-      <svg viewBox="0 0 310 120" role="presentation">
-        <defs>
-          <linearGradient id="hose-body" x1="0" y1="0" x2="0" y2="1">
-            <stop className="hose-highlight" offset="0" />
-            <stop className="hose-mid" offset="0.28" />
-            <stop className="hose-dark" offset="0.68" />
-            <stop className="hose-edge" offset="1" />
-          </linearGradient>
-          <linearGradient id="metal-body" x1="0" y1="0" x2="0" y2="1">
-            <stop className="metal-shadow" offset="0" />
-            <stop className="metal-bright" offset="0.18" />
-            <stop className="metal-mid" offset="0.47" />
-            <stop className="metal-light" offset="0.72" />
-            <stop className="metal-shadow" offset="1" />
-          </linearGradient>
-          <linearGradient id="metal-end" x1="0" y1="0" x2="1" y2="0">
-            <stop className="metal-shadow" offset="0" />
-            <stop className="metal-light" offset="0.38" />
-            <stop className="metal-mid" offset="0.68" />
-            <stop className="metal-dark" offset="1" />
-          </linearGradient>
-          <pattern id="hose-weave" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
-            <path className="hose-weave-line" d="M0 0V10" />
-          </pattern>
-          <clipPath id="hose-clip">
-            <path d="M-12 93C35 96 61 84 86 70C104 60 119 56 143 56" />
-          </clipPath>
-        </defs>
-        <path className="connector-hose-edge" d="M-12 93C35 96 61 84 86 70C104 60 119 56 143 56" />
-        <path className="connector-hose" d="M-12 93C35 96 61 84 86 70C104 60 119 56 143 56" />
-        <rect className="connector-weave" x="-8" y="45" width="154" height="62" clipPath="url(#hose-clip)" />
-        <path className="connector-hose-glint" d="M-6 86C34 88 59 77 82 65C103 54 119 51 140 51" />
-        <path className="connector-hose-mark" d="M17 88C38 87 55 82 72 74" />
-        <g className="connector-crimp">
-          <path d="M126 36H202V76H126C116 76 109 69 109 60V52C109 43 116 36 126 36Z" />
-          <path className="connector-crimp-highlight" d="M122 41H196" />
-          <path className="connector-crimp-edge" d="M125 37V75M136 37V75M147 37V75M158 37V75M169 37V75M180 37V75M191 37V75" />
-          <path className="connector-crimp-band" d="M112 44H121V68H112M196 39H202V73H196" />
-        </g>
-        <path className="connector-hex" d="M201 38H239L253 56L239 74H201L190 56Z" />
-        <path className="connector-hex-face" d="M205 41H237L247 54H195Z" />
-        <path className="connector-hex-highlight" d="M205 42H236L245 53" />
-        <path className="connector-neck" d="M245 46H271V66H245Z" />
-        <path className="connector-thread" d="M268 47H306V65H268Z" />
-        <path className="connector-thread-lines" d="M274 48V64M281 48V64M288 48V64M295 48V64M301 49V63" />
-        <ellipse className="connector-opening" cx="306" cy="56" rx="4" ry="9" />
-      </svg>
+      <img src={hoseAsset.url} alt="" width={1261} height={335} decoding="async" />
     </div>
   );
 }
