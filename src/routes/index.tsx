@@ -166,6 +166,7 @@ function Index() {
     const heroElement = document.querySelector<HTMLElement>(".hero-section");
     const hydraulicElement = document.querySelector<HTMLElement>(".hydraulic-connector");
     const serviceVisual = document.querySelector<HTMLElement>(".service-visual");
+    const serviceEyebrow = document.querySelector<HTMLElement>(".service-copy .eyebrow");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let animationFrame = 0;
 
@@ -188,35 +189,37 @@ function Index() {
       if (hydraulicElement && serviceVisual) {
         const serviceRect = serviceVisual.getBoundingClientRect();
         const isMobile = window.innerWidth < 768;
-        const targetX = serviceRect.left + serviceRect.width * (isMobile ? 0.48 : 0.3);
-        const targetY = serviceRect.top + serviceRect.height * (isMobile ? 0.25 : 0.31);
+        const anchorRect = (serviceEyebrow ?? serviceVisual).getBoundingClientRect();
+        const targetX = anchorRect.left + (isMobile ? 150 : 190);
+        const targetY = anchorRect.top - (isMobile ? 40 : 72);
+        const heroRect = heroElement?.getBoundingClientRect() ?? new DOMRect(0, 0, window.innerWidth, viewportHeight);
 
         if (reducedMotion.matches) {
-          const targetVisible = serviceRect.top < viewportHeight && serviceRect.bottom > 0;
+          const targetVisible = anchorRect.top < viewportHeight && anchorRect.bottom > 0;
           hydraulicElement.style.setProperty("--hydraulic-x", `${targetX.toFixed(2)}px`);
           hydraulicElement.style.setProperty("--hydraulic-y", `${targetY.toFixed(2)}px`);
-          hydraulicElement.style.setProperty("--hydraulic-rotation", "-4deg");
-          hydraulicElement.style.setProperty("--hydraulic-scale", isMobile ? "0.56" : "0.72");
-          hydraulicElement.style.setProperty("--hydraulic-opacity", targetVisible ? "0.88" : "0");
+          hydraulicElement.style.setProperty("--hydraulic-rotation", "-3deg");
+          hydraulicElement.style.setProperty("--hydraulic-scale", isMobile ? "0.82" : "0.86");
+          hydraulicElement.style.setProperty("--hydraulic-opacity", targetVisible ? "1" : "0");
           hydraulicElement.dataset["progress"] = targetVisible ? "static" : "hidden";
         } else {
-          const serviceTop = serviceRect.top + window.scrollY;
-          const destinationScroll = Math.max(serviceTop - viewportHeight * (isMobile ? 0.28 : 0.24), 1);
+          const anchorTop = anchorRect.top + window.scrollY;
+          const destinationScroll = Math.max(anchorTop - viewportHeight * (isMobile ? 0.32 : 0.3), 1);
           const progress = Math.min(Math.max(window.scrollY / destinationScroll, 0), 1);
           const points: Array<[number, number, number, number]> = isMobile
             ? [
-                [window.innerWidth * 0.84, viewportHeight * 0.7, -14, 0.58],
-                [window.innerWidth * 0.82, viewportHeight * 0.61, -3, 0.62],
-                [window.innerWidth * 0.88, viewportHeight * 0.5, 10, 0.58],
-                [window.innerWidth * 0.96, viewportHeight * 0.42, -7, 0.54],
-                [targetX, targetY, -4, 0.56],
+                [window.innerWidth * 0.7, heroRect.bottom - 12, -6, 0.92],
+                [window.innerWidth * 0.72, viewportHeight * 0.55, 4, 0.9],
+                [window.innerWidth * 0.78, viewportHeight * 0.42, -4, 0.86],
+                [window.innerWidth * 0.68, viewportHeight * 0.3, 3, 0.84],
+                [targetX, targetY, -3, 0.82],
               ]
             : [
-                [window.innerWidth * 0.88, viewportHeight * 0.79, -17, 0.88],
-                [window.innerWidth * 0.83, viewportHeight * 0.68, -5, 0.94],
-                [window.innerWidth * 0.91, viewportHeight * 0.53, 11, 0.86],
-                [window.innerWidth * 0.72, viewportHeight * 0.4, -8, 0.76],
-                [targetX, targetY, -4, 0.72],
+                [heroRect.left + heroRect.width * 0.6, heroRect.top + heroRect.height * 0.86, -8, 1],
+                [window.innerWidth * 0.64, viewportHeight * 0.58, 3, 0.98],
+                [window.innerWidth * 0.74, viewportHeight * 0.46, -5, 0.94],
+                [window.innerWidth * 0.5, viewportHeight * 0.36, 2, 0.9],
+                [targetX, targetY, -3, 0.86],
               ];
           const safeIndex = progress <= 0.24 ? 0 : progress <= 0.53 ? 1 : progress <= 0.78 ? 2 : 3;
           const segmentStart = [0, 0.24, 0.53, 0.78][safeIndex] ?? 0;
