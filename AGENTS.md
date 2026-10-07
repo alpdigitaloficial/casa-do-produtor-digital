@@ -11,4 +11,7 @@
 
 - Keep page motion coordinated by one passive scroll listener and one animation frame; this preserves smooth mobile scrolling and reduced-motion support.
 - Drive timeline progress from its own viewport geometry and keep timeline items outside one-shot reveal effects; this preserves bidirectional scroll feedback.
-- Render the Hero-to-press hydraulic journey as one fixed, pointer-free element whose route is computed inside the shared scroll frame; this preserves visual continuity and interaction safety.
+- Hydraulic media stays section-bound in Hero and service compositions, with crop/scale computed in the shared scroll frame; never use a fixed cross-section journey, which was rejected.
+- Centralize pending real media URLs and category messages in the editorial media configuration; absence renders no fabricated hydraulic/product asset and retains the approved team poster.
+- Use accessible Radix dialog primitives for the editorial category panels and the design-system Button for their controls; this provides focus return, Escape/outside dismissal and modal scroll locking.
+- Team media uses a poster fallback until a real video URL exists, then native controls, playsInline and metadata preload without autoplay; this preserves mobile access and reduced-motion safety.
