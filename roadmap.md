@@ -23,6 +23,7 @@
 - [x] Remover definitivamente objeto hidráulico viajante e preparar transformação local sem asset artificial
 - [x] Preparar e testar seis painéis editoriais da vitrine com WhatsApps próprios, fechar/ESC/fora e bloqueio de scroll
 - [x] Preparar vídeo institucional principal com capa atual e foto completa complementar
-- [ ] Integrar e validar transformação hidráulica — aguarda asset fotográfico real
-- [ ] Integrar imagens dos seis painéis — aguarda fotos reais por categoria
+- [ ] Integrar e validar PNG hidráulico oficial e transformação local
+- [ ] Integrar e validar fotos reais dos painéis e botas ao lado das roçadeiras na vitrine
+- [ ] Integrar fotos de Parafusos — aguarda envio do usuário
 - [ ] Integrar e validar vídeo institucional — aguarda vídeo real e capa definitiva

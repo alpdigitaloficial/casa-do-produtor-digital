@@ -24,6 +24,7 @@ import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
 import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
+import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
 import { HydraulicComposition, TeamFilm } from "@/components/editorial-media";
 
@@ -175,16 +176,16 @@ function Index() {
       heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.025).toFixed(3));
       document.documentElement.classList.toggle("has-scrolled", window.scrollY > 40);
 
-      // Prepared only: local crops of the forthcoming real asset, no cross-page route.
+      // Local transformations of the official source; no cross-page route.
       const hydraulicHeroProgress = reducedMotion.matches ? 0 : heroProgress;
-      heroElement?.style.setProperty("--composition-scale", (1 + hydraulicHeroProgress * 0.035).toFixed(3));
+      heroElement?.style.setProperty("--composition-scale", (1 + hydraulicHeroProgress * 0.12 * mobileFactor).toFixed(3));
       heroElement?.style.setProperty("--composition-rotation", `${(hydraulicHeroProgress * -2).toFixed(2)}deg`);
-      heroElement?.style.setProperty("--composition-crop", `${(hydraulicHeroProgress * 8).toFixed(2)}%`);
+      heroElement?.style.setProperty("--composition-crop", `${(hydraulicHeroProgress * 20 * mobileFactor).toFixed(2)}%`);
       if (serviceElement) {
         const rect = serviceElement.getBoundingClientRect();
         const progress = reducedMotion.matches ? 1 : Math.min(Math.max((viewportHeight - rect.top) / viewportHeight, 0), 1);
-        serviceElement.style.setProperty("--composition-scale", (0.97 + progress * 0.03).toFixed(3));
-        serviceElement.style.setProperty("--composition-crop", `${((1 - progress) * 8).toFixed(2)}%`);
+        serviceElement.style.setProperty("--composition-scale", (0.92 + progress * 0.08).toFixed(3));
+        serviceElement.style.setProperty("--composition-crop", `${((1 - progress) * 20).toFixed(2)}%`);
       }
 
       motionElements.forEach((element) => {
@@ -285,8 +286,7 @@ function Index() {
         <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">
             <Reveal className="service-copy" data-depth="-3">
-              <HydraulicComposition stage="service" />
-              <p className="eyebrow light">Serviço especializado</p>
+              <div className="service-heading-anchor"><HydraulicComposition stage="service" /><p className="eyebrow light">Serviço especializado</p></div>
               <h2 id="service-title">Prensagem de<br />mangueiras hidráulicas</h2>
               <p>Mais praticidade para quem precisa de uma solução rápida e adequada para mangueiras de alta pressão.</p>
               <WhatsAppLink message={messages.service} />
@@ -311,6 +311,9 @@ function Index() {
               </figure>
               <figure className="showcase-photo showcase-photo-equipment" data-depth="7">
                 <img src={equipmentAsset.url} alt="Equipamentos para cuidado de áreas urbanas e rurais disponíveis na loja" loading="lazy" />
+              </figure>
+              <figure className="showcase-photo showcase-photo-boots" data-depth="4">
+                <img src={bootsAsset.url} alt="Botas de trabalho disponíveis na Casa do Produtor" loading="lazy" />
               </figure>
               <figure className="showcase-photo showcase-photo-paint" data-depth="-5">
                 <img src={paintAsset.url} alt="Tintas organizadas nas prateleiras da Casa do Produtor" loading="lazy" />
