@@ -84,11 +84,12 @@ img { display: block; max-width: 100%; }
 
 .site-shell { overflow: clip; }
 .hydraulic-composition { position: absolute; pointer-events: none; overflow: hidden; clip-path: inset(0 0 var(--composition-crop, 0%) 0); }
-.hydraulic-composition img { width: 100%; height: 100%; object-fit: contain; transform: scale(var(--composition-scale, 1)) rotate(var(--composition-rotation, 0deg)); }
-.hydraulic-composition-hero { right: 8%; bottom: 0; width: 23%; height: 30%; z-index: 1; }
+.hydraulic-composition img { width: 100%; height: 100%; object-fit: contain; transform: scale(var(--composition-scale, 1)) rotate(var(--composition-rotation, 0deg)); transform-origin: center top; }
+.hydraulic-composition-hero { right: 8%; bottom: 3.8rem; width: 14rem; height: 14rem; z-index: 1; }
 .service-copy { position: relative; }
-.hydraulic-composition-service { bottom: calc(100% + 1rem); left: 0; width: min(70%, 20rem); height: 4rem; }
-@media (max-width: 47.99rem) { .hydraulic-composition-hero { right: 5%; width: 26%; height: 18%; } }
+.service-heading-anchor { position: relative; }
+.hydraulic-composition-service { bottom: calc(100% + .75rem); left: 0; width: 7rem; height: 7rem; }
+@media (max-width: 47.99rem) { .hydraulic-composition-hero { right: 1rem; bottom: 7rem; width: 5.5rem; height: 5.5rem; } .hydraulic-composition-service { width: 5rem; height: 5rem; } }
 .site-header { position: absolute; z-index: 30; top: 0; left: 0; right: 0; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 1rem; width: min(100% - 2rem, 88rem); margin: 0 auto; padding: 1rem 0; border-bottom: 1px solid color-mix(in oklab, var(--background) 28%, transparent); color: var(--secondary-foreground); }
 .brand-link { min-width: 0; }
 .brand-link img { width: 12.5rem; height: 3.8rem; object-fit: contain; object-position: left center; }
@@ -187,6 +188,8 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .showcase-photo-equipment img { object-position: 46% center; }
 .showcase-photo-paint { z-index: 2; left: -1rem; bottom: 1.5rem; width: 45%; height: 28%; border: .35rem solid var(--background); box-shadow: 0 1rem 2rem color-mix(in oklab, var(--surface-dark) 13%, transparent); }
 .showcase-photo-paint img { object-position: center; }
+.showcase-photo-boots { z-index: 3; right: 42%; bottom: 0; width: 25%; height: 19%; border: .35rem solid var(--background); box-shadow: 0 1rem 2rem color-mix(in oklab, var(--surface-dark) 13%, transparent); }
+.showcase-photo-boots img { object-position: center; }
 .showcase-composition.is-visible .showcase-photo-main img { transform: scale(1.015); }
 .showcase-composition.is-visible .showcase-photo-equipment img { transform: scale(1.025); }
 .showcase-composition.is-visible .showcase-photo-paint img { transform: scale(1.02); }
@@ -352,6 +355,7 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .showcase-photo-main { inset: 0 10% 14% 0; clip-path: polygon(0 0,100% 0,100% 91%,95% 100%,0 100%); }
   .showcase-photo-equipment { right: -1rem; bottom: 0; width: 50%; height: 41%; }
   .showcase-photo-paint { left: 5%; bottom: -1.5rem; width: 36%; height: 29%; }
+  .showcase-photo-boots { right: 37%; bottom: 5%; width: 25%; height: 20%; }
   .showcase-composition > span { left: 9%; bottom: -.5rem; }
   .showcase-side { display: flex; flex-direction: column; justify-content: center; padding: 3rem 0 3rem 2.5rem; }
   .photo-help-section { grid-template-columns: 1fr 1fr; align-items: center; }
