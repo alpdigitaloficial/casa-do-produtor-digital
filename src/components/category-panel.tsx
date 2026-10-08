@@ -1,4 +1,5 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { useRef } from "react";
 import { ArrowRight, Check, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { categoryMedia } from "@/lib/editorial-media";
@@ -7,20 +8,25 @@ type Props = { title: string; description: string; number: string; whatsappNumbe
 
 export function CategoryPanel({ title, description, number, whatsappNumber }: Props) {
   const media = categoryMedia[title];
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const scrollPosition = useRef(0);
   if (!media) return null;
 
   return (
-    <DialogPrimitive.Root>
+    <DialogPrimitive.Root onOpenChange={(open) => { if (open) scrollPosition.current = window.scrollY; }}>
       <DialogPrimitive.Trigger asChild>
-        <Button variant="ghost" className="stock-category" aria-label={`Ver ${title}`}>
+        <Button ref={triggerRef} variant="ghost" className="stock-category" aria-label={`Ver ${title}`}>
           <Check size={15} aria-hidden="true" /><span>{title}</span><ArrowRight size={16} aria-hidden="true" />
         </Button>
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="category-panel-backdrop" />
-        <DialogPrimitive.Content className={`category-panel ${media.photos.length ? "category-panel-with-media" : "category-panel-text"}`}>
+        <DialogPrimitive.Content className={`category-panel ${media.photos.length ? "category-panel-with-media" : "category-panel-text"}`}
+          onOpenAutoFocus={(event) => { event.preventDefault(); closeRef.current?.focus({ preventScroll: true }); }}
+          onCloseAutoFocus={(event) => { event.preventDefault(); triggerRef.current?.focus({ preventScroll: true }); window.scrollTo({ top: scrollPosition.current, behavior: "instant" }); }}>
           <DialogPrimitive.Close asChild>
-            <Button variant="ghost" size="icon" className="category-panel-close" aria-label="Fechar categoria" title="Fechar">
+            <Button ref={closeRef} variant="ghost" size="icon" className="category-panel-close" aria-label="Fechar categoria" title="Fechar">
               <X aria-hidden="true" />
             </Button>
           </DialogPrimitive.Close>
