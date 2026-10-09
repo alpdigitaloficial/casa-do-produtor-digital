@@ -22,7 +22,7 @@ import facadeTeamAsset from "@/assets/equipe-fachada.jpg.asset.json";
 import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
-import pressAsset from "@/assets/prensa-hidraulica-casa-do-produtor.jpg.asset.json";
+import pressAsset from "@/assets/20260928_172413.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
@@ -292,7 +292,7 @@ function Index() {
               <WhatsAppLink message={messages.service} />
             </Reveal>
             <Reveal className="service-visual" data-depth="7">
-              <img src={pressAsset.url} alt="Prensa hidráulica real utilizada pela Casa do Produtor na prensagem de mangueiras" loading="lazy" />
+              <img src={pressAsset.url} alt="Máquina de prensagem de mangueiras hidráulicas na Casa do Produtor" loading="lazy" />
               <p>Equipamento real<br />da Casa do Produtor</p>
             </Reveal>
           </div>
