@@ -27,3 +27,4 @@
 - [x] Integrar e validar fotos reais dos painéis e botas ao lado das roçadeiras na vitrine — desktop/mobile, imagens, WhatsApps, fechamento e bloqueio de scroll verificados
 - [ ] Integrar fotos de Parafusos — aguarda envio do usuário
 - [ ] Integrar e validar vídeo institucional — aguarda vídeo real e capa definitiva
+- [x] Adicionar e validar linha SVG de margem Hero → botão da prensagem — scroll reversível, resize, painéis, movimento reduzido e medidas/textos/fotos preservados
