@@ -27,6 +27,7 @@ import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
 import { HydraulicComposition, TeamFilm } from "@/components/editorial-media";
+import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
 
 const BUSINESS = {
   name: "Casa do Produtor",
@@ -158,6 +159,8 @@ function Index() {
     const heroElement = document.querySelector<HTMLElement>(".hero-section");
     const serviceElement = document.querySelector<HTMLElement>(".service-section");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hoseSvg = document.querySelector<SVGSVGElement>(".scroll-hose");
+    const updateHose = hoseSvg ? createScrollHose(hoseSvg) : undefined;
     let animationFrame = 0;
 
     const observer = new IntersectionObserver(
@@ -216,6 +219,7 @@ function Index() {
           item.style.setProperty("--timeline-marker-scale", (0.68 + itemProgress * 0.32).toFixed(3));
         });
       }
+      updateHose?.(reducedMotion.matches);
     };
 
     const requestMotionUpdate = () => {
@@ -230,12 +234,14 @@ function Index() {
     updateMotion();
     window.addEventListener("scroll", requestMotionUpdate, { passive: true });
     window.addEventListener("resize", requestMotionUpdate);
+    document.addEventListener("load", requestMotionUpdate, true);
     reducedMotion.addEventListener("change", requestMotionUpdate);
 
     return () => {
       observer.disconnect();
       window.removeEventListener("scroll", requestMotionUpdate);
       window.removeEventListener("resize", requestMotionUpdate);
+      document.removeEventListener("load", requestMotionUpdate, true);
       reducedMotion.removeEventListener("change", requestMotionUpdate);
       if (animationFrame) window.cancelAnimationFrame(animationFrame);
       document.documentElement.classList.remove("motion-ready");
@@ -245,6 +251,7 @@ function Index() {
 
   return (
     <div id="inicio" className="site-shell">
+      <ScrollHose />
       <Header />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">

@@ -82,7 +82,21 @@ img { display: block; max-width: 100%; }
 ::selection { background: var(--primary); color: var(--primary-foreground); }
 :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 
-.site-shell { overflow: clip; }
+.site-shell { overflow: clip; position: relative; }
+.scroll-hose { position: absolute; inset: 0 auto auto 0; z-index: 5; pointer-events: none; overflow: hidden; }
+.scroll-hose > path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.scroll-hose-edge { stroke: color-mix(in oklab, var(--metal-bright) 35%, transparent); stroke-width: calc(var(--scroll-hose-width, 9) + 2); }
+.scroll-hose-body { stroke: var(--hose-mid); stroke-width: var(--scroll-hose-width, 9); }
+.scroll-hose-ribs { stroke: var(--primary); stroke-width: var(--scroll-hose-width, 9); }
+.scroll-hose-tip { fill: url(#scroll-hose-chrome); stroke: var(--metal-dark); stroke-width: .6; opacity: 0; }
+.scroll-hose-collar { fill: none; stroke: var(--metal-shadow); stroke-width: .65; }
+.hose-chrome-dark { stop-color: var(--metal-dark); }
+.hose-chrome-bright { stop-color: var(--metal-bright); }
+.hose-chrome-mid { stop-color: var(--metal-mid); }
+.hose-chrome-light { stop-color: var(--metal-light); }
+.scroll-hose-arrival { fill: none; stroke: var(--primary); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.scroll-hose-arrival.is-pulsing { animation: scroll-hose-arrival .7s ease-out 2; }
+@keyframes scroll-hose-arrival { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(1.12); } }
 .hydraulic-composition { position: absolute; pointer-events: none; overflow: hidden; clip-path: inset(0 0 var(--composition-crop, 0%) 0); }
 .hydraulic-composition img { width: 100%; height: 100%; object-fit: contain; transform: scale(var(--composition-scale, 1)) rotate(var(--composition-rotation, 0deg)); transform-origin: center top; }
 .hydraulic-composition-hero { right: 8%; bottom: 3.8rem; width: 14rem; height: 14rem; z-index: 1; }
@@ -401,4 +415,5 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .floating-whatsapp { opacity: 1; transform: none; pointer-events: auto; }
   .hydraulic-composition { clip-path: none; }
   .hydraulic-composition img { transform: none; }
+  .scroll-hose-arrival { animation: none !important; opacity: 0; }
 }
