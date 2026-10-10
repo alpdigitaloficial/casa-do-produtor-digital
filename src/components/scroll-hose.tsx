@@ -1,24 +1,24 @@
-// A decorative path only: the two approved photographic compositions remain untouched.
+// A decorative path only: the approved service photograph remains untouched.
 export function ScrollHose() {
   return (
     <svg className="scroll-hose" aria-hidden="true" focusable="false" preserveAspectRatio="none">
       <defs>
         <linearGradient id="scroll-hose-chrome" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" className="hose-chrome-dark" />
-          <stop offset=".3" className="hose-chrome-bright" />
-          <stop offset=".52" className="hose-chrome-mid" />
-          <stop offset=".76" className="hose-chrome-light" />
-          <stop offset="1" className="hose-chrome-dark" />
+          <stop offset="0" className="hose-chrome-bright" />
+          <stop offset=".35" className="hose-chrome-mid" />
+          <stop offset=".6" className="hose-chrome-dark" />
+          <stop offset="1" className="hose-chrome-light" />
         </linearGradient>
       </defs>
       <path className="scroll-hose-edge" />
       <path className="scroll-hose-body" />
       <path className="scroll-hose-ribs" />
       <g className="scroll-hose-tip">
-        <rect x="-23" y="-5.5" width="8" height="11" rx="1" />
-        <path d="M -16,-4 -13,-7 -7,-7 -4,-4 -4,4 -7,7 -13,7 -16,4 Z" />
-        <rect x="-5" y="-3" width="5" height="6" rx=".7" />
-        <path className="scroll-hose-collar" d="M -21,-5 V 5 M -18,-5 V 5" />
+        <rect x="-38" y="-8" width="16" height="16" rx="2" />
+        <path className="scroll-hose-collar" d="M-34 -8V8M-30 -8V8M-26 -8V8" strokeOpacity=".35" />
+        <rect x="-22" y="-5.5" width="12" height="11" />
+        <rect x="-10" y="-11" width="12" height="22" rx="2" />
+        <path className="scroll-hose-collar" d="M-10 -5.5H2M-10 5.5H2" strokeOpacity=".45" />
       </g>
       <rect className="scroll-hose-arrival" rx="6" />
     </svg>
@@ -92,6 +92,7 @@ export function createScrollHose(svg: SVGSVGElement) {
     svg.dataset["startScroll"] = String(startScroll);
     svg.dataset["endScroll"] = String(endScroll);
     svg.dataset["reducedMotion"] = String(reducedMotion);
+    svg.style.visibility = progress > 0 ? "visible" : "hidden";
     paths.slice(0, 2).forEach(path => {
       path.setAttribute("stroke-dasharray", `${length} ${length}`);
       path.setAttribute("stroke-dashoffset", String(length * (1 - progress)));
@@ -107,7 +108,10 @@ export function createScrollHose(svg: SVGSVGElement) {
     const before = body.getPointAtLength(Math.max(0, visibleLength - 1));
     const after = body.getPointAtLength(Math.min(length, visibleLength + 1));
     const angle = Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI;
-    tip.setAttribute("transform", `translate(${point.x} ${point.y}) rotate(${angle}) scale(${thickness / 9})`);
+    const scale = thickness / 9;
+    // The supplied nut extends two units past its origin: align its front to the path tip.
+    const radians = angle * Math.PI / 180;
+    tip.setAttribute("transform", `translate(${point.x - 2 * scale * Math.cos(radians)} ${point.y - 2 * scale * Math.sin(radians)}) rotate(${angle}) scale(${scale})`);
     tip.setAttribute("opacity", progress > 0 ? "1" : "0");
     ring.setAttribute("x", String(endX - 4));
     ring.setAttribute("y", String(buttonRect.top - origin.top - 4));

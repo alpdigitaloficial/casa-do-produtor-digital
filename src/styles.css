@@ -70,6 +70,11 @@
   --hose-dark: oklch(0.13 0.006 80);
   --hose-mid: oklch(0.22 0.008 80);
   --hose-light: oklch(0.36 0.008 80);
+  --hose-chrome-bright: #F7F9FB;
+  --hose-chrome-mid: #B9C2CE;
+  --hose-chrome-dark: #7F8997;
+  --hose-chrome-light: #DDE2E9;
+  --hose-chrome-outline: #16233B;
 }
 
 * { box-sizing: border-box; border-color: var(--border); }
@@ -83,17 +88,17 @@ img { display: block; max-width: 100%; }
 :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 
 .site-shell { overflow: clip; position: relative; }
-.scroll-hose { position: absolute; inset: 0 auto auto 0; z-index: 5; pointer-events: none; overflow: hidden; }
+.scroll-hose { position: absolute; inset: 0 auto auto 0; z-index: 5; pointer-events: none; overflow: hidden; visibility: hidden; }
 .scroll-hose > path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .scroll-hose-edge { stroke: color-mix(in oklab, var(--metal-bright) 35%, transparent); stroke-width: calc(var(--scroll-hose-width, 9) + 2); }
 .scroll-hose-body { stroke: var(--hose-mid); stroke-width: var(--scroll-hose-width, 9); }
 .scroll-hose-ribs { stroke: var(--primary); stroke-width: var(--scroll-hose-width, 9); }
-.scroll-hose-tip { fill: url(#scroll-hose-chrome); stroke: var(--metal-dark); stroke-width: .6; opacity: 0; }
-.scroll-hose-collar { fill: none; stroke: var(--metal-shadow); stroke-width: .65; }
-.hose-chrome-dark { stop-color: var(--metal-dark); }
-.hose-chrome-bright { stop-color: var(--metal-bright); }
-.hose-chrome-mid { stop-color: var(--metal-mid); }
-.hose-chrome-light { stop-color: var(--metal-light); }
+.scroll-hose-tip { fill: url(#scroll-hose-chrome); stroke: var(--hose-chrome-outline); stroke-width: 1; }
+.scroll-hose-collar { fill: none; }
+.hose-chrome-dark { stop-color: var(--hose-chrome-dark); }
+.hose-chrome-bright { stop-color: var(--hose-chrome-bright); }
+.hose-chrome-mid { stop-color: var(--hose-chrome-mid); }
+.hose-chrome-light { stop-color: var(--hose-chrome-light); }
 .scroll-hose-arrival { fill: none; stroke: var(--primary); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
 .scroll-hose-arrival.is-pulsing { animation: scroll-hose-arrival .7s ease-out 2; }
 @keyframes scroll-hose-arrival { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(1.12); } }

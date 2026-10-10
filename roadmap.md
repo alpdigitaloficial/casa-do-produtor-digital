@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Remover somente a mangueira estática do Hero e ajustar conector cromado/ocultação inicial da linha; validar preservação do site
+
 - [x] Aplicar identidade visual e fotografias reais
 - [x] Construir todas as seções institucionais e comerciais
 - [x] Configurar mensagens contextuais do WhatsApp
