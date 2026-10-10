@@ -57,7 +57,8 @@ export function createScrollHose(svg: SVGSVGElement) {
     const gutter = mobile ? 11 : Math.max(thickness / 2 + 1, contentLeft - 34);
     const endX = buttonRect.left - origin.left;
     const endY = buttonRect.top - origin.top + buttonRect.height / 2;
-    const turnY = Math.min(listRect.top - origin.top, startY + Math.max(24, (listRect.top - heroRect.bottom) * .4));
+    const categoryPadding = Number.parseFloat(getComputedStyle(categories).paddingTop) || 0;
+    const turnY = Math.min(listRect.top - origin.top, categoryRect.top - origin.top + Math.max(12, categoryPadding - 14));
     const listTop = listRect.top - origin.top;
     const listBottom = Math.min(listRect.bottom - origin.top, endY - 36);
     const waveSpan = Math.max(0, listBottom - listTop);
