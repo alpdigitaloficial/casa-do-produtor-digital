@@ -54,7 +54,7 @@ export function createScrollHose(svg: SVGSVGElement) {
     const startY = heroRect.bottom - origin.top;
     const contentLeft = categoryRect.left - origin.left;
     // Clamp the gutter at narrow desktop widths rather than moving existing content.
-    const gutter = mobile ? 11 : Math.max(11, contentLeft - 34);
+    const gutter = mobile ? 11 : Math.max(thickness / 2 + 1, contentLeft - 34);
     const endX = buttonRect.left - origin.left;
     const endY = buttonRect.top - origin.top + buttonRect.height / 2;
     const turnY = Math.min(listRect.top - origin.top, startY + Math.max(24, (listRect.top - heroRect.bottom) * .4));
