@@ -258,7 +258,6 @@ function Index() {
           <div className="hero-photo-wrap"><img className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" /><span>Loja física · Sidrolândia/MS</span></div>
           <div className="hero-shade" />
           <div className="hero-lines" aria-hidden="true" />
-          <HydraulicComposition stage="hero" />
           <div className="hero-content">
             <p className="eyebrow light">Casa do Produtor · Sidrolândia/MS</p>
             <h1 id="hero-title">Soluções para a cidade<br />e para o campo.</h1>
