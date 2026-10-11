@@ -26,7 +26,7 @@ import pressAsset from "@/assets/20260928_172413.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
-import { HydraulicComposition, TeamFilm } from "@/components/editorial-media";
+import { TeamFilm } from "@/components/editorial-media";
 import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
 
 const BUSINESS = {
@@ -292,7 +292,7 @@ function Index() {
         <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">
             <Reveal className="service-copy" data-depth="-3">
-              <div className="service-heading-anchor"><HydraulicComposition stage="service" /><p className="eyebrow light">Serviço especializado</p></div>
+              <div className="service-heading-anchor"><p className="eyebrow light">Serviço especializado</p></div>
               <h2 id="service-title">Prensagem de<br />mangueiras hidráulicas</h2>
               <p>Mais praticidade para quem precisa de uma solução rápida e adequada para mangueiras de alta pressão.</p>
               <WhatsAppLink message={messages.service} />
