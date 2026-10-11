@@ -365,7 +365,7 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .service-grid { grid-template-columns: .94fr 1.18fr; min-height: 40rem; }
   .service-copy { display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; padding-right: 1.5rem; }
   .service-visual { height: auto; min-height: 43rem; margin-block: -1.5rem -2.5rem; clip-path: polygon(5% 0,100% 0,100% 94%, 94% 100%,0 100%,0 9%); }
-  .service-visual img { object-position: 43% 50%; }
+  .service-visual img { object-position: 60% 50%; }
   .service-visual > p { left: 3rem; bottom: 2.5rem; }
   .showcase-section { padding-top: 7rem; padding-bottom: 7rem; }
   .showcase-layout { grid-template-columns: minmax(0,1.55fr) minmax(18rem,.5fr); align-items: stretch; gap: 2.5rem; margin-top: -1rem; }
