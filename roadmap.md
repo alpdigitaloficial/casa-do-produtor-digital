@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Remover somente a mangueira estática do Hero e ajustar conector cromado/ocultação inicial da linha; validar preservação do site
+- [x] Remover somente a mangueira estática do Hero e ajustar conector cromado/ocultação inicial da linha — desktop/celular, scroll reversível, chegada ao botão, modais e movimento reduzido validados
 
 - [x] Aplicar identidade visual e fotografias reais
 - [x] Construir todas as seções institucionais e comerciais
