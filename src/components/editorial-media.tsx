@@ -3,7 +3,8 @@ import { hydraulicMedia, teamMedia } from "@/lib/editorial-media";
 // Section-bound views of one approved source, never a fixed travelling object.
 // Cropping and subtle local transforms are driven by the shared scroll frame.
 export function HydraulicComposition({ stage }: { stage: "hero" | "service" }) {
-  if (!hydraulicMedia.src) return null;
+  // The static service hose was explicitly cancelled; never render it here.
+  if (stage === "service" || !hydraulicMedia.src) return null;
   return <div className={`hydraulic-composition hydraulic-composition-${stage}`} aria-hidden="true"><img src={hydraulicMedia.src} alt="" decoding="async" /></div>;
 }
 
