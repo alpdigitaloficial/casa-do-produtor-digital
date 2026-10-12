@@ -43,7 +43,7 @@ export function CategoryPanel({ title, description, number, whatsappNumber }: Pr
           </div>
           {media.photos.length > 0 && (
             <div className="category-panel-photos">
-              {media.photos.map((photo, index) => <figure key={photo.src} className={index === 0 ? "category-panel-photo-main" : "category-panel-photo-secondary"}><img src={photo.src} alt={photo.alt} loading={index === 0 ? "eager" : "lazy"} decoding="async" /></figure>)}
+              {media.photos.slice(0, 3).map((photo, index) => <figure key={photo.src} className={index === 0 ? "category-panel-photo-main" : `category-panel-photo-secondary category-panel-photo-secondary-${index}`}><img src={photo.src} alt={photo.alt} loading={index === 0 ? "eager" : "lazy"} decoding="async" />{index === 0 && <figcaption>Produtos reais da loja</figcaption>}</figure>)}
             </div>
           )}
         </DialogPrimitive.Content>
