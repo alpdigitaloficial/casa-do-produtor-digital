@@ -30,3 +30,4 @@
 - [ ] Integrar fotos de Parafusos — aguarda envio do usuário
 - [ ] Integrar e validar vídeo institucional — aguarda vídeo real e capa definitiva
 - [x] Adicionar e validar linha SVG de margem Hero → botão da prensagem — scroll reversível, resize, painéis, movimento reduzido e medidas/textos/fotos preservados
+- [x] Adicionar faixa de marcas (BRANDS) após a vitrine e mover o bloco amarelo para depois de "Mais do que uma loja" — seção de avaliações preparada (SHOW_REVIEWS = false) aguardando avaliações reais
