@@ -291,6 +291,8 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .review-card p { margin: 0; color: color-mix(in oklab, var(--secondary-foreground) 85%, transparent); }
 .review-card strong { font-size: .95rem; }
 .review-card small { font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in oklab, var(--secondary-foreground) 58%, transparent); }
+@media (min-width: 48rem) { .reviews-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 47.99rem) { .brands-section { gap: .65rem; padding-top: 1.35rem; padding-bottom: 1.35rem; } .brands-list { gap: .35rem 1.5rem; } .brands-list li { font-size: 1.02rem; } }
 .history-section { padding: 5.5rem max(1rem, calc((100vw - 78rem)/2)); background: var(--surface-dark); color: var(--secondary-foreground); }
 .history-intro { display: grid; gap: 1rem; }
 .history-intro p { color: color-mix(in oklab, var(--secondary-foreground) 67%, transparent); }
