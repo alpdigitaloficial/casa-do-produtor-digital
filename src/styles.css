@@ -148,6 +148,12 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .button-ghost:hover { border-color: var(--primary); color: var(--primary); }
 .button-dark { background: var(--surface-dark); color: var(--secondary-foreground); }
 .hero-tag { display: none; }
+.hero-mobile-badges { display: none; }
+@media (width < 720px) {
+  .hero-mobile-badges { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .65rem; pointer-events: none; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+  .hero-mobile-badges > span { border-left: 2px solid var(--primary); padding: .25rem .4rem; background: color-mix(in oklab, var(--surface-dark) 78%, transparent); }
+  .hero-mobile-since strong { color: var(--primary); font-family: var(--font-display); }
+}
 
 .section { width: min(100% - 2rem, 78rem); margin: 0 auto; padding: 5.5rem 0; }
 .categories-section { position: relative; padding-top: 3.25rem; }

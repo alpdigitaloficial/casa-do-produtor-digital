@@ -268,6 +268,10 @@ function Index() {
             </div>
           </div>
           <div className="hero-tag" aria-hidden="true"><span>Desde</span><strong>2020</strong></div>
+          <div className="hero-mobile-badges">
+            <span className="hero-mobile-since">Desde <strong>2020</strong></span>
+            <span className="hero-mobile-location">Loja física · Sidrolândia/MS</span>
+          </div>
         </section>
 
         <section className="section categories-section motion-section" id="produtos" aria-labelledby="categories-title">

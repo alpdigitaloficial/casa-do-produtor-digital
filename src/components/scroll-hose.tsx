@@ -49,12 +49,13 @@ export function createScrollHose(svg: SVGSVGElement) {
     const listRect = list.getBoundingClientRect();
     const buttonRect = target.getBoundingClientRect();
     const mobile = window.innerWidth < 768;
-    const thickness = mobile ? 5 : 9;
+    const narrowMobile = window.innerWidth < 720;
+    const thickness = narrowMobile ? 4 : mobile ? 5 : 9;
     const startX = contentRect.left - origin.left + contentRect.width * (mobile ? .5 : .7);
     const startY = heroRect.bottom - origin.top;
     const contentLeft = categoryRect.left - origin.left;
     // Clamp the gutter at narrow desktop widths rather than moving existing content.
-    const gutter = mobile ? 11 : Math.max(thickness / 2 + 1, contentLeft - 34);
+    const gutter = narrowMobile ? 6 : mobile ? 11 : Math.max(thickness / 2 + 1, contentLeft - 34);
     const endX = buttonRect.left - origin.left;
     const endY = buttonRect.top - origin.top + buttonRect.height / 2;
     const categoryPadding = Number.parseFloat(getComputedStyle(categories).paddingTop) || 0;
@@ -111,7 +112,8 @@ export function createScrollHose(svg: SVGSVGElement) {
     const scale = thickness / 9;
     // The supplied nut extends two units past its origin: align its front to the path tip.
     const radians = angle * Math.PI / 180;
-    tip.setAttribute("transform", `translate(${point.x - 2 * scale * Math.cos(radians)} ${point.y - 2 * scale * Math.sin(radians)}) rotate(${angle}) scale(${scale})`);
+    // Keep the collar's cross-section inside the narrow gutter's text clearance.
+    tip.setAttribute("transform", `translate(${point.x - 2 * scale * Math.cos(radians)} ${point.y - 2 * scale * Math.sin(radians)}) rotate(${angle}) scale(${scale} ${scale * (narrowMobile ? .75 : 1)})`);
     tip.setAttribute("opacity", progress > 0 ? "1" : "0");
     ring.setAttribute("x", String(endX - 4));
     ring.setAttribute("y", String(buttonRect.top - origin.top - 4));
