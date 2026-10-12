@@ -61,6 +61,16 @@ const timeline = [
   ["Hoje", "Uma empresa construída por clientes, colaboradores, fornecedores e parceiros."],
 ] as const;
 
+const BRANDS = ["Husqvarna", "Brudden", "ZS"] as const;
+
+const SHOW_REVIEWS = false;
+
+const REVIEWS = [
+  { text: "[a preencher]", name: "[a preencher]" },
+  { text: "[a preencher]", name: "[a preencher]" },
+  { text: "[a preencher]", name: "[a preencher]" },
+] as const;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -340,20 +350,11 @@ function Index() {
           </div>
         </section>
 
-        <section className="photo-help-section motion-section" aria-labelledby="photo-help-title">
-          <Reveal className="photo-help-copy">
-            <p className="eyebrow">A gente ajuda</p>
-            <h2 id="photo-help-title">Não encontrou<br />o que procura?</h2>
-            <p>Não sabe o nome do produto? Envie uma foto da peça, conexão, ferramenta ou item pelo WhatsApp. Nossa equipe pode ajudar a identificar ou verificar a disponibilidade.</p>
-            <WhatsAppLink message={messages.photo} />
-          </Reveal>
-          <Reveal className="photo-steps">
-            <div><Camera /><span>01</span><strong>Tire uma foto</strong></div>
-            <ArrowDown aria-hidden="true" />
-            <div><Send /><span>02</span><strong>Envie pelo WhatsApp</strong></div>
-            <ArrowDown aria-hidden="true" />
-            <div><Wrench /><span>03</span><strong>Consulte com nossa equipe</strong></div>
-          </Reveal>
+        <section className="brands-section" aria-label="Marcas trabalhadas na loja">
+          <p>Trabalhamos com marcas em que você confia</p>
+          <ul className="brands-list">
+            {BRANDS.map((brand) => <li key={brand}>{brand}</li>)}
+          </ul>
         </section>
 
         <section className="section benefits-section" aria-labelledby="benefits-title">
@@ -369,6 +370,38 @@ function Index() {
               return <Reveal className="benefit-item" key={String(title)}><BenefitIcon /><h3>{String(title)}</h3><p>{String(copy)}</p></Reveal>;
             })}
           </div>
+        </section>
+
+        {SHOW_REVIEWS && (
+          <section className="reviews-section" aria-labelledby="reviews-title">
+            <Reveal className="section-heading"><p className="eyebrow light">Clientes</p><h2 id="reviews-title">Quem compra, recomenda</h2></Reveal>
+            <div className="reviews-grid">
+              {REVIEWS.map((review, index) => (
+                <Reveal className="review-card" key={index}>
+                  <span className="review-quote" aria-hidden="true">“</span>
+                  <p>{review.text}</p>
+                  <strong>{review.name}</strong>
+                  <small>Avaliação no Google</small>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="photo-help-section motion-section" aria-labelledby="photo-help-title">
+          <Reveal className="photo-help-copy">
+            <p className="eyebrow">A gente ajuda</p>
+            <h2 id="photo-help-title">Não encontrou<br />o que procura?</h2>
+            <p>Não sabe o nome do produto? Envie uma foto da peça, conexão, ferramenta ou item pelo WhatsApp. Nossa equipe pode ajudar a identificar ou verificar a disponibilidade.</p>
+            <WhatsAppLink message={messages.photo} />
+          </Reveal>
+          <Reveal className="photo-steps">
+            <div><Camera /><span>01</span><strong>Tire uma foto</strong></div>
+            <ArrowDown aria-hidden="true" />
+            <div><Send /><span>02</span><strong>Envie pelo WhatsApp</strong></div>
+            <ArrowDown aria-hidden="true" />
+            <div><Wrench /><span>03</span><strong>Consulte com nossa equipe</strong></div>
+          </Reveal>
         </section>
 
         <section className="history-section" id="historia" aria-labelledby="history-title">
