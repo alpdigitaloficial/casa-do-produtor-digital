@@ -63,13 +63,13 @@ const timeline = [
 
 const BRANDS = ["Husqvarna", "Brudden", "ZS"] as const;
 
-const SHOW_REVIEWS = false;
+const SHOW_REVIEWS = true;
 
-const REVIEWS = [
-  { text: "[a preencher]", name: "[a preencher]" },
-  { text: "[a preencher]", name: "[a preencher]" },
-  { text: "[a preencher]", name: "[a preencher]" },
-] as const;
+const REVIEWS: { text?: string; name: string }[] = [
+  { name: "Geremias S." },
+  { text: "Excelente serviço recomendo", name: "Claudinei B." },
+  { text: "Tudo que preciso acho aqui! Ótimo atendimento", name: "Eric S." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
