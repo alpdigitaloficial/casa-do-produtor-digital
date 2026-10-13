@@ -379,7 +379,12 @@ function Index() {
               {REVIEWS.map((review, index) => (
                 <Reveal className="review-card" key={index}>
                   <span className="review-quote" aria-hidden="true">“</span>
-                  <p>{review.text}</p>
+                  <span className="review-stars" role="img" aria-label="Avaliação 5 de 5 estrelas">
+                    {[0, 1, 2, 3, 4].map((star) => (
+                      <svg key={star} viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z" /></svg>
+                    ))}
+                  </span>
+                  {review.text && <p>{review.text}</p>}
                   <strong>{review.name}</strong>
                   <small>Avaliação no Google</small>
                 </Reveal>
