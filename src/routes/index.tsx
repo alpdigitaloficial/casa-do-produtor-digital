@@ -18,11 +18,12 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 
 import logoAsset from "@/assets/casa-do-produtor-logo.png.asset.json";
-import facadeTeamAsset from "@/assets/equipe-fachada.jpg.asset.json";
+import teamPeopleAsset from "@/assets/equipe-so-pessoas.jpg.asset.json";
+import teamCounterAsset from "@/assets/equipe-quatro-balcao.jpeg.asset.json";
 import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
-import pressAsset from "@/assets/20260928_172413.jpg.asset.json";
+import pressAsset from "@/assets/prensa-melhorada.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
@@ -61,7 +62,7 @@ const timeline = [
   ["Hoje", "Uma empresa construída por clientes, colaboradores, fornecedores e parceiros."],
 ] as const;
 
-const BRANDS = ["Husqvarna", "Brudden", "ZS"] as const;
+const BRANDS = ["Husqvarna", "Brudden", "Zebu", "Tiger", "Savana", "Rossel", "Tae Cera", "Basillux", "Tramontina"] as const;
 
 const SHOW_REVIEWS = true;
 
@@ -161,6 +162,7 @@ function Header() {
 }
 
 function Index() {
+  const [brandsPaused, setBrandsPaused] = useState(false);
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal, .motion-section");
     const timelineElement = document.querySelector<HTMLElement>(".timeline");
@@ -352,9 +354,16 @@ function Index() {
 
         <section className="brands-section" aria-label="Marcas trabalhadas na loja">
           <p>Trabalhamos com marcas em que você confia</p>
-          <ul className="brands-list">
-            {BRANDS.map((brand) => <li key={brand}>{brand}</li>)}
-          </ul>
+          <div className={`brands-marquee${brandsPaused ? " is-paused" : ""}`} tabIndex={0} onPointerDown={(event) => { if (event.pointerType === "touch") setBrandsPaused((paused) => !paused); }}>
+            <div className="brands-track">
+              <ul className="brands-list">
+                {BRANDS.map((brand) => <li key={brand}>{brand}</li>)}
+              </ul>
+              <ul className="brands-list brands-list-copy" aria-hidden="true">
+                {BRANDS.map((brand) => <li key={brand}>{brand}</li>)}
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section className="section benefits-section" aria-labelledby="benefits-title">
@@ -425,8 +434,8 @@ function Index() {
 
         <section className="team-section motion-section" aria-labelledby="team-title">
           <div className="team-composition">
-            <Reveal className="team-image-large" data-depth="5"><TeamFilm fallbackPoster={facadeTeamAsset.url} /></Reveal>
-            <Reveal className="team-image-small team-image-complete" data-depth="8"><img src={facadeTeamAsset.url} alt="Equipe completa da Casa do Produtor em frente à loja" loading="lazy" /></Reveal>
+            <Reveal className="team-image-large" data-depth="5"><TeamFilm fallbackPoster={teamPeopleAsset.url} /></Reveal>
+            <Reveal className="team-image-small team-image-complete" data-depth="8"><img src={teamCounterAsset.url} alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></Reveal>
             <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>

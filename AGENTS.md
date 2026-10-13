@@ -16,3 +16,4 @@
 - Centralize pending real media URLs and category messages in the editorial media configuration; absence renders no fabricated hydraulic/product asset and retains the approved team poster.
 - Use accessible Radix dialog primitives for the editorial category panels and the design-system Button for their controls; this provides focus return, Escape/outside dismissal and modal scroll locking.
 - Team media uses a poster fallback until a real video URL exists, then native controls, playsInline and metadata preload without autoplay; this preserves mobile access and reduced-motion safety.
+- Brand marquees use two equal CSS-animated lists with an aria-hidden duplicate and a static wrapping reduced-motion alternative; this keeps loops seamless without adding another animation frame.
