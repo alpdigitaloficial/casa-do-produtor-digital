@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Trocar fotos da equipe e prensa; atualizar e animar marcas; validar desktop/celular e movimento reduzido
+- [ ] Trocar fotos da equipe e prensa; atualizar e animar marcas; manter caixa da prensa com foto inteira e faixas escuras; validar desktop/celular e movimento reduzido
 
 - [x] Remover somente a mangueira estática do Hero e ajustar conector cromado/ocultação inicial da linha — desktop/celular, scroll reversível, chegada ao botão, modais e movimento reduzido validados
 
