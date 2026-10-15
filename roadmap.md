@@ -36,3 +36,4 @@
 - [x] Adicionar e validar linha SVG de margem Hero → botão da prensagem — scroll reversível, resize, painéis, movimento reduzido e medidas/textos/fotos preservados
 - [x] Adicionar faixa de marcas (BRANDS) após a vitrine e mover o bloco amarelo para depois de "Mais do que uma loja"
 - [x] Preencher as 3 avaliações reais do Google (Geremias S., Claudinei B., Eric S.), 5 estrelas, e ativar a seção (SHOW_REVIEWS = true)
+- [x] Remover "Ferragens" das categorias (linha, painel, fotos e WhatsApp) e renumerar 01–05 — desktop/celular, painéis, contadores e mangueira-linha validados
