@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Corrigir somente o layout da equipe: fotos sobrepostas e texto alinhado; validado em 1440, 1280, 900, 899, 720, 390 e 320px
+
 - [x] Trocar fotos da equipe e prensa; atualizar e animar marcas; manter caixa da prensa com foto inteira e faixas escuras; validar desktop/celular, pausa por toque e movimento reduzido
 
 - [x] Remover somente a mangueira estática do Hero e ajustar conector cromado/ocultação inicial da linha — desktop/celular, scroll reversível, chegada ao botão, modais e movimento reduzido validados

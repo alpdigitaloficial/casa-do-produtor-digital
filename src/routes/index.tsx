@@ -434,8 +434,10 @@ function Index() {
 
         <section className="team-section motion-section" aria-labelledby="team-title">
           <div className="team-composition">
-            <Reveal className="team-image-large" data-depth="5"><TeamFilm fallbackPoster={teamPeopleAsset.url} /></Reveal>
-            <Reveal className="team-image-small team-image-complete" data-depth="8"><img src={teamCounterAsset.url} alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></Reveal>
+            <Reveal className="team-photos" data-depth="5">
+              <div className="team-image-large"><TeamFilm fallbackPoster={teamPeopleAsset.url} /></div>
+              <div className="team-image-small team-image-complete"><img src={teamCounterAsset.url} alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></div>
+            </Reveal>
             <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
