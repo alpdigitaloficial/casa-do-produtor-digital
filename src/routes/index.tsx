@@ -48,11 +48,10 @@ const messages = {
 
 const categories = [
   ["01", "Linha agrícola", "Produtos para diferentes necessidades do campo e da propriedade."],
-  ["02", "Ferragens", "Itens essenciais para manutenção, montagem e reparos."],
-  ["03", "Parafusos", "Opções para diferentes tipos de trabalho e aplicação."],
-  ["04", "Ferramentas", "Soluções para oficina, manutenção e trabalho diário."],
-  ["05", "Roçadeiras", "Equipamentos para o cuidado de áreas urbanas e rurais."],
-  ["06", "Tintas", "Produtos para proteção, acabamento e renovação."],
+  ["02", "Parafusos", "Opções para diferentes tipos de trabalho e aplicação."],
+  ["03", "Ferramentas", "Soluções para oficina, manutenção e trabalho diário."],
+  ["04", "Roçadeiras", "Equipamentos para o cuidado de áreas urbanas e rurais."],
+  ["05", "Tintas", "Produtos para proteção, acabamento e renovação."],
 ] as const;
 
 const timeline = [

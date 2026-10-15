@@ -2,7 +2,6 @@
 import hose from "@/assets/mangueira-oficial-fase4.png.asset.json";
 import sprays from "@/assets/produtos-sprays.jpg.asset.json";
 import tools from "@/assets/produtos-ferramentas.jpg.asset.json";
-import hardware from "@/assets/produtos-ferragens.jpg.asset.json";
 import agricultural from "@/assets/produtos-linha-agricola.jpg.asset.json";
 import cleaning from "@/assets/produtos-limpeza.jpg.asset.json";
 import paints from "@/assets/produtos-tintas-brasilux.jpg.asset.json";
@@ -14,9 +13,6 @@ export const categoryMedia: Record<string, { message: string; photos: ProductPho
   "Linha agrícola": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar produtos da linha agrícola.", photos: [
     { src: agricultural.url, alt: "Sabres de motosserra e ferramentas para a propriedade rural na Casa do Produtor" },
     { src: cleaning.url, alt: "Produtos de limpeza e manutenção disponíveis na Casa do Produtor" },
-  ] },
-  "Ferragens": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar produtos de ferragens.", photos: [
-    { src: hardware.url, alt: "Ferragens, chaves e acessórios expostos na loja" },
   ] },
   "Parafusos": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar parafusos.", photos: [] },
   "Ferramentas": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar ferramentas.", photos: [
