@@ -431,6 +431,13 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .floating-whatsapp { left: auto; right: 1.5rem; bottom: 1.5rem; }
 }
 
+@media (max-width: 899.98px) {
+  .team-photos { display: grid; gap: 12px; padding-bottom: 0; }
+  .team-image-small { position: static; width: 100%; aspect-ratio: 3 / 2; }
+  .team-image-complete img { object-position: center 62%; }
+  .team-copy { padding-top: 0; }
+}
+
 @media (min-width: 900px) {
   .team-composition { grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); column-gap: 48px; }
   .team-photos { width: 100%; max-width: 804px; padding-bottom: 24px; }
