@@ -468,3 +468,25 @@ footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap
   .hydraulic-composition img { transform: none; }
   .scroll-hose-arrival { animation: none !important; opacity: 0; }
 }
+
+.faq-section { padding: 5.5rem max(1rem, calc((100vw - 78rem)/2)); background: var(--background); color: var(--foreground); }
+.faq-layout { display: grid; gap: 2.25rem; }
+.faq-intro h2 { margin-bottom: 1.25rem; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1; font-weight: 800; }
+.faq-intro > p { max-width: 26rem; color: var(--muted-foreground); line-height: 1.7; }
+.faq-list { border-bottom: 1px solid color-mix(in oklab, var(--surface-dark) 14%, transparent); }
+.faq-item { border-top: 1px solid color-mix(in oklab, var(--surface-dark) 14%, transparent); }
+.faq-question { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.05rem 0; border: 0; background: none; text-align: left; color: var(--foreground); font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 700; line-height: 1.35; cursor: pointer; }
+.faq-question svg { flex-shrink: 0; color: var(--muted-foreground); transition: transform .3s ease; }
+.faq-question:hover { color: color-mix(in oklab, var(--foreground) 70%, var(--primary)); }
+.faq-question:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+.faq-item.is-open .faq-question svg { transform: rotate(180deg); }
+.faq-answer-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+.faq-item.is-open .faq-answer-wrap { grid-template-rows: 1fr; }
+.faq-answer-inner { overflow: hidden; min-height: 0; }
+.faq-answer-inner p { margin: 0; padding: 0 0 1.15rem; color: color-mix(in oklab, var(--foreground) 78%, transparent); font-size: .9688rem; line-height: 1.7; }
+.faq-directions { min-height: 2.4rem; margin-top: .7rem; padding: .4rem .8rem; font-size: .8rem; }
+.faq-help { display: grid; gap: .9rem; justify-items: start; margin-top: 1.9rem; }
+.faq-help p { margin: 0; font-weight: 800; }
+@media (min-width: 48rem) {
+  .faq-layout { grid-template-columns: 38fr 62fr; gap: 3.5rem; align-items: start; }
+}
