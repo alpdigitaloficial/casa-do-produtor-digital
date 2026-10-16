@@ -31,7 +31,9 @@
 - [x] Preparar vídeo institucional principal com capa atual e foto completa complementar
 - [x] Integrar e validar PNG hidráulico oficial e transformação local — scroll bidirecional, pausa e reduced motion verificados
 - [x] Integrar e validar fotos reais dos painéis e botas ao lado das roçadeiras na vitrine — desktop/mobile, imagens, WhatsApps, fechamento e bloqueio de scroll verificados
-- [ ] Integrar fotos de Parafusos — aguarda envio do usuário
+- [x] Integrar fotos de Parafusos — aguarda envio do usuário
+- [x] Atribuir as 9 fotos enviadas (linha agrícola, parafusos e ferramentas — 3 cada) aos painéis das categorias — desktop/celular, carregamento e painéis validados
+- [x] Criar a seção de perguntas frequentes (FAQ) antes do fechamento, com acordeão acessível, botão "Perguntar no WhatsApp", JSON-LD FAQPage e itens ocultos "[a preencher]" — desktop/celular, teclado e movimento reduzido validados
 - [ ] Integrar e validar vídeo institucional — aguarda vídeo real e capa definitiva
 - [x] Adicionar e validar linha SVG de margem Hero → botão da prensagem — scroll reversível, resize, painéis, movimento reduzido e medidas/textos/fotos preservados
 - [x] Adicionar faixa de marcas (BRANDS) após a vitrine e mover o bloco amarelo para depois de "Mais do que uma loja"
