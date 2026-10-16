@@ -492,6 +492,49 @@ function Index() {
           <iframe className="map-frame" title="Mapa da Casa do Produtor em Sidrolândia" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Avenida%20Dorvalino%20dos%20Santos%201760%20Centro%20Sidrolandia%20MS&output=embed" />
         </section>
 
+        <section className="faq-section" aria-labelledby="faq-title">
+          <div className="faq-layout">
+            <Reveal className="faq-intro">
+              <p className="eyebrow">Dúvidas</p>
+              <h2 id="faq-title">Perguntas frequentes</h2>
+              <p>O que mais perguntam antes de chamar no WhatsApp.</p>
+            </Reveal>
+            <div>
+              <div className="faq-list">
+                {FAQ_VISIBLE.map((item, index) => (
+                  <div className={`faq-item${openFaq === index ? " is-open" : ""}`} key={item.question}>
+                    <button
+                      type="button"
+                      className="faq-question"
+                      id={`faq-question-${index}`}
+                      aria-expanded={openFaq === index}
+                      aria-controls={`faq-answer-${index}`}
+                      onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                    >
+                      <span>{item.question}</span>
+                      <ChevronDown aria-hidden="true" size={18} />
+                    </button>
+                    <div className="faq-answer-wrap" id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`}>
+                      <div className="faq-answer-inner">
+                        <p>
+                          {item.answer}
+                          {item.directions && (
+                            <a className="button-dark faq-directions" href={BUSINESS.mapsUrl} target="_blank" rel="noreferrer">Como chegar <ExternalLink size={15} /></a>
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="faq-help">
+                <p>Não achou sua dúvida?</p>
+                <WhatsAppLink message={FAQ_WHATSAPP_MESSAGE} />
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="final-cta" aria-labelledby="final-title">
           <img src={logoAsset.url} alt="" aria-hidden="true" />
           <Reveal><p className="eyebrow light">Casa do Produtor</p><h2 id="final-title">Precisa de uma solução?</h2><h3>Fale com a Casa do Produtor.</h3><p>Produtos, ferramentas e soluções para a cidade e para o campo.</p><WhatsAppLink message={messages.hero} /></Reveal>
