@@ -3,7 +3,8 @@ import {
   ArrowDown,
   ArrowRight,
   Camera,
-  ChevronDown,
+  Minus,
+  Plus,
   Clock3,
   ExternalLink,
   MapPin,
@@ -494,43 +495,45 @@ function Index() {
 
         <section className="faq-section" aria-labelledby="faq-title">
           <div className="faq-layout">
-            <Reveal className="faq-intro">
-              <p className="eyebrow">Dúvidas</p>
-              <h2 id="faq-title">Perguntas frequentes</h2>
-              <p>O que mais perguntam antes de chamar no WhatsApp.</p>
-            </Reveal>
-            <div>
-              <div className="faq-list">
-                {FAQ_VISIBLE.map((item, index) => (
-                  <div className={`faq-item${openFaq === index ? " is-open" : ""}`} key={item.question}>
-                    <button
-                      type="button"
-                      className="faq-question"
-                      id={`faq-question-${index}`}
-                      aria-expanded={openFaq === index}
-                      aria-controls={`faq-answer-${index}`}
-                      onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
-                    >
-                      <span>{item.question}</span>
-                      <ChevronDown aria-hidden="true" size={18} />
-                    </button>
-                    <div className="faq-answer-wrap" id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`}>
-                      <div className="faq-answer-inner">
-                        <p>
-                          {item.answer}
-                          {item.directions && (
-                            <a className="button-dark faq-directions" href={BUSINESS.mapsUrl} target="_blank" rel="noreferrer">Como chegar <ExternalLink size={15} /></a>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="faq-help">
-                <p>Não achou sua dúvida?</p>
+            <div className="faq-side">
+              <Reveal className="faq-intro">
+                <p className="eyebrow">Dúvidas</p>
+                <h2 id="faq-title">Perguntas frequentes</h2>
+                <p className="faq-sub">O que mais perguntam antes de chamar no WhatsApp.</p>
+              </Reveal>
+              <div className="faq-card">
+                <h3>Não achou sua dúvida?</h3>
+                <p>Fale direto com a nossa equipe pelo WhatsApp.</p>
                 <WhatsAppLink message={FAQ_WHATSAPP_MESSAGE} />
               </div>
+            </div>
+            <div className="faq-list">
+              {FAQ_VISIBLE.map((item, index) => (
+                <div className={`faq-item${openFaq === index ? " is-open" : ""}`} key={item.question}>
+                  <button
+                    type="button"
+                    className="faq-question"
+                    id={`faq-question-${index}`}
+                    aria-expanded={openFaq === index}
+                    aria-controls={`faq-answer-${index}`}
+                    onClick={() => setOpenFaq(openFaq === index ? -1 : index)}
+                  >
+                    <span className="faq-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                    <span className="faq-question-text">{item.question}</span>
+                    {openFaq === index ? <Minus aria-hidden="true" size={18} /> : <Plus aria-hidden="true" size={18} />}
+                  </button>
+                  <div className="faq-answer-wrap" id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`}>
+                    <div className="faq-answer-inner">
+                      <p>
+                        {item.answer}
+                        {item.directions && (
+                          <a className="button-dark faq-directions" href={BUSINESS.mapsUrl} target="_blank" rel="noreferrer">Como chegar <ExternalLink size={15} /></a>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
