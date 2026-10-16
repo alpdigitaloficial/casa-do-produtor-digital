@@ -3,6 +3,7 @@ import {
   ArrowDown,
   ArrowRight,
   Camera,
+  ChevronDown,
   Clock3,
   ExternalLink,
   MapPin,
