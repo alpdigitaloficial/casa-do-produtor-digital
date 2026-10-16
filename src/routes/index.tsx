@@ -191,6 +191,7 @@ function Header() {
 
 function Index() {
   const [brandsPaused, setBrandsPaused] = useState(false);
+  const [openFaq, setOpenFaq] = useState(0);
   useEffect(() => {
     const elements = document.querySelectorAll(".reveal, .motion-section");
     const timelineElement = document.querySelector<HTMLElement>(".timeline");
