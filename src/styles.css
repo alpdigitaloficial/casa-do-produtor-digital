@@ -313,6 +313,35 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 .history-more summary { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; color: var(--primary); cursor: pointer; font-weight: 800; list-style: none; }
 .history-more p { color: color-mix(in oklab, var(--secondary-foreground) 68%, transparent); line-height: 1.7; }
 
+.store-video-section { padding: 5.5rem max(1rem, calc((100vw - 86rem)/2)); background: var(--background); color: var(--foreground); }
+.store-video-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+.store-video-heading { min-width: 0; }
+.store-video-heading h2 { margin: 0 0 1.25rem; font-family: var(--font-display); font-size: 2.5rem; line-height: 1.05; font-weight: 800; overflow-wrap: break-word; }
+.store-video-subtitle { margin: 0; font-size: 1.125rem; line-height: 1.55; color: var(--foreground); }
+.store-video-player { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface-dark); clip-path: polygon(0 0, 96% 0, 100% 7%, 100% 100%, 4% 100%, 0 93%); }
+.store-video-player::before, .store-video-player::after { content: ""; position: absolute; z-index: 2; width: 1.5rem; height: 1.5rem; pointer-events: none; }
+.store-video-player::before { top: 1rem; left: 1rem; border-top: 2px solid var(--primary); border-left: 2px solid var(--primary); }
+.store-video-player::after { right: 1rem; bottom: 1rem; border-right: 2px solid var(--primary); border-bottom: 2px solid var(--primary); }
+.store-video-player > img, .store-video-player > iframe, .store-video-player > video { display: block; width: 100%; height: 100%; border: 0; }
+.store-video-player > img { object-fit: cover; }
+.store-video-player > video { object-fit: contain; }
+.store-video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4rem; height: 4rem; border-radius: 50%; background: var(--primary); color: var(--primary-foreground); box-shadow: 0 .5rem 1.5rem color-mix(in oklab, var(--surface-dark) 30%, transparent); }
+.store-video-play svg { width: 1.5rem; height: 1.5rem; fill: currentColor; }
+.store-video-details { display: grid; gap: 24px; justify-items: start; min-width: 0; }
+.store-video-description { display: grid; gap: 1rem; }
+.store-video-description p { margin: 0; font-size: 1rem; line-height: 1.7; color: color-mix(in oklab, var(--foreground) 85%, transparent); }
+.store-video-badges { display: flex; flex-wrap: wrap; gap: .5rem; }
+.store-video-badges span { padding: .4rem .55rem; border: 1px solid var(--border); font-size: .6875rem; font-weight: 700; line-height: 1.4; }
+.store-video-details .button-primary { height: auto; white-space: normal; }
+@media (min-width: 900px) {
+  .store-video-layout { grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); grid-template-rows: auto auto; column-gap: clamp(32px, 5vw, 72px); row-gap: 24px; align-items: center; }
+  .store-video-heading { grid-column: 2; grid-row: 1; align-self: end; max-width: 460px; }
+  .store-video-player { grid-column: 1; grid-row: 1 / 3; }
+  .store-video-details { grid-column: 2; grid-row: 2; align-self: start; max-width: 460px; }
+  .store-video-subtitle { font-size: 1.25rem; }
+}
+@media (min-width: 1200px) { .store-video-heading h2 { font-size: 3rem; } }
+
 .team-section { position: relative; padding: 5.5rem max(1rem, calc((100vw - 86rem)/2)); background: var(--background); color: var(--foreground); }
 .team-section::before { content: ""; position: absolute; top: 0; right: 0; width: 38%; height: 1px; background: linear-gradient(90deg, transparent, var(--industrial)); }
 .team-composition { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: center; }
