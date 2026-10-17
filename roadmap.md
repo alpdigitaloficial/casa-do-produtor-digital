@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Adaptar somente a seção da equipe para “Por dentro da Casa do Produtor”, vídeo 16:9 e textos aprovados; verificar desktop, celular e carregamento por toque
+- [x] Adaptar somente a seção da equipe para “Por dentro da Casa do Produtor”, vídeo 16:9 e textos aprovados; desktop/celular, capa aos 15s, carregamento após toque e WhatsApp verificados
 
 - [x] Corrigir somente o layout da equipe: fotos sobrepostas e texto alinhado; validado em 1440, 1280, 900, 899, 720, 390 e 320px
 
@@ -36,7 +36,7 @@
 - [x] Integrar fotos de Parafusos — aguarda envio do usuário
 - [x] Atribuir as 9 fotos enviadas (linha agrícola, parafusos e ferramentas — 3 cada) aos painéis das categorias — desktop/celular, carregamento e painéis validados
 - [x] Criar a seção de perguntas frequentes (FAQ) antes do fechamento, com acordeão acessível, botão "Perguntar no WhatsApp", JSON-LD FAQPage e itens ocultos "[a preencher]" — desktop/celular, teclado e movimento reduzido validados
-- [ ] Integrar e validar vídeo institucional — URL Mux e capa aos 15 segundos recebidas
+- [ ] Confirmar reprodução completa do vídeo Mux em navegador real — capa, iframe e stream disponíveis; navegador automatizado apresenta erro de suporte de mídia H.264
 - [x] Adicionar e validar linha SVG de margem Hero → botão da prensagem — scroll reversível, resize, painéis, movimento reduzido e medidas/textos/fotos preservados
 - [x] Adicionar faixa de marcas (BRANDS) após a vitrine e mover o bloco amarelo para depois de "Mais do que uma loja"
 - [x] Preencher as 3 avaliações reais do Google (Geremias S., Claudinei B., Eric S.), 5 estrelas, e ativar a seção (SHOW_REVIEWS = true)
