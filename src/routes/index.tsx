@@ -21,7 +21,6 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import logoAsset from "@/assets/casa-do-produtor-logo.png.asset.json";
 import teamPeopleAsset from "@/assets/equipe-so-pessoas.jpg.asset.json";
-import teamCounterAsset from "@/assets/equipe-quatro-balcao.jpeg.asset.json";
 import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
 import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
@@ -29,7 +28,7 @@ import pressAsset from "@/assets/prensa-melhorada.jpg.asset.json";
 import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
 import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
-import { TeamFilm } from "@/components/editorial-media";
+import { StoreVideoSection } from "@/components/store-video-section";
 import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
 
 const BUSINESS = {
@@ -462,15 +461,7 @@ function Index() {
           </details>
         </section>
 
-        <section className="team-section motion-section" aria-labelledby="team-title">
-          <div className="team-composition">
-            <Reveal className="team-photos" data-depth="5">
-              <div className="team-image-large"><TeamFilm fallbackPoster={teamPeopleAsset.url} /></div>
-              <div className="team-image-small team-image-complete"><img src={teamCounterAsset.url} alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></div>
-            </Reveal>
-            <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
-          </div>
-        </section>
+        <StoreVideoSection fallbackPoster={teamPeopleAsset.url} whatsappHref={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} />
 
         <section className="location-section" id="localizacao" aria-labelledby="location-title">
           <div className="location-photo" data-depth="5"><img src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>
