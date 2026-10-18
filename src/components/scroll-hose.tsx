@@ -28,8 +28,8 @@ export function ScrollHose() {
 export function createScrollHose(svg: SVGSVGElement) {
   const hero = document.querySelector<HTMLElement>(".hero-section");
   const content = document.querySelector<HTMLElement>(".hero-content");
-  const categories = document.querySelector<HTMLElement>(".categories-section");
-  const list = document.querySelector<HTMLElement>(".category-editorial");
+  const categories = document.querySelector<HTMLElement>(".store-video-section");
+  const list = document.querySelector<HTMLElement>(".store-video-layout");
   const target = document.querySelector<HTMLElement>(".service-copy .button-primary");
   const shell = document.querySelector<HTMLElement>(".site-shell");
   const paths = Array.from(svg.querySelectorAll<SVGPathElement>(":scope > path"));
@@ -53,7 +53,7 @@ export function createScrollHose(svg: SVGSVGElement) {
     const thickness = narrowMobile ? 4 : mobile ? 5 : 9;
     const startX = contentRect.left - origin.left + contentRect.width * (mobile ? .5 : .7);
     const startY = heroRect.bottom - origin.top;
-    const contentLeft = categoryRect.left - origin.left;
+    const contentLeft = listRect.left - origin.left;
     // Clamp the gutter at narrow desktop widths rather than moving existing content.
     const gutter = narrowMobile ? 6 : mobile ? 11 : Math.max(thickness / 2 + 1, contentLeft - 34);
     const endX = buttonRect.left - origin.left;
