@@ -7,7 +7,7 @@ describe("approved store video", () => {
     expect(resolveStoreVideo(VIDEO_URL, POSTER_TIME_SEGUNDOS)).toEqual({
       native: false,
       src: "https://player.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk",
-      poster: "https://image.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk/thumbnail.jpg?time=15",
+      poster: "https://image.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk/thumbnail.jpg?time=15&width=1280",
     });
   });
   test("hides the section when the video URL is empty", () => {

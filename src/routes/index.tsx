@@ -317,24 +317,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="section categories-section motion-section" id="produtos" aria-labelledby="categories-title">
-          <Reveal className="section-heading split-heading">
-            <div><p className="eyebrow">Cidade + campo</p><h2 id="categories-title">Encontre o que<br />você precisa</h2></div>
-            <p>Uma seleção pensada para resolver necessidades da casa, oficina, empresa e propriedade rural.</p>
-          </Reveal>
-          <div className="category-editorial">
-            {categories.map(([number, title, description], index) => (
-              <Reveal key={title} className={`category-row category-row-${index + 1}`}>
-                <a className="category-link" href={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(`${messages.product} Tenho interesse em ${title.toLowerCase()}.`)}`} target="_blank" rel="noreferrer" aria-label={`Consultar ${title} pelo WhatsApp`}>
-                <span className="category-number">{number}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-                <ArrowRight aria-hidden="true" />
-                </a>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+        <StoreVideoSection fallbackPoster={teamPeopleAsset.url} whatsappHref={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} />
 
         <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">
@@ -351,7 +334,7 @@ function Index() {
           </div>
         </section>
 
-        <section className="section showcase-section motion-section" aria-labelledby="showcase-title">
+        <section className="section showcase-section motion-section" id="produtos" aria-labelledby="showcase-title">
           <Reveal className="showcase-intro">
             <p className="eyebrow">Nossa vitrine</p>
             <h2 id="showcase-title">Variedade que acompanha<br />o seu trabalho.</h2>
@@ -472,8 +455,6 @@ function Index() {
             <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
-
-        <StoreVideoSection fallbackPoster={teamPeopleAsset.url} whatsappHref={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} />
 
         <section className="location-section" id="localizacao" aria-labelledby="location-title">
           <div className="location-photo" data-depth="5"><img src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>

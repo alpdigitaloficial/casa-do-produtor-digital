@@ -13,7 +13,7 @@ export function resolveStoreVideo(value: string, posterTime: number) {
     if (url.hostname === "player.mux.com") {
       const id = url.pathname.split("/").filter(Boolean)[0];
       if (!id) return null;
-      return { native: false, src: `https://player.mux.com/${id}`, poster: `https://image.mux.com/${id}/thumbnail.jpg?time=${posterTime}` };
+      return { native: false, src: `https://player.mux.com/${id}`, poster: `https://image.mux.com/${id}/thumbnail.jpg?time=${posterTime}&width=1280` };
     }
     if (/\.mp4$/i.test(url.pathname)) return { native: true, src: url.href };
     if (["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "www.youtube-nocookie.com"].includes(url.hostname)) {
