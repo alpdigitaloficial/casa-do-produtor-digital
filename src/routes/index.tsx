@@ -531,7 +531,7 @@ function Index() {
       <footer>
         <div className="footer-brand"><img src={logoAsset.url} alt="Casa do Produtor" /><p>Soluções para a cidade e para o campo.</p></div>
         <nav aria-label="Links do rodapé"><a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#servicos">Serviços</a><a href="#historia">Nossa história</a><a href="#localizacao">Localização</a><a href={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} target="_blank" rel="noreferrer">WhatsApp</a></nav>
-        <div className="footer-address"><p>{BUSINESS.address}</p><small>© {new Date().getFullYear()} Casa do Produtor</small></div>
+        <div className="footer-address"><p>{BUSINESS.address}</p><small>CNPJ: 36.564.249.0001.77</small><small>© {new Date().getFullYear()} Casa do Produtor</small><small className="footer-credit">Desenvolvido por: <a href="https://alpdigital.com.br/cartao/" target="_blank" rel="noreferrer">ALP Digital</a></small></div>
       </footer>
       <WhatsAppLink message={messages.hero} className="floating-whatsapp" />
     </div>
