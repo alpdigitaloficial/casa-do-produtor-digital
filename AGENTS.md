@@ -16,5 +16,6 @@
 - Centralize pending real media URLs and category messages in the editorial media configuration; absence renders no fabricated hydraulic/product asset and retains the approved team poster.
 - Use accessible Radix dialog primitives for the editorial category panels and the design-system Button for their controls; this provides focus return, Escape/outside dismissal and modal scroll locking.
 - The store video section resolves approved HTTPS providers and mounts iframe players only after a poster click; native MP4 uses controls, playsInline and preload none to avoid loading playback before interaction.
+- The store video cover uses one saved asset pointer without provider thumbnails or fallback photos; this prevents provider requests before interaction and preserves the chosen frame.
 - Keep the store video section in its own component with CSS grid ordering for heading, player and details; this preserves desktop two-column alignment and mobile reading order without duplicate players.
 - Brand marquees use two equal CSS-animated lists with an aria-hidden duplicate and a static wrapping reduced-motion alternative; this keeps loops seamless without adding another animation frame.
