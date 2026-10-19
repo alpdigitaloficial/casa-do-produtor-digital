@@ -317,7 +317,7 @@ function Index() {
           </div>
         </section>
 
-        <StoreVideoSection fallbackPoster={teamPeopleAsset.url} whatsappHref={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} />
+        <StoreVideoSection whatsappHref={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} />
 
         <section className="service-section motion-section" id="servicos" aria-labelledby="service-title">
           <div className="service-grid">

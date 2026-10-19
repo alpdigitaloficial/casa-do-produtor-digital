@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { MessageCircle, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import coverAsset from "@/assets/capa-video-17s.jpg.asset.json";
 
 export const VIDEO_URL = "https://player.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk";
-export const POSTER_TIME_SEGUNDOS = 15;
+export const STORE_VIDEO_POSTER = coverAsset.url;
 
-export function resolveStoreVideo(value: string, posterTime: number) {
+export function resolveStoreVideo(value: string) {
   if (!value.trim()) return null;
   try {
     const url = new URL(value);
@@ -13,13 +14,13 @@ export function resolveStoreVideo(value: string, posterTime: number) {
     if (url.hostname === "player.mux.com") {
       const id = url.pathname.split("/").filter(Boolean)[0];
       if (!id) return null;
-      return { native: false, src: `https://player.mux.com/${id}`, poster: `https://image.mux.com/${id}/thumbnail.jpg?time=${posterTime}&width=1280` };
+      return { native: false, src: `https://player.mux.com/${id}` };
     }
     if (/\.mp4$/i.test(url.pathname)) return { native: true, src: url.href };
     if (["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "www.youtube-nocookie.com"].includes(url.hostname)) {
       const id = url.hostname === "youtu.be" ? url.pathname.split("/")[1] : url.searchParams.get("v") ?? url.pathname.split("/")[2];
       if (!id || !/^[\w-]+$/.test(id)) return null;
-      return { native: false, src: `https://www.youtube-nocookie.com/embed/${id}`, poster: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
+      return { native: false, src: `https://www.youtube-nocookie.com/embed/${id}` };
     }
     return { native: false, src: url.href };
   } catch {
@@ -27,12 +28,11 @@ export function resolveStoreVideo(value: string, posterTime: number) {
   }
 }
 
-export function StoreVideoSection({ whatsappHref, fallbackPoster }: { whatsappHref: string; fallbackPoster: string }) {
+export function StoreVideoSection({ whatsappHref }: { whatsappHref: string }) {
   const [activated, setActivated] = useState(false);
-  const [posterFailed, setPosterFailed] = useState(false);
-  const media = resolveStoreVideo(VIDEO_URL, POSTER_TIME_SEGUNDOS);
+  const media = resolveStoreVideo(VIDEO_URL);
   if (!media) return null;
-  const poster = !posterFailed && media.poster ? media.poster : fallbackPoster;
+  const poster = STORE_VIDEO_POSTER;
 
   return (
     <section className="store-video-section" aria-labelledby="store-video-title">
@@ -49,7 +49,7 @@ export function StoreVideoSection({ whatsappHref, fallbackPoster }: { whatsappHr
             <iframe src={media.src} title="Vídeo Por dentro da Casa do Produtor" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen />
           ) : (
             <>
-              <img src={poster} alt="Capa do vídeo Por dentro da Casa do Produtor" loading="lazy" onError={() => setPosterFailed(true)} />
+              <img src={poster} alt="Capa do vídeo Por dentro da Casa do Produtor" loading="lazy" />
               <Button className="store-video-play" size="icon" aria-label="Reproduzir vídeo da Casa do Produtor" onClick={() => setActivated(true)}><Play aria-hidden="true" /></Button>
             </>
           )}
