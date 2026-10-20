@@ -19,3 +19,4 @@
 - The store video cover uses one saved asset pointer without provider thumbnails or fallback photos; this prevents provider requests before interaction and preserves the chosen frame.
 - Keep the store video section in its own component with CSS grid ordering for heading, player and details; this preserves desktop two-column alignment and mobile reading order without duplicate players.
 - Brand marquees use two equal CSS-animated lists with an aria-hidden duplicate and a static wrapping reduced-motion alternative; this keeps loops seamless without adding another animation frame.
+- Use the Lovable Vite configuration wrapper with the custom server entry and fully bundled deployment dependencies; preserve SPA public output for external hosting so local preview and published loading remain compatible.
