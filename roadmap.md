@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Corrigir carregamento publicado: dependência TanStack ausente; preservar visual, validar preview e compilação automática
+- [x] Corrigir configuração do carregamento: wrapper Lovable e entrada server restaurados; preview HTTP 200, sem erro de página, compilação automática OK e 5 testes aprovados
 - [ ] Confirmar correção no endereço publicado e ação “Salvar” — aguarda nova publicação autorizada e repetição no editor pelo usuário
 
 - [x] Adaptar somente a seção da equipe para “Por dentro da Casa do Produtor”, vídeo 16:9 e textos aprovados; desktop/celular, capa aos 15s, carregamento após toque e WhatsApp verificados
