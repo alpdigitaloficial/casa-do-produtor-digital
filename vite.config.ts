@@ -1,27 +1,27 @@
-import { defineConfig } from '@lovable.dev/vite-tanstack-config'
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+import { tanstackStart } from '@tanstack/react-start/plugin/vite'
+import viteReact from '@vitejs/plugin-react'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
-  vite: {
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  plugins: [
+    // Tailwind v4: precisa do plugin para processar @import "tailwindcss" source(none)
+    // e @source "../src". Sem ele o CSS sai envolto em @media source(none){...} (invalido).
+    tailwindcss(),
+    tanstackStart({
+      spa: {
+        enabled: true,
       },
-    },
-  },
-  tanstackStart: {
-    server: { entry: 'server' },
-    spa: { enabled: true },
-  },
-  // Keep the public SPA output where the external hosting workflow expects it.
-  // Lovable pins its own deployment output paths during platform builds.
-  nitro: {
-    output: {
-      publicDir: 'dist/client',
-      serverDir: 'dist/server',
-    },
-  },
+    }),
+    viteReact(),
+  ],
 })
