@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Recuperar somente logo oficial, fachada compartilhada pelo Hero/localização, capa salva do vídeo e prensa original em caminhos estáticos; preservar as 18 fotos e validar sem publicar
-- [ ] Conferir artefato final desta recuperação — build manual indisponível pelas regras do ambiente; inspecionar saída automática se disponibilizada
+- [x] Recuperar somente logo oficial, fachada compartilhada pelo Hero/localização, capa salva do vídeo e prensa original em caminhos estáticos; quatro originais byte-idênticos, 18 fotos preservadas, 12 testes aprovados e prévia conferida em 1280×1800, 820×1180, 393×852 e 672×577 sem erros/overflow; sem publicar
+- [ ] Conferir artefato final desta recuperação — compilação automática OK, mas dist/client não disponibilizado; build manual proibido pelas regras do ambiente, saída final KingHost ainda não inspecionada
 
 - [x] Recuperar 18 fotos originais da equipe, vitrine e cinco painéis em public/images; cópias binárias intactas, arquivos originais preservados
 - [x] Restaurar wrapper Lovable 2.26.5, entrada server, SPA e saída estática; oito testes e compilação automática OK; fotos e painéis conferidos em 1280×1800, 820×1180, 393×700 e 672×577, sem overflow nem erros de página
