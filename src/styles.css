@@ -152,7 +152,7 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
 @media (width < 720px) {
   .site-header { border-bottom-color: transparent; }
   .site-header .brand-link { visibility: hidden; }
-  .hero-content > .eyebrow { position: relative; top: 20px; }
+  .hero-content > .eyebrow { position: relative; top: 16px; }
   .hero-mobile-badges { position: absolute; left: 1rem; right: 1rem; bottom: 1rem; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .65rem; pointer-events: none; font-size: 11px; font-weight: 800; text-transform: uppercase; }
   .hero-mobile-badges > span { border-left: 2px solid var(--primary); padding: .25rem .4rem; background: color-mix(in oklab, var(--surface-dark) 78%, transparent); }
   .hero-mobile-since strong { color: var(--primary); font-family: var(--font-display); }
