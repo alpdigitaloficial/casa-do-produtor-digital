@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
-import logoAsset from "@/assets/casa-do-produtor-logo.png.asset.json";
+import logoAsset from "@/assets/casa-do-produtor-logo-oficial.png.asset.json";
 import teamPeopleAsset from "@/assets/equipe-so-pessoas.jpg.asset.json";
 import teamCounterAsset from "@/assets/equipe-quatro-balcao.jpeg.asset.json";
 import { TeamFilm } from "@/components/editorial-media";
