@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Aplicar nova logo e conferir rodapé — aguarda arquivo oficial novo, ausente no anexo do briefing
+- [ ] Ajustar identificação da fachada e logo no celular sem alterar desktop/tablet
+- [ ] Corrigir ativação do vídeo em um clique, mantendo capa e carregamento somente após toque
+
 - [x] Corrigir configuração do carregamento: wrapper Lovable e entrada server restaurados; preview HTTP 200, sem erro de página, compilação automática OK e 5 testes aprovados
 - [ ] Confirmar correção no endereço publicado e ação “Salvar” — aguarda nova publicação autorizada e repetição no editor pelo usuário
 
