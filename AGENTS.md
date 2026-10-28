@@ -21,4 +21,4 @@
 - Keep the store video section in its own component with CSS grid ordering for heading, player and details; this preserves desktop two-column alignment and mobile reading order without duplicate players.
 - Brand marquees use two equal CSS-animated lists with an aria-hidden duplicate and a static wrapping reduced-motion alternative; this keeps loops seamless without adding another animation frame.
 - Use the Lovable Vite configuration wrapper with the custom server entry and fully bundled deployment dependencies; preserve SPA public output for external hosting so local preview and published loading remain compatible.
-- Keep the single content route unsplit through TanStack router configuration; the installed dev transforms otherwise lose the FAQ data shared by metadata and page rendering.
+- Keep FAQ data shared by metadata and page rendering in a browser-safe data module; this preserves automatic route splitting without missing shared exports in the installed dev transforms.
