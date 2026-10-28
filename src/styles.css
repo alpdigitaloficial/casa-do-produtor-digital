@@ -161,6 +161,9 @@ h1 { max-width: 53rem; margin-bottom: 1.25rem; font-size: clamp(2.25rem, 5.6vw, 
   .hero-content > .eyebrow { font-size: .65rem; gap: .4rem; white-space: nowrap; }
   .hero-content > .eyebrow::before { width: 1rem; flex-shrink: 0; }
 }
+@media (width < 720px) and (height < 740px) {
+  .hero-content { padding-top: 14rem; }
+}
 
 .section { width: min(100% - 2rem, 78rem); margin: 0 auto; padding: 5.5rem 0; }
 .categories-section { position: relative; padding-top: 3.25rem; }
