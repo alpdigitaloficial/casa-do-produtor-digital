@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Aplicar nova logo e conferir rodapé — aguarda arquivo oficial novo, ausente no anexo do briefing
+- [x] Reposicionar identificação da fachada no celular; nenhuma logo sobreposta independente existe no Hero, cabeçalho preservado enquanto aguarda nova logo
+- [x] Corrigir ativação do vídeo em um clique, mantendo capa e carregamento somente após toque — seis testes aprovados; reprodução completa aguarda navegador com suporte H.264
+
 - [x] Corrigir configuração do carregamento: wrapper Lovable e entrada server restaurados; preview HTTP 200, sem erro de página, compilação automática OK e 5 testes aprovados
 - [ ] Confirmar correção no endereço publicado e ação “Salvar” — aguarda nova publicação autorizada e repetição no editor pelo usuário
 
