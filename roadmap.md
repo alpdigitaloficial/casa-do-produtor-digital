@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Correção cirúrgica mobile: ocultar logo completa do cabeçalho (símbolo só se separável com qualidade), liberar telefone da fachada e remover linha branca; conferir menu, vídeo, desktop e tablet sem publicar
+
 - [x] Aplicar nova logo transparente no cabeçalho, fechamento, rodapé e favicon; remover apenas margens transparentes, sem bordas do JPEG; conferir 1280, 820, 393 e 320px, sem distorção ou rolagem lateral
 - [x] Reposicionar identificação da fachada no celular; nenhuma logo sobreposta independente existe no Hero, cabeçalho preservado enquanto aguarda nova logo
 - [x] Corrigir ativação do vídeo em um clique, mantendo capa e carregamento somente após toque — seis testes aprovados; reprodução completa aguarda navegador com suporte H.264
