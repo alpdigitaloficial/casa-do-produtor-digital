@@ -14,9 +14,11 @@
 - Keep static hydraulic compositions unmounted in Hero and service, preserving their surrounding layout; only the authorized gutter SVG remains to avoid restoring removed imagery or a fixed cross-section journey.
 - Keep the authorized decorative gutter hose in one absolute SVG, measured from DOM and updated in the existing motion frame; this adds the requested scroll drawing without changing page layout or restoring the old fixed travelling object.
 - Centralize pending real media URLs and category messages in the editorial media configuration; absence renders no fabricated hydraulic/product asset and retains the approved team poster.
+- Keep recovered team, showcase and category photograph URLs in the local-media registry backed by original binary copies in public/images; static KingHost builds must serve these without Lovable-only asset routes, while existing pointers remain as provenance.
 - Use accessible Radix dialog primitives for the editorial category panels and the design-system Button for their controls; this provides focus return, Escape/outside dismissal and modal scroll locking.
 - The store video section resolves approved HTTPS providers and mounts iframe players only after a poster click with Mux playback requested on activation; native MP4 uses controls, playsInline and preload none to avoid loading playback before interaction.
 - The store video cover uses one saved asset pointer without provider thumbnails or fallback photos; this prevents provider requests before interaction and preserves the chosen frame.
 - Keep the store video section in its own component with CSS grid ordering for heading, player and details; this preserves desktop two-column alignment and mobile reading order without duplicate players.
 - Brand marquees use two equal CSS-animated lists with an aria-hidden duplicate and a static wrapping reduced-motion alternative; this keeps loops seamless without adding another animation frame.
 - Use the Lovable Vite configuration wrapper with the custom server entry and fully bundled deployment dependencies; preserve SPA public output for external hosting so local preview and published loading remain compatible.
+- Keep FAQ data shared by metadata and page rendering in a browser-safe data module; this preserves automatic route splitting without missing shared exports in the installed dev transforms.

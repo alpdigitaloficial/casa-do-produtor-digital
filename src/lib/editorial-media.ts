@@ -1,18 +1,11 @@
 // Populate only with approved real media pointer URLs supplied by the business.
 import hose from "@/assets/mangueira-oficial-fase4.png.asset.json";
-import sprays from "@/assets/produtos-sprays.jpg.asset.json";
-import paints from "@/assets/produtos-tintas-brasilux.jpg.asset.json";
-import finishes from "@/assets/produtos-tintas-acabamentos.jpg.asset.json";
-import equipment from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
-import agrFacas from "@/assets/20261014_094157.jpg.asset.json";
-import agrCubo from "@/assets/20261014_094255.jpg.asset.json";
-import agrFlanges from "@/assets/20261014_094310.jpg.asset.json";
-import parafusosAmarelos from "@/assets/20261014_093831.jpg.asset.json";
-import parafusosZincados from "@/assets/20261014_093857.jpg.asset.json";
-import parafusosCavacos from "@/assets/20261014_094019.jpg.asset.json";
-import ferramentasSoquetes from "@/assets/20261014_094417.jpg.asset.json";
-import ferramentasTramontinaSoquetes from "@/assets/20261014_094444.jpg.asset.json";
-import ferramentasTramontinaChaves from "@/assets/20261014_094453.jpg.asset.json";
+import {
+  sprays, paints, finishes, equipmentAsset as equipment,
+  agrFacas, agrCubo, agrFlanges,
+  parafusosAmarelos, parafusosZincados, parafusosCavacos,
+  ferramentasSoquetes, ferramentasTramontinaSoquetes, ferramentasTramontinaChaves,
+} from "@/lib/local-media";
 
 export type ProductPhoto = { src: string; alt: string };
 export const categoryMedia: Record<string, { message: string; photos: ProductPhoto[] }> = {

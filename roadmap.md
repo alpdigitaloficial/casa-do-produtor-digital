@@ -1,5 +1,9 @@
 # Roadmap
 
+- [x] Recuperar 18 fotos originais da equipe, vitrine e cinco painéis em public/images; cópias binárias intactas, arquivos originais preservados
+- [x] Restaurar wrapper Lovable 2.26.5, entrada server, SPA e saída estática; oito testes e compilação automática OK; fotos e painéis conferidos em 1280×1800, 820×1180, 393×700 e 672×577, sem overflow nem erros de página
+- [ ] Inspecionar _shell.html e as 18 fotos no artefato de produção — compilação automática informou OK, mas não disponibilizou dist/client neste ambiente; sem executar workflow ou publicar
+
 - [x] Ocultar logo completa do cabeçalho e remover sua linha branca abaixo de 720px, preservando altura, menu, tablet e desktop; oito telas conferidas, seis testes aprovados, sem publicar
 - [x] Liberar telefone da fachada em telas baixas: espaçamento do Hero abaixo de 720px de largura e 740px de altura, foto com dimensões anteriores preservadas; conferidos 320×480, 320×577, 360×640, 393×577, 393×700, 393×852, 430×932, 820×1180 e 1280×1800; sem overflow, botões acessíveis por rolagem, sem publicar
 
