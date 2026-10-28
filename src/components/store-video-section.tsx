@@ -14,7 +14,7 @@ export function resolveStoreVideo(value: string) {
     if (url.hostname === "player.mux.com") {
       const id = url.pathname.split("/").filter(Boolean)[0];
       if (!id) return null;
-      return { native: false, src: `https://player.mux.com/${id}` };
+      return { native: false, src: `https://player.mux.com/${id}?autoplay=true` };
     }
     if (/\.mp4$/i.test(url.pathname)) return { native: true, src: url.href };
     if (["youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "www.youtube-nocookie.com"].includes(url.hostname)) {
