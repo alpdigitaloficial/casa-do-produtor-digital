@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Recuperar fotos originais da equipe, vitrine e cinco painéis em public/images; preservar visual e arquivos originais
+- [ ] Restaurar configuração Lovable compatível com SPA e saída estática; validar fotos, testes e resultado automático sem publicar
+
 - [x] Ocultar logo completa do cabeçalho e remover sua linha branca abaixo de 720px, preservando altura, menu, tablet e desktop; oito telas conferidas, seis testes aprovados, sem publicar
 - [x] Liberar telefone da fachada em telas baixas: espaçamento do Hero abaixo de 720px de largura e 740px de altura, foto com dimensões anteriores preservadas; conferidos 320×480, 320×577, 360×640, 393×577, 393×700, 393×852, 430×932, 820×1180 e 1280×1800; sem overflow, botões acessíveis por rolagem, sem publicar
 
