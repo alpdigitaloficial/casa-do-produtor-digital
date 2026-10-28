@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MessageCircle, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import coverAsset from "@/assets/capa-video-17s.jpg.asset.json";
+import { videoCoverAsset as coverAsset } from "@/lib/static-site-media";
 
 export const VIDEO_URL = "https://player.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk";
 export const STORE_VIDEO_POSTER = coverAsset.url;
