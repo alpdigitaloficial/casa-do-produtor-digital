@@ -14,6 +14,7 @@
 - Keep static hydraulic compositions unmounted in Hero and service, preserving their surrounding layout; only the authorized gutter SVG remains to avoid restoring removed imagery or a fixed cross-section journey.
 - Keep the authorized decorative gutter hose in one absolute SVG, measured from DOM and updated in the existing motion frame; this adds the requested scroll drawing without changing page layout or restoring the old fixed travelling object.
 - Centralize pending real media URLs and category messages in the editorial media configuration; absence renders no fabricated hydraulic/product asset and retains the approved team poster.
+- Keep recovered team, showcase and category photograph URLs in the local-media registry backed by original binary copies in public/images; static KingHost builds must serve these without Lovable-only asset routes, while existing pointers remain as provenance.
 - Use accessible Radix dialog primitives for the editorial category panels and the design-system Button for their controls; this provides focus return, Escape/outside dismissal and modal scroll locking.
 - The store video section resolves approved HTTPS providers and mounts iframe players only after a poster click with Mux playback requested on activation; native MP4 uses controls, playsInline and preload none to avoid loading playback before interaction.
 - The store video cover uses one saved asset pointer without provider thumbnails or fallback photos; this prevents provider requests before interaction and preserves the chosen frame.

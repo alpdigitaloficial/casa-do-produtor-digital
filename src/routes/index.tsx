@@ -20,15 +20,10 @@ import {
 import { useEffect, useState, type ReactNode } from "react";
 
 import logoAsset from "@/assets/casa-do-produtor-logo-oficial.png.asset.json";
-import teamPeopleAsset from "@/assets/equipe-so-pessoas.jpg.asset.json";
-import teamCounterAsset from "@/assets/equipe-quatro-balcao.jpeg.asset.json";
+import { teamPeopleAsset, teamCounterAsset, equipmentAsset, toolsAsset, paintAsset, bootsAsset } from "@/lib/local-media";
 import { TeamFilm } from "@/components/editorial-media";
-import equipmentAsset from "@/assets/equipamentos-casa-do-produtor.jpg.asset.json";
 import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
-import toolsAsset from "@/assets/ferramentas-casa-do-produtor.jpg.asset.json";
 import pressAsset from "@/assets/prensa-melhorada.jpg.asset.json";
-import paintAsset from "@/assets/tintas-casa-do-produtor.jpg.asset.json";
-import bootsAsset from "@/assets/produtos-botas.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
 import { StoreVideoSection } from "@/components/store-video-section";
 import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
