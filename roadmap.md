@@ -1,7 +1,7 @@
 # Roadmap
 
 - [x] Ocultar logo completa do cabeçalho e remover sua linha branca abaixo de 720px, preservando altura, menu, tablet e desktop; oito telas conferidas, seis testes aprovados, sem publicar
-- [ ] Liberar telefone da fachada em telas baixas — o próprio título aprovado cobre o telefone em 320/393×577px; aguarda autorização para reposicionar título, pois deslocar somente a identificação não resolve
+- [x] Liberar telefone da fachada em telas baixas: espaçamento do Hero abaixo de 720px de largura e 740px de altura, foto com dimensões anteriores preservadas; conferidos 320×480, 320×577, 360×640, 393×577, 393×700, 393×852, 430×932, 820×1180 e 1280×1800; sem overflow, botões acessíveis por rolagem, sem publicar
 
 - [x] Aplicar nova logo transparente no cabeçalho, fechamento, rodapé e favicon; remover apenas margens transparentes, sem bordas do JPEG; conferir 1280, 820, 393 e 320px, sem distorção ou rolagem lateral
 - [x] Reposicionar identificação da fachada no celular; nenhuma logo sobreposta independente existe no Hero, cabeçalho preservado enquanto aguarda nova logo
