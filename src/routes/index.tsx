@@ -20,11 +20,9 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 
-import logoAsset from "@/assets/casa-do-produtor-logo-oficial.png.asset.json";
+import { logoAsset, facadeAsset, pressAsset } from "@/lib/static-site-media";
 import { teamPeopleAsset, teamCounterAsset, equipmentAsset, toolsAsset, paintAsset, bootsAsset } from "@/lib/local-media";
 import { TeamFilm } from "@/components/editorial-media";
-import facadeAsset from "@/assets/fachada-casa-do-produtor.jpg.asset.json";
-import pressAsset from "@/assets/prensa-melhorada.jpg.asset.json";
 import { CategoryPanel } from "@/components/category-panel";
 import { StoreVideoSection } from "@/components/store-video-section";
 import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
