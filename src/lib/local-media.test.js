@@ -4,8 +4,8 @@ import { readFileSync } from "node:fs";
 import * as media from "./local-media";
 
 describe("recovered original photographs", () => {
-  test("all 18 approved photographs resolve to real local JPEGs", () => {
-    expect(Object.values(media)).toHaveLength(18);
+  test("all 22 approved photographs resolve to real local JPEGs", () => {
+    expect(Object.values(media)).toHaveLength(22);
     for (const photo of Object.values(media)) {
       expect(photo.url.startsWith("/images/")).toBe(true);
       const bytes = readFileSync(new URL(`../../public${photo.url}`, import.meta.url));

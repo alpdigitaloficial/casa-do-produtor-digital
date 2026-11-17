@@ -4,7 +4,9 @@ import {
   sprays, paints, finishes, equipmentAsset as equipment,
   agrFacas, agrCubo, agrFlanges,
   parafusosAmarelos, parafusosZincados, parafusosCavacos,
+  parafusosOlhais, parafusosDourados, parafusosFlangeados,
   ferramentasSoquetes, ferramentasTramontinaSoquetes, ferramentasTramontinaChaves,
+  ferramentasChavesParede,
 } from "@/lib/local-media";
 
 export type ProductPhoto = { src: string; alt: string };
@@ -15,12 +17,16 @@ export const categoryMedia: Record<string, { message: string; photos: ProductPho
     { src: agrFlanges.url, alt: "Flanges e carcaças metálicas para maquinário agrícola na Casa do Produtor" },
   ] },
   "Parafusos": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar parafusos.", photos: [
+    { src: parafusosOlhais.url, alt: "Ganchos e olhais roscados zincados na Casa do Produtor" },
+    { src: parafusosDourados.url, alt: "Parafusos de cabeça arredondada com zinchamento dourado na Casa do Produtor" },
+    { src: parafusosFlangeados.url, alt: "Parafusos sextavados flangeados em aço na Casa do Produtor" },
+    { src: parafusosCavacos.url, alt: "Cavacos e parafusos sextavados zincados na Casa do Produtor" },
     { src: parafusosAmarelos.url, alt: "Parafusos para madeira com cabeça chata na Casa do Produtor" },
     { src: parafusosZincados.url, alt: "Parafusos zincados com arruela e sextavado na Casa do Produtor" },
-    { src: parafusosCavacos.url, alt: "Cavacos e parafusos sextavados zincados na Casa do Produtor" },
   ] },
   "Ferramentas": { message: "Olá! Vim pelo site da Casa do Produtor e gostaria de consultar ferramentas.", photos: [
     { src: ferramentasSoquetes.url, alt: "Parede de chaves fixas, soquetes e alicates na Casa do Produtor" },
+    { src: ferramentasChavesParede.url, alt: "Parede de chaves de fenda, allen e soquetes para velas na Casa do Produtor" },
     { src: ferramentasTramontinaSoquetes.url, alt: "Expositor Tramontina de soquetes e chaves catraca na Casa do Produtor" },
     { src: ferramentasTramontinaChaves.url, alt: "Expositor Tramontina de chaves combinadas e fixas na Casa do Produtor" },
   ] },

@@ -58,3 +58,4 @@
 - [x] Adicionar faixa de marcas (BRANDS) após a vitrine e mover o bloco amarelo para depois de "Mais do que uma loja"
 - [x] Preencher as 3 avaliações reais do Google (Geremias S., Claudinei B., Eric S.), 5 estrelas, e ativar a seção (SHOW_REVIEWS = true)
 - [x] Remover "Ferragens" das categorias (linha, painel, fotos e WhatsApp) e renumerar 01–05 — desktop/celular, painéis, contadores e mangueira-linha validados
+- [x] Adicionar 4 fotos reais novas nos painéis de Parafusos (olhais, dourados, flangeados inox) e Ferramentas (parede de chaves de fenda/allen) e ampliar o painel para 4 fotos — 12 testes aprovados, desktop 1280×1800 e celular 393×852 conferidos, sem rolagem lateral; duas das seis enviadas eram repetidas de fotos já no site (094019 e 094444)
