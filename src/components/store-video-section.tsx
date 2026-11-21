@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MessageCircle, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { videoCoverAsset as coverAsset } from "@/lib/static-site-media";
+import { SiteImage } from "@/components/site-image";
 
 export const VIDEO_URL = "https://player.mux.com/0047Di3sQzYmp9GL8hWASgYGvypqttl5wmOx6dutTabk";
 export const STORE_VIDEO_POSTER = coverAsset.url;
@@ -49,7 +50,7 @@ export function StoreVideoSection({ whatsappHref }: { whatsappHref: string }) {
             <iframe src={media.src} title="Vídeo Por dentro da Casa do Produtor" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen />
           ) : (
             <>
-              <img src={poster} alt="Capa do vídeo Por dentro da Casa do Produtor" loading="lazy" />
+              <SiteImage src={poster} alt="Capa do vídeo Por dentro da Casa do Produtor" sizes="(min-width: 900px) 58vw, calc(100vw - 32px)" />
               <Button className="store-video-play" size="icon" aria-label="Reproduzir vídeo da Casa do Produtor" onClick={() => setActivated(true)}><Play aria-hidden="true" /></Button>
             </>
           )}

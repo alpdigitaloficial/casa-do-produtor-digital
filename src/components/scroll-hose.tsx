@@ -36,11 +36,21 @@ export function createScrollHose(svg: SVGSVGElement) {
   const body = svg.querySelector<SVGPathElement>(".scroll-hose-body");
   const tip = svg.querySelector<SVGGElement>(".scroll-hose-tip");
   const ring = svg.querySelector<SVGRectElement>(".scroll-hose-arrival");
+  const mobileQuery = window.matchMedia("(width < 768px)");
+  const narrowQuery = window.matchMedia("(width < 720px)");
+  // Detached geometry does not invalidate the document's layout.
+  const geometry = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  let shellSize = { width: 0, height: 0 };
+  const sizeObserver = new ResizeObserver((entries) => {
+    const entry = entries[0];
+    if (entry) shellSize = { width: entry.contentRect.width, height: entry.contentRect.height };
+  });
+  if (shell) sizeObserver.observe(shell);
   let previousPath = "";
   let length = 0;
   let arrived = false;
 
-  return (reducedMotion: boolean) => {
+  const read = (reducedMotion: boolean) => {
     if (!hero || !content || !categories || !list || !target || !shell || !body || !tip || !ring) return;
     const origin = shell.getBoundingClientRect();
     const heroRect = hero.getBoundingClientRect();
@@ -48,8 +58,8 @@ export function createScrollHose(svg: SVGSVGElement) {
     const categoryRect = categories.getBoundingClientRect();
     const listRect = list.getBoundingClientRect();
     const buttonRect = target.getBoundingClientRect();
-    const mobile = window.innerWidth < 768;
-    const narrowMobile = window.innerWidth < 720;
+    const mobile = mobileQuery.matches;
+    const narrowMobile = narrowQuery.matches;
     const thickness = narrowMobile ? 4 : mobile ? 5 : 9;
     const startX = contentRect.left - origin.left + contentRect.width * (mobile ? .5 : .7);
     const startY = heroRect.bottom - origin.top;
@@ -76,19 +86,36 @@ export function createScrollHose(svg: SVGSVGElement) {
       `C ${gutter} ${endY}, ${gutter} ${endY}, ${endX} ${endY}`,
     ].join(" ");
     if (d !== previousPath) {
-      paths.forEach(path => path.setAttribute("d", d));
-      length = body.getTotalLength();
+      geometry.setAttribute("d", d);
+      length = geometry.getTotalLength();
       previousPath = d;
     }
-    const width = shell.clientWidth;
-    const height = shell.scrollHeight;
-    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-    svg.setAttribute("width", String(width));
-    svg.setAttribute("height", String(height));
-    svg.style.setProperty("--scroll-hose-width", String(thickness));
+    const width = shellSize.width || origin.width;
+    const height = shellSize.height || origin.height;
     const startScroll = Math.max(0, heroRect.bottom + window.scrollY - window.innerHeight * .65);
     const endScroll = Math.max(startScroll + 1, buttonRect.top + window.scrollY + buttonRect.height / 2 - window.innerHeight * .45);
     const progress = reducedMotion ? 1 : Math.min(1, Math.max(0, (window.scrollY - startScroll) / (endScroll - startScroll)));
+    // Short visible ribs, with the unrevealed tail excluded from the dash pattern.
+    const visibleLength = length * progress;
+    const spacing = thickness * 2.8;
+    const rib = thickness * .22;
+    const count = Math.floor(visibleLength / spacing);
+    const ribs = Array.from({ length: count }, () => `${rib} ${spacing - rib}`).join(" ");
+
+    const point = geometry.getPointAtLength(visibleLength);
+    const before = geometry.getPointAtLength(Math.max(0, visibleLength - 1));
+    const after = geometry.getPointAtLength(Math.min(length, visibleLength + 1));
+    const angle = Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI;
+    const scale = thickness / 9;
+    // The supplied nut extends two units past its origin: align its front to the path tip.
+    const radians = angle * Math.PI / 180;
+    // Keep the collar's cross-section inside the narrow gutter's text clearance.
+    return () => {
+      paths.forEach(path => path.setAttribute("d", d));
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      svg.setAttribute("width", String(width));
+      svg.setAttribute("height", String(height));
+      svg.style.setProperty("--scroll-hose-width", String(thickness));
     svg.dataset["progress"] = progress.toFixed(4);
     svg.dataset["startScroll"] = String(startScroll);
     svg.dataset["endScroll"] = String(endScroll);
@@ -98,21 +125,7 @@ export function createScrollHose(svg: SVGSVGElement) {
       path.setAttribute("stroke-dasharray", `${length} ${length}`);
       path.setAttribute("stroke-dashoffset", String(length * (1 - progress)));
     });
-    // Short visible ribs, with the unrevealed tail excluded from the dash pattern.
-    const visibleLength = length * progress;
-    const spacing = thickness * 2.8;
-    const rib = thickness * .22;
-    const count = Math.floor(visibleLength / spacing);
-    const ribs = Array.from({ length: count }, () => `${rib} ${spacing - rib}`).join(" ");
-    paths[2]?.setAttribute("stroke-dasharray", `${ribs} 0 ${length + 1}`);
-    const point = body.getPointAtLength(visibleLength);
-    const before = body.getPointAtLength(Math.max(0, visibleLength - 1));
-    const after = body.getPointAtLength(Math.min(length, visibleLength + 1));
-    const angle = Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI;
-    const scale = thickness / 9;
-    // The supplied nut extends two units past its origin: align its front to the path tip.
-    const radians = angle * Math.PI / 180;
-    // Keep the collar's cross-section inside the narrow gutter's text clearance.
+      paths[2]?.setAttribute("stroke-dasharray", `${ribs} 0 ${length + 1}`);
     tip.setAttribute("transform", `translate(${point.x - 2 * scale * Math.cos(radians)} ${point.y - 2 * scale * Math.sin(radians)}) rotate(${angle}) scale(${scale} ${scale * (narrowMobile ? .75 : 1)})`);
     tip.setAttribute("opacity", progress > 0 ? "1" : "0");
     ring.setAttribute("x", String(endX - 4));
@@ -126,5 +139,7 @@ export function createScrollHose(svg: SVGSVGElement) {
       ring.classList.remove("is-pulsing");
       arrived = false;
     }
+    };
   };
+  return { read, disconnect: () => sizeObserver.disconnect() };
 }

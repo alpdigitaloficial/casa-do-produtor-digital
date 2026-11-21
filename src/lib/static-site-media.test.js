@@ -12,9 +12,12 @@ describe("approved static site originals", () => {
   ];
   for (const [asset, hash] of originals) {
     test(`${asset.url} preserves the exact original and filename case`, () => {
-      const filename = asset.url.split("/").pop();
+      const optimized = readFileSync(new URL(`../../public${asset.url}`, import.meta.url));
+      expect(optimized.subarray(8, 12).toString()).toBe("WEBP");
+      const originalUrl = asset.url.replace(".webp", asset === logoAsset ? ".png" : ".jpg");
+      const filename = originalUrl.split("/").pop();
       expect(readdirSync(new URL("../../public/images/", import.meta.url))).toContain(filename);
-      const bytes = readFileSync(new URL(`../../public${asset.url}`, import.meta.url));
+      const bytes = readFileSync(new URL(`../../public${originalUrl}`, import.meta.url));
       expect(createHash("sha256").update(bytes).digest("hex")).toBe(hash);
       const pointer = JSON.parse(readFileSync(new URL(`../assets/${filename}.asset.json`, import.meta.url), "utf8"));
       expect(bytes.length).toBe(pointer.size);

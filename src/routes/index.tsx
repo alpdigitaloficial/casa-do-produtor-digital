@@ -22,18 +22,13 @@ import { useEffect, useState, type ReactNode } from "react";
 
 import { logoAsset, facadeAsset, pressAsset } from "@/lib/static-site-media";
 import { teamPeopleAsset, teamCounterAsset, equipmentAsset, toolsAsset, paintAsset, bootsAsset } from "@/lib/local-media";
+import { BUSINESS, BUSINESS_JSON_LD, SITE_URL } from "@/lib/business-data";
+import { SiteImage } from "@/components/site-image";
+import { responsiveImage } from "@/lib/responsive-image";
 import { TeamFilm } from "@/components/editorial-media";
 import { CategoryPanel } from "@/components/category-panel";
 import { StoreVideoSection } from "@/components/store-video-section";
 import { ScrollHose, createScrollHose } from "@/components/scroll-hose";
-
-const BUSINESS = {
-  name: "Casa do Produtor",
-  address: "Avenida Dorvalino dos Santos, 1760 — Centro, Sidrolândia/MS",
-  whatsappNumber: "5567992991091",
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Avenida+Dorvalino+dos+Santos+1760+Centro+Sidrolandia+MS",
-} as const;
 
 const messages = {
   hero: "Olá! Vim pelo site da Casa do Produtor e gostaria de conhecer melhor os produtos e serviços.",
@@ -84,11 +79,17 @@ export const Route = createFileRoute("/")({
         content: "Produtos, ferramentas e soluções com atendimento próximo em Sidrolândia/MS.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/" },
+      { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(FAQ_JSON_LD) }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      { rel: "preload", as: "image", href: facadeAsset.url, fetchPriority: "high", imageSrcSet: responsiveImage(facadeAsset.url)?.srcSet, imageSizes: "(min-width: 768px) 58vw, 100vw" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(BUSINESS_JSON_LD) },
+      { type: "application/ld+json", children: JSON.stringify(FAQ_JSON_LD) },
+    ],
   }),
   component: Index,
 });
@@ -141,7 +142,7 @@ function Header() {
   return (
     <header className="site-header">
       <a href="#inicio" className="brand-link" aria-label="Casa do Produtor — início">
-        <img src={logoAsset.url} alt="Casa do Produtor — Parafusos e Ferragens" />
+        <SiteImage src={logoAsset.url} sizes="200px" loading="eager" alt="Casa do Produtor — Parafusos e Ferragens" />
       </a>
       <nav className="desktop-nav" aria-label="Navegação principal">
         {links.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
@@ -173,6 +174,9 @@ function Index() {
     const hoseSvg = document.querySelector<SVGSVGElement>(".scroll-hose");
     const updateHose = hoseSvg ? createScrollHose(hoseSvg) : undefined;
     let animationFrame = 0;
+    const mobileQuery = window.matchMedia("(width < 768px)");
+    const resizeObserver = new ResizeObserver(requestMotionUpdate);
+    [document.documentElement, heroElement, serviceElement, timelineElement, ...motionElements].forEach((element) => { if (element) resizeObserver.observe(element); });
 
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
@@ -181,10 +185,15 @@ function Index() {
     elements.forEach((element) => observer.observe(element));
 
     const updateMotion = () => {
+      // Capture all layout reads before any connected DOM writes.
+      const applyHose = updateHose?.read(reducedMotion.matches);
+      const serviceRect = serviceElement?.getBoundingClientRect();
+      const motionRects = Array.from(motionElements, (element) => ({ element, rect: element.getBoundingClientRect() }));
+      const timelineRect = timelineElement?.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const heroHeight = heroElement?.getBoundingClientRect().height ?? viewportHeight;
       const heroProgress = Math.min(Math.max(window.scrollY / Math.max(heroHeight, 1), 0), 1);
-      const mobileFactor = window.innerWidth < 768 ? 0.5 : 1;
+      const mobileFactor = mobileQuery.matches ? 0.5 : 1;
       heroElement?.style.setProperty("--hero-photo-shift", `${(heroProgress * 14 * mobileFactor).toFixed(2)}px`);
       heroElement?.style.setProperty("--hero-content-shift", `${(heroProgress * -8 * mobileFactor).toFixed(2)}px`);
       heroElement?.style.setProperty("--hero-content-opacity", (1 - heroProgress * 0.025).toFixed(3));
@@ -195,15 +204,14 @@ function Index() {
       heroElement?.style.setProperty("--composition-scale", (1 + hydraulicHeroProgress * 0.12 * mobileFactor).toFixed(3));
       heroElement?.style.setProperty("--composition-rotation", `${(hydraulicHeroProgress * -2).toFixed(2)}deg`);
       heroElement?.style.setProperty("--composition-crop", `${(hydraulicHeroProgress * 20 * mobileFactor).toFixed(2)}%`);
-      if (serviceElement) {
-        const rect = serviceElement.getBoundingClientRect();
+      if (serviceElement && serviceRect) {
+        const rect = serviceRect;
         const progress = reducedMotion.matches ? 1 : Math.min(Math.max((viewportHeight - rect.top) / viewportHeight, 0), 1);
         serviceElement.style.setProperty("--composition-scale", (0.92 + progress * 0.08).toFixed(3));
         serviceElement.style.setProperty("--composition-crop", `${((1 - progress) * 20).toFixed(2)}%`);
       }
 
-      motionElements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
+      motionRects.forEach(({ element, rect }) => {
         const centerOffset = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
         const depth = Number(element.dataset["depth"] ?? "0");
         const limit = Math.abs(depth) * mobileFactor;
@@ -211,9 +219,8 @@ function Index() {
         element.style.setProperty("--depth-shift", `${shift.toFixed(2)}px`);
       });
 
-      if (timelineElement) {
-        const timelineRect = timelineElement.getBoundingClientRect();
-        const mobileTimeline = window.innerWidth < 768;
+      if (timelineElement && timelineRect) {
+        const mobileTimeline = mobileQuery.matches;
         const startLine = viewportHeight * (mobileTimeline ? 0.82 : 0.76);
         const endLine = viewportHeight * (mobileTimeline ? 0.24 : 0.28);
         const travel = Math.max(timelineRect.height + startLine - endLine, 1);
@@ -230,10 +237,10 @@ function Index() {
           item.style.setProperty("--timeline-marker-scale", (0.68 + itemProgress * 0.32).toFixed(3));
         });
       }
-      updateHose?.(reducedMotion.matches);
+      applyHose?.();
     };
 
-    const requestMotionUpdate = () => {
+    function requestMotionUpdate() {
       if (animationFrame) return;
       animationFrame = window.requestAnimationFrame(() => {
         animationFrame = 0;
@@ -242,7 +249,7 @@ function Index() {
     };
 
     document.documentElement.classList.add("motion-ready");
-    updateMotion();
+    requestMotionUpdate();
     window.addEventListener("scroll", requestMotionUpdate, { passive: true });
     window.addEventListener("resize", requestMotionUpdate);
     document.addEventListener("load", requestMotionUpdate, true);
@@ -250,6 +257,8 @@ function Index() {
 
     return () => {
       observer.disconnect();
+      resizeObserver.disconnect();
+      updateHose?.disconnect();
       window.removeEventListener("scroll", requestMotionUpdate);
       window.removeEventListener("resize", requestMotionUpdate);
       document.removeEventListener("load", requestMotionUpdate, true);
@@ -266,7 +275,7 @@ function Index() {
       <Header />
       <main>
         <section className="hero-section" aria-labelledby="hero-title">
-          <div className="hero-photo-wrap"><img className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" /><span>Loja física · Sidrolândia/MS</span></div>
+          <div className="hero-photo-wrap"><SiteImage className="hero-photo" src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos em Sidrolândia" fetchPriority="high" loading="eager" sizes="(min-width: 768px) 58vw, 100vw" /><span>Loja física · Sidrolândia/MS</span></div>
           <div className="hero-shade" />
           <div className="hero-lines" aria-hidden="true" />
           <div className="hero-content">
@@ -296,7 +305,7 @@ function Index() {
               <WhatsAppLink message={messages.service} />
             </Reveal>
             <Reveal className="service-visual" data-depth="7">
-              <img src={pressAsset.url} alt="Máquina de prensagem de mangueiras hidráulicas na Casa do Produtor" loading="lazy" />
+              <SiteImage src={pressAsset.url} alt="Máquina de prensagem de mangueiras hidráulicas na Casa do Produtor" loading="lazy" />
               <p>Equipamento real<br />da Casa do Produtor</p>
             </Reveal>
           </div>
@@ -311,16 +320,16 @@ function Index() {
           <div className="showcase-layout">
             <Reveal className="showcase-composition">
               <figure className="showcase-photo showcase-photo-main" data-depth="3">
-                <img src={toolsAsset.url} alt="Parede de ferramentas e ferragens da Casa do Produtor" loading="lazy" />
+                <SiteImage src={toolsAsset.url} alt="Parede de ferramentas e ferragens da Casa do Produtor" loading="lazy" />
               </figure>
               <figure className="showcase-photo showcase-photo-equipment" data-depth="7">
-                <img src={equipmentAsset.url} alt="Equipamentos para cuidado de áreas urbanas e rurais disponíveis na loja" loading="lazy" />
+                <SiteImage src={equipmentAsset.url} sizes="(min-width: 768px) 32vw, 57vw" alt="Equipamentos para cuidado de áreas urbanas e rurais disponíveis na loja" loading="lazy" />
               </figure>
               <figure className="showcase-photo showcase-photo-boots" data-depth="4">
-                <img src={bootsAsset.url} alt="Botas de trabalho disponíveis na Casa do Produtor" loading="lazy" />
+                <SiteImage src={bootsAsset.url} sizes="25vw" alt="Botas de trabalho disponíveis na Casa do Produtor" loading="lazy" />
               </figure>
               <figure className="showcase-photo showcase-photo-paint" data-depth="-5">
-                <img src={paintAsset.url} alt="Tintas organizadas nas prateleiras da Casa do Produtor" loading="lazy" />
+                <SiteImage src={paintAsset.url} sizes="(min-width: 768px) 24vw, 45vw" alt="Tintas organizadas nas prateleiras da Casa do Produtor" loading="lazy" />
               </figure>
               <span>Produtos reais. Atendimento próximo.</span>
             </Reveal>
@@ -418,14 +427,14 @@ function Index() {
           <div className="team-composition">
             <Reveal className="team-photos" data-depth="5">
               <div className="team-image-large"><TeamFilm fallbackPoster={teamPeopleAsset.url} /></div>
-              <div className="team-image-small team-image-complete"><img src={teamCounterAsset.url} alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></div>
+              <div className="team-image-small team-image-complete"><SiteImage src={teamCounterAsset.url} sizes="(min-width: 900px) 18vw, calc(100vw - 32px)" alt="Quatro funcionários da Casa do Produtor atrás do balcão da loja" loading="lazy" /></div>
             </Reveal>
             <Reveal className="team-copy" data-depth="-3"><p className="eyebrow">Nossa equipe</p><h2 id="team-title">Quem faz a Casa do Produtor acontecer</h2><p>A Casa do Produtor é feita de pessoas, histórias, trabalho e confiança.</p><div className="team-words" aria-label="Valores da equipe"><span>Pessoas.</span><span>Trabalho.</span><span>Confiança.</span><span>História.</span></div></Reveal>
           </div>
         </section>
 
         <section className="location-section" id="localizacao" aria-labelledby="location-title">
-          <div className="location-photo" data-depth="5"><img src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>
+          <div className="location-photo" data-depth="5"><SiteImage src={facadeAsset.url} alt="Fachada da Casa do Produtor na Avenida Dorvalino dos Santos" loading="lazy" /></div>
           <div className="location-info">
             <Reveal><p className="eyebrow">Visite a loja</p><h2 id="location-title">Venha conhecer<br />a Casa do Produtor</h2></Reveal>
             <div className="address-line"><MapPin /><p>{BUSINESS.address}</p></div>
@@ -491,15 +500,15 @@ function Index() {
         </section>
 
         <section className="final-cta" aria-labelledby="final-title">
-          <img src={logoAsset.url} alt="" aria-hidden="true" />
+          <SiteImage src={logoAsset.url} sizes="(min-width: 600px) 720px, 120vw" alt="Logo Casa do Produtor" aria-hidden="true" />
           <Reveal><p className="eyebrow light">Casa do Produtor</p><h2 id="final-title">Precisa de uma solução?</h2><h3>Fale com a Casa do Produtor.</h3><p>Produtos, ferramentas e soluções para a cidade e para o campo.</p><WhatsAppLink message={messages.hero} /></Reveal>
         </section>
       </main>
 
       <footer>
-        <div className="footer-brand"><img src={logoAsset.url} alt="Casa do Produtor" /><p>Soluções para a cidade e para o campo.</p></div>
+        <div className="footer-brand"><SiteImage src={logoAsset.url} sizes="224px" alt="Casa do Produtor" /><p>Soluções para a cidade e para o campo.</p></div>
         <nav aria-label="Links do rodapé"><a href="#inicio">Início</a><a href="#produtos">Produtos</a><a href="#servicos">Serviços</a><a href="#historia">Nossa história</a><a href="#localizacao">Localização</a><a href={`https://wa.me/${BUSINESS.whatsappNumber}?text=${encodeURIComponent(messages.hero)}`} target="_blank" rel="noreferrer">WhatsApp</a></nav>
-        <div className="footer-address"><p>{BUSINESS.address}</p><small>CNPJ: 36.564.249.0001.77</small><small>© {new Date().getFullYear()} Casa do Produtor</small><small className="footer-credit">Desenvolvido por: <a href="https://alpdigital.com.br/cartao/" target="_blank" rel="noreferrer">ALP Digital</a></small></div>
+        <div className="footer-address"><p>{BUSINESS.address}</p><small>CNPJ: 36.564.249.0001.77</small><small>© {new Date().getFullYear()} Casa do Produtor</small><small className="footer-credit">Criado por <a href="https://alpdigital.com.br/" target="_blank" rel="noopener">ALP Digital</a></small></div>
       </footer>
       <WhatsAppLink message={messages.hero} className="floating-whatsapp" />
     </div>

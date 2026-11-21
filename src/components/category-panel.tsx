@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { ArrowRight, Check, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { categoryMedia } from "@/lib/editorial-media";
+import { SiteImage } from "@/components/site-image";
 
 type Props = { title: string; description: string; number: string; whatsappNumber: string };
 
@@ -43,7 +44,7 @@ export function CategoryPanel({ title, description, number, whatsappNumber }: Pr
           </div>
           {media.photos.length > 0 && (
             <div className="category-panel-photos">
-              {media.photos.slice(0, 4).map((photo, index) => <figure key={photo.src} className={index === 0 ? "category-panel-photo-main" : `category-panel-photo-secondary category-panel-photo-secondary-${index}`}><img src={photo.src} alt={photo.alt} loading={index === 0 ? "eager" : "lazy"} decoding="async" />{index === 0 && <figcaption>Produtos reais da loja</figcaption>}</figure>)}
+              {media.photos.slice(0, 4).map((photo, index) => <figure key={photo.src} className={index === 0 ? "category-panel-photo-main" : `category-panel-photo-secondary category-panel-photo-secondary-${index}`}><SiteImage src={photo.src} alt={photo.alt} sizes={index === 0 ? "(min-width: 768px) 430px, calc(100vw - 72px)" : "(min-width: 768px) 172px, 40vw"} />{index === 0 && <figcaption>Produtos reais da loja</figcaption>}</figure>)}
             </div>
           )}
         </DialogPrimitive.Content>

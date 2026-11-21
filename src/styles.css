@@ -2,6 +2,9 @@
 @source "../src";
 @import "tw-animate-css";
 
+@font-face { font-family: "Archivo"; font-style: normal; font-weight: 600 800; font-display: swap; src: url("/fonts/archivo-latin-variable.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("/fonts/manrope-latin-variable.woff2") format("woff2"); }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -62,6 +65,7 @@
   --surface-dark: oklch(0.16 0.014 72);
   --surface-raised: oklch(0.24 0.014 72);
   --whatsapp: oklch(0.67 0.17 147);
+  --agency-credit: #FF8A3D;
   --metal-shadow: oklch(0.28 0.008 80);
   --metal-dark: oklch(0.38 0.01 82);
   --metal-mid: oklch(0.58 0.012 85);
@@ -126,9 +130,7 @@ img { display: block; max-width: 100%; }
 .hero-shade { background: linear-gradient(180deg, color-mix(in oklab, var(--surface-dark) 38%, transparent) 0%, color-mix(in oklab, var(--surface-dark) 12%, transparent) 28%, color-mix(in oklab, var(--surface-dark) 94%, transparent) 100%); }
 .hero-lines { opacity: .35; background-image: linear-gradient(90deg, transparent 49.85%, color-mix(in oklab, var(--background) 35%, transparent) 50%, transparent 50.15%); background-size: 25% 100%; }
 .hero-content { position: relative; z-index: 2; width: min(100% - 2rem, 82rem); margin: 0 auto; padding: 7.5rem 0 3rem; opacity: var(--hero-content-opacity, 1); transform: translate3d(0, var(--hero-content-shift, 0), 0); will-change: transform, opacity; }
-.motion-ready .hero-content .eyebrow { animation: hero-content-in .5s .12s ease both; }
-.motion-ready .hero-content h1 { animation: hero-content-in .55s .19s cubic-bezier(.2,.7,.2,1) both; }
-.motion-ready .hero-content .hero-copy { animation: hero-content-in .5s .27s ease both; }
+.motion-ready .hero-content .eyebrow, .motion-ready .hero-content h1, .motion-ready .hero-content .hero-copy { animation: none; }
 .motion-ready .hero-actions { animation: hero-content-in .45s .34s ease both; }
 .eyebrow { display: flex; align-items: center; gap: .7rem; margin: 0 0 1rem; color: var(--muted-foreground); font: 800 .72rem/1 var(--font-sans); letter-spacing: .13em; text-transform: uppercase; }
 .eyebrow::before { content: ""; width: 2.4rem; height: 2px; background: var(--primary); }
@@ -404,9 +406,9 @@ footer { display: grid; gap: 2.5rem; padding: 3rem max(1rem, calc((100vw - 78rem
 footer nav { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .8rem; font-size: .88rem; font-weight: 700; }
 .footer-address small { display: block; margin-top: 1rem; }
 .footer-address small + small { margin-top: .35rem; }
-.footer-credit a { color: color-mix(in oklab, var(--secondary-foreground) 85%, transparent); text-decoration: underline; text-underline-offset: 3px; }
-.footer-credit a:hover, .footer-credit a:focus-visible { color: var(--primary); }
-.floating-whatsapp { position: fixed; z-index: 40; left: .75rem; right: .75rem; bottom: .75rem; box-shadow: 0 10px 28px color-mix(in oklab, var(--surface-dark) 30%, transparent); background: var(--whatsapp); color: var(--secondary-foreground); opacity: 0; transform: translateY(.65rem); pointer-events: none; }
+.footer-credit a { color: var(--agency-credit); font-weight: 800; text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--agency-credit) 45%, transparent); text-underline-offset: 3px; }
+.footer-credit a:hover, .footer-credit a:focus-visible { text-decoration-color: var(--agency-credit); }
+.floating-whatsapp { position: fixed; z-index: 40; left: .75rem; right: .75rem; bottom: .75rem; box-shadow: 0 10px 28px color-mix(in oklab, var(--surface-dark) 30%, transparent); background: var(--whatsapp); color: var(--secondary-foreground); opacity: 1; transform: translateY(0); pointer-events: auto; }
 .has-scrolled .floating-whatsapp { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .floating-whatsapp:hover { background: var(--whatsapp); transform: translateY(-3px) scale(1.015); }
 .floating-whatsapp:active { transform: translateY(0) scale(.985); }

@@ -13,7 +13,7 @@ describe("approved store video", () => {
     expect(new URL(media?.src ?? "https://example.com").searchParams.get("autoplay")).toBe("true");
   });
   test("uses only the saved cover selected at 17 seconds", () => {
-    expect(STORE_VIDEO_POSTER).toBe("/images/capa-video-17s.jpg");
+    expect(STORE_VIDEO_POSTER).toBe("/images/capa-video-17s.webp");
   });
   test("hides the section when the video URL is empty", () => {
     expect(resolveStoreVideo("")).toBeNull();
