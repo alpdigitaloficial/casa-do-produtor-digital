@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Aplicar SEO e performance do briefing de 21/11: arquivos públicos, domínio comercial, dados estruturados, crédito ALP, WebP responsivo, fontes locais e leitura/escrita coordenadas do movimento
+- [x] Aplicar SEO e performance do briefing de 21/11: arquivos públicos, domínio comercial, dados estruturados, crédito ALP, WebP responsivo, fontes locais e leitura/escrita coordenadas do movimento
 - [ ] Publicar atualização autorizada e verificar os três arquivos no domínio comercial; depende da sincronização KingHost
 
 - [x] Recuperar somente logo oficial, fachada compartilhada pelo Hero/localização, capa salva do vídeo e prensa original em caminhos estáticos; quatro originais byte-idênticos, 18 fotos preservadas, 12 testes aprovados e prévia conferida em 1280×1800, 820×1180, 393×852 e 672×577 sem erros/overflow; sem publicar
